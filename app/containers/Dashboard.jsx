@@ -5,6 +5,13 @@ import React from 'react';
  *  i.e. We should keep this as the container that does the data-fetching
  *  and dispatching of actions if you decide to have any sub-components.
  */
-const Dashboard = () => <div>Welcome to the Dasboard. Stay tuned...</div>;
+const Dashboard = () => {
+    return(
+        <div>
+            Device Manager Dashboard
+        </div>
+    );
+
+}
 
 export default Dashboard;
