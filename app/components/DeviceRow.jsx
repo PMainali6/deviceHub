@@ -1,30 +1,57 @@
 import React from 'react';
-import {GridList, GridTile} from 'material-ui/GridList';
+import { withStyles } from 'material-ui/styles';
+import GridList, { GridListTile, GridListTileBar } from 'material-ui/GridList';
+import IconButton from 'material-ui/IconButton';
+import EditIcon from 'material-ui-icons/Edit';
 
-const styles = {
+const styles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    display: 'flex',
     flexWrap: 'nowrap',
-    overflowX: 'auto',
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: 'translateZ(0)',
   },
-  titleStyle: {
-    color: 'rgb(0, 188, 212)',
+  title: {
+    color: theme.palette.primary.dark,
   },
-};
+  titleBar: {
+    background:
+      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+  },
+});
 
 
-const DeviceRow = ({devices, deviceOS}) => {
+const DeviceRow = ({devices, deviceOS, classes}) => {
 	return (
-		<div>
+		<div className={classes.root}>
 			<h4>{deviceOS}</h4>
-			{devices.map((device,index) => <p key={index}>{device.name}</p>)}
+			<GridList className={classes.gridList} cols={2.5}>
+				{devices.map((device,index) => 
+					<GridListTile key={index}>
+						<img src="img.png" alt={device.name} />
+						<GridListTileBar
+							title = {device.name}
+							classes={{
+				            	root: classes.titleBar,
+				                title: classes.title,
+				            }}
+				            actionIcon={
+				                <IconButton>
+				                  <EditIcon className={classes.title} />
+				                </IconButton>
+				            }
+				        />
+				    </GridListTile>
+				)}
+			</GridList>
 		</div>
 	)
 }
 
-export default DeviceRow;
+export default withStyles(styles)(DeviceRow);
