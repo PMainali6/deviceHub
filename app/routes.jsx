@@ -1,9 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { fetchVoteData } from './fetch-data';
-import { App, Vote, Dashboard, About, AddDevice, LoginOrRegister } from './pages';
-
-console.log(AddDevice);
+import { App, Vote, Dashboard, About, BookSlot, DeviceForm, LoginOrRegister } from './pages';
 
 /*
  * @param {Redux Store}
@@ -36,8 +34,10 @@ export default (store) => {
       <IndexRoute component={Vote} fetchData={fetchVoteData} />
       <Route path="login" component={LoginOrRegister} onEnter={redirectAuth} />
       <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
+      <Route path="book-slot" component={BookSlot} onEnter={requireAuth} />
+      <Route path="edit-device" component={DeviceForm} onEnter={requireAuth} />
+      <Route path="add-device" component={DeviceForm} onEnter={requireAuth} />
       <Route path="about" component={About} />
-      <Route path="add-device" component={AddDevice} />
     </Route>
   );
 };

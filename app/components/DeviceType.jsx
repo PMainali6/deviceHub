@@ -12,14 +12,6 @@ const style = {
 const DeviceType = ({devices, deviceType}) => {
 	console.log(devices)
 	return (
-	// 	<div>
-	// 		<span>{devices.name}</span>
-	// 		<Paper style={style}>
-	// 			{children}
-	// 		</Paper>
-	// 	</div>
-
-	// )
 	<div>
 	<Paper style={style}>
 		<h4>{deviceType}</h4>

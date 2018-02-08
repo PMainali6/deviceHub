@@ -3,5 +3,5 @@ export { default as Vote} from 'pages/Vote';
 export { default as Dashboard } from 'pages/Dashboard';
 export { default as LoginOrRegister } from 'pages/LoginOrRegister';
 export { default as About } from 'pages/About';
-export { default as AddDevice } from 'pages/AddDevice';
-
+export { default as BookSlot } from 'pages/BookSlot';
+export { default as DeviceForm } from 'pages/DeviceForm';

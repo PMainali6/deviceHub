@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { withStyles } from 'material-ui/styles';
 import GridList, { GridListTile, GridListTileBar } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
@@ -32,22 +33,31 @@ const DeviceRow = ({devices, deviceOS, classes}) => {
 		<div className={classes.root}>
 			<h4>{deviceOS}</h4>
 			<GridList className={classes.gridList} cols={2.5}>
-				{devices.map((device,index) => 
-					<GridListTile key={index}>
-						<img src="img.png" alt={device.name} />
-						<GridListTileBar
-							title = {device.name}
-							classes={{
-				            	root: classes.titleBar,
-				                title: classes.title,
-				            }}
-				            actionIcon={
-				                <IconButton>
-				                  <EditIcon className={classes.title} />
-				                </IconButton>
-				            }
-				        />
-				    </GridListTile>
+				{devices.map((device,index) => {
+					var slotLink = "/book-slot?key=" + device.name;
+					var editLink = "/edit-device?key=" + device.name;
+
+					return (
+						<Link to={slotLink} key={index}>
+							<GridListTile >
+								<img src="img" alt={device.name} />
+								<GridListTileBar
+									title = {device.name}
+									classes={{
+						            	root: classes.titleBar,
+						                title: classes.title,
+						            }}
+						            actionIcon={
+						                <IconButton>
+						                  <EditIcon className={classes.title} />
+						                </IconButton>
+						            }
+						        />
+						    </GridListTile>
+						</Link>
+					)
+				}
+					
 				)}
 			</GridList>
 		</div>
