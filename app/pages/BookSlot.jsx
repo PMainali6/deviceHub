@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../pages/Page';
-import BookSlotContainer from '../containers/BookSlot';
+import BookSlotContainer from '../components/BookSlot';
 
 class BookSlot extends Component {
   getMetaData() {

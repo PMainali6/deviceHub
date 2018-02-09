@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../pages/Page';
-import DeviceFormContainer from '../containers/DeviceForm';
+import DeviceFormContainer from '../components/DeviceForm';
 
 class DeviceForm extends Component {
   getMetaData() {
