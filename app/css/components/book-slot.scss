@@ -1,0 +1,28 @@
+.slot-container {
+    margin: 20px auto;
+  	display: flex;
+    padding: 20px;
+    flex-flow: row wrap;
+
+    .slot-title{
+        text-align: center;
+        flex: 1 100%;
+    }
+        
+    .slot-tab {
+        display: inline-block;
+        width: 20%;
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+            padding-right: 0;
+            margin: 0;
+        }
+    }
+
+    .book-slot-form {
+        width: 80%;
+        display: inline-block;
+    }
+}
