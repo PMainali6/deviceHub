@@ -36,15 +36,7 @@ module.exports = ({ production = false, browser = false } = {}) => {
       }
     },
     {
-      loader: 'postcss-loader',
-      options: {
-        ident: 'postcss',
-        plugins: [
-          postcssImport({ path: path.resolve(PATHS.app, './css') }),
-          postcssCssnext({ browsers: ['> 1%', 'last 2 versions'] }),
-          postcssReporter({ clearMessages: true })
-        ]
-      }
+      loader: 'sass-loader'
     }
   ]);
 
@@ -62,7 +54,7 @@ module.exports = ({ production = false, browser = false } = {}) => {
   const browserLoaders = createBrowserLoaders(production)(createCssLoaders(true));
 
   return {
-    test: /\.css$/,
+    test: /\.(css|scss)$/,
     use: browser ? browserLoaders : serverLoaders,
     include: PATHS.app
   };

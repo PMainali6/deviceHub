@@ -34,7 +34,7 @@ const BookSlotForm = ({classes}) => {
 	return (
 		<form className={classes.container} noValidate autoComplete="off">
 
-			<Button className={classes.button} variant="raised" color="default">
+			<Button className={classes.button} variant="raised" color="primary">
 				Release
 				<AssignmentReturn className={classes.rightIcon} />
 			</Button>

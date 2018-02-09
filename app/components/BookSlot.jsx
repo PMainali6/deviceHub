@@ -3,16 +3,13 @@ import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
-
+import style from '../css/components/book-slot';
 import BookSlotForm from './BookSlotForm';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(style);
 
 const styles = theme => ({
-	paper: {
-		margin: '20px auto',
-  		display: 'block',
-  		padding: 20,
-  		width: 700,
-	},
 	container: {
 		display: 'flex',
 		flexWrap: 'wrap',
@@ -40,36 +37,37 @@ const styles = theme => ({
 
 const BookSlot = ({classes}) => {
 	return (
-	<Paper className={classes.paper}>
-		<h4>Book A Slot</h4>
+	<Paper className={cx('slot-container')}>
+		<h4 className={cx('slot-title')}>Book A Slot</h4>
 
-		<nav>
+		<nav className={cx('slot-tab')}>
 			<ul>
 				<li>
-					<Button className={classes.button}  variant="raised" color="default">
-						9-11
+					<Button disabled className={classes.button}  variant="raised" color="default">
+						09:00 - 11:00
 	        		</Button>
 				</li>
 				<li>
-					<Button className={classes.button}  variant="raised" color="default">
-						11-1
+					<Button className={classes.button}  variant="raised" color="secondary">
+						11:00 - 13:00
 	        		</Button>
 				</li>
 				<li>
-					<Button className={classes.button}  variant="raised" color="default">
-						2-4
+					<Button className={classes.button}  variant="raised" color="primary">
+						14:00 - 16:00
 	        		</Button>
 				</li>
 				<li>
-					<Button className={classes.button}  variant="raised" color="default">
-						4-6
+					<Button className={classes.button}  variant="raised" color="primary">
+						16:00 - 18:00
 	        		</Button>
 				</li>
 			</ul>
 		</nav>
-
-		<BookSlotForm id="form1" key="1" />
-	
+		
+		<div className={cx('book-slot-form')}>
+			<BookSlotForm id="form1" key="1" />
+		</div>
 	</Paper>
 	)
 }

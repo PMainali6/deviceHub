@@ -1,32 +1,24 @@
-@import '../settings';
-@import '../common/typography';
-@import '../common/colors';
-@import '../common/button';
-@import '../common/input';
-
 .login {
   width: 420px;
   margin: 0 auto;
-  background-color: var(--colorAthensGray);
-  border: 2px solid var(--colorMercury);
-  border-radius: var(--globalRadius);
+  background-color: #f5f5f6;
+  border: 2px solid #e3e3e3;
+  border-radius: 4px;
 }
 
-.waiting {
-  .loading {
+.waiting .loading {
     display: block;
-  }
 }
 
 .alternative {
-  background: var(--colorWhite);
+  background: #ffff;
   padding: 12px 8px;
-  font-size: var(--fontMedium);
+  font-size: 16px;
   text-align: center;
 }
 
 .alternative-link {
-  color: var(--colorDodgerBlue);
+  color: #2196f3;
   font-weight: bold;
   cursor: pointer;
 }
@@ -39,35 +31,68 @@
 
 .email-container {
   padding: 16px 12px;
-  border-bottom: 2px solid var(--colorMercury);
+  border-bottom: 2px solid #e3e3e3;
 }
 
 .google-container {
   padding: 16px 12px;
 }
 
-.header {}
-
 .heading {
-  @apply --subHeading;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 48px;
+
   padding: 16px 12px;
   text-align: center;
 }
 
 .input {
-  @apply --input;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+
+  padding: 0.75rem 1rem;
+  border: 2px solid #c3c8ce;
+  border-radius: 4px;
+  width: 100%;
+
+  background-color: #ffffff;
+  color: #333f48;
+  margin-bottom: 0.75rem;
 }
 
 .message {
-  color: var(--colorCrimson);
-  font-size: var(--fontSmall);
+  color: #ed193a;
+  font-size: 12px;
 }
 
 .button {
-  @apply --greenButton;
+
+  display: block;
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 24px;
+
+    text-decoration: none;
+    text-align: center;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 2px;
+    cursor: pointer;
+    transition: 0.1s background-color ease;
+
+  color: #ffffff;
+    background: #0f9d58;
+    border-color: #0f9d58;
 }
 
 .hint {
-  @apply --small;
-  color: var(--colorBombay);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #b4bac1;
 }
