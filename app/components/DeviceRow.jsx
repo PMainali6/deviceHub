@@ -4,15 +4,13 @@ import { withStyles } from 'material-ui/styles';
 import GridList, { GridListTile, GridListTileBar } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import EditIcon from 'material-ui-icons/Edit';
+import style from '../css/components/device-row';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(style);
+
 
 const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
-  },
   gridList: {
     flexWrap: 'nowrap',
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
@@ -30,7 +28,7 @@ const styles = theme => ({
 
 const DeviceRow = ({devices, deviceOS, classes}) => {
 	return (
-		<div className={classes.root}>
+		<div className={cx('root')}>
 			<h4>{deviceOS}</h4>
 			<GridList className={classes.gridList} cols={2.5}>
 				{devices.map((device,index) => {
@@ -40,7 +38,7 @@ const DeviceRow = ({devices, deviceOS, classes}) => {
 					return (
 						<Link to={slotLink} key={index}>
 							<GridListTile >
-								<img src="img" alt={device.name} />
+								<img src={device.img} alt={device.name} />
 								<GridListTileBar
 									title = {device.name}
 									classes={{

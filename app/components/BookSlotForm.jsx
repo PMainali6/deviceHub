@@ -5,7 +5,10 @@ import Button from 'material-ui/Button';
 
 import Save from 'material-ui-icons/Save';
 import AssignmentReturn from 'material-ui-icons/AssignmentReturn';
+import style from '../css/components/book-slot-form';
+import classNames from 'classnames/bind';
 
+const cx = classNames.bind(style);
 
 const styles = theme => ({
 	container: {
@@ -23,11 +26,7 @@ const styles = theme => ({
 	},
 	rightIcon: {
 		marginLeft: theme.spacing.unit,
-	},
-	formAction: {
-		width: '100%',
-		marginTop: 30,
-	},
+	}
 });
 
 const BookSlotForm = ({classes}) => {
@@ -75,7 +74,7 @@ const BookSlotForm = ({classes}) => {
 				/>
 			</div>
 
-			<div className={classes.formAction}>
+			<div className={cx('formAction')}>
 	        		<Button className={classes.button} variant="raised" color="primary">
 	        			Save
 	        			<Save className={classes.rightIcon} />

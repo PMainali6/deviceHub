@@ -52,7 +52,7 @@ const uploadFile = {
 	'accept':'.jpg, .jpeg, .png'
 }
 
-const DeviceForm = ({classes}) => {
+const DeviceForm = ({classes, onTest=f=>f}) => {
 	return (
 		<Paper className={classes.paper}>
 			<h4>Device Form </h4>
@@ -113,27 +113,16 @@ const DeviceForm = ({classes}) => {
 		        	margin="normal"
         		/>
 
-        		<div className={classes.uploadAction}>
-	        		<TextField
-	        			required
-	        			id="image"
-	        			label="Upload Image"
-	        			className={classes.textField}
-	        			margin ="normal"
-	        			inputProps = {uploadFile}
-	        			InputLabelProps={{
-				            shrink: true,
-				        }}
-	        		/>
-
-	        		<Button className={classes.button} size="small" variant="raised" color="default">
-	        			Upload
-	        			<FileUpload className={classes.rightIcon} />
-	        		</Button>
-	        	</div>
+        		<TextField
+		        	required
+		        	id="img-url"
+		        	label="Image Url"
+		        	className={classes.textField}
+		        	margin="normal"
+        		/>
 
         		<div className={classes.formAction}>
-	        		<Button className={classes.button} variant="raised" color="primary">
+	        		<Button className={classes.button} variant="raised" color="primary" onClick={() => onTest()}>
 	        			Save
 	        			<Save className={classes.rightIcon} />
 	        		</Button>

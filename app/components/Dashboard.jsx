@@ -1,5 +1,4 @@
 import React from 'react';
-
 import DeviceType from './DeviceType';
 /*
  * Note: This is kept as a container-level component,
@@ -7,32 +6,16 @@ import DeviceType from './DeviceType';
  *  and dispatching of actions if you decide to have any sub-components.
  */
 
+
  const stateValue =
 {
    "devices": [
       {
+        'id':'1234',
         "name":"Samsung Galaxy S8",
         "deviceType":"Mobile",
         "os":"Android",
-        "version":"7.1",
-        "slot":[
-          {
-            "value": "9-11",
-            "booked": false
-          },
-          {
-            "value": "11-1",
-            "booked": false
-          },
-          {
-            "value": "2-4",
-            "booked": false
-          },
-          {
-            "value": "4-6",
-            "booked": false
-          }
-        ]
+        "version":"7.1"
       },
       {
         "name":"Samsung Galaxy S8 Plus",
