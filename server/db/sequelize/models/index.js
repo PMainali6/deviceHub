@@ -3,6 +3,7 @@ import sequelizeConfig from '../sequelize_config';
 import { ENV } from '../../../../config/env';
 import tokenModel from './tokens';
 import topicModel from './topics';
+import deviceModel from './devices';
 import userModel from './users';
 
 const config = sequelizeConfig[ENV];
@@ -14,6 +15,7 @@ const sequelize = dbUrl ? new Sequelize(dbUrl) : new Sequelize(config.database, 
 
 db.Token = sequelize.import('Token', tokenModel);
 db.Topic = sequelize.import('Topic', topicModel);
+db.Device = sequelize.import('Device', deviceModel);
 db.User = sequelize.import('User', userModel);
 
 Object.keys(db).forEach((key) => {
