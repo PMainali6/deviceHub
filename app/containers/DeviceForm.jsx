@@ -3,25 +3,13 @@ import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import DeviceFormComponent from '../components/DeviceForm';
-import test from '../actions/random-test';
+import { addDevice } from '../actions/device';
 
 
 const mapStateToProps = (state) => {
-    return state;
+    return {
+    	devices: state.user
+    };
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         onTest() {
-//             dispatch(
-//                 test()
-//             )
-//         }
-//     }
-// }
-
-const DeviceForm = ({test}) => {
-    <DeviceFormComponent onTest={test}/>
-}
-
-export default connect(mapStateToProps, {test})(DeviceForm);
+export default connect(mapStateToProps, { addDevice })(DeviceFormComponent);
