@@ -9,13 +9,12 @@ function addDeviceRequest (id, data) {
 	} 
 }
 
-export function addDevice (device) {
-	console.dir(device);
+export function addDevice (data) {
 	return (dispatch, getState) => {
 		const id = '10';
 
-		dispatch(addDeviceRequest(id, device));
+		dispatch(addDeviceRequest(id, data));
 
-		return deviceService().addDeviceData({id, device})
+		return deviceService().addDeviceData({id, data})
 	}
 }

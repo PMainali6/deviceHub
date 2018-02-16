@@ -32,11 +32,12 @@ class DeviceForm extends Component {
 		const { addDevice } = this.props;
 
 		let formInput = {
-			deviceName: this.deviceName.value,
-			deviceType: this.deviceType.value,
-			deviceOS: this.deviceOS.value,
-			deviceVersion: this.deviceVersion.value,
-			deviceImg: this.deviceImg.value
+			name: this.deviceName.value,
+			type: this.deviceType.value,
+			os: this.deviceOS.value,
+			version: this.deviceVersion.value,
+			bookedBy: "",
+			available: true
 		}
 		addDevice(formInput);
 	}
