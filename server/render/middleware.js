@@ -18,7 +18,52 @@ export default function render(req, res) {
       authenticated,
       isWaiting: false,
       message: '',
-      isLogin: true
+      isLogin: true,
+      devices: [
+        {
+          name: "Samsung Galaxy S8",
+          deviceType: "Mobile",
+          os: "Android",
+          version: "7.1"
+        },
+        {
+          name: "HTC U11",
+          deviceType: "Mobile",
+          os: "Android",
+          version: "7.1"
+        },
+        {
+          name: "Apple Iphone X",
+          deviceType: "Mobile",
+          os: "IOS",
+          version: "11.3"
+        },
+        {
+          name: "Nokia 1020",
+          deviceType: "Mobile",
+          os: "Windows",
+          version: "10"
+        },
+        {
+          name: "Samsung Galaxy Tab",
+          deviceType: "Tablet",
+          os: "Android",
+          version: "8.1"
+        },
+        {
+          name: "Apple Ipad Pro",
+          deviceType: "Tablet",
+          os: "IOS",
+          version: "11.3"
+        },
+        {
+          name: "Acer Tablet",
+          deviceType: "Tablet",
+          os: "Windows",
+          version: "10"
+        }
+      ]
+
     }
   }, history);
   const routes = createRoutes(store);
