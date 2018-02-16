@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../pages/Page';
-import DashboardContainer from '../components/Dashboard';
+import DashboardContainer from '../containers/Dashboard';
 
 class Dashboard extends Component {
   getMetaData() {
