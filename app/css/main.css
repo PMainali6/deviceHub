@@ -1,7 +1,7 @@
 html {
     height: 100%;
 
-    &::before {
+    /* &::before {
         content: "";
         background: #eee url(https://images.pexels.com/photos/220182/pexels-photo-220182.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb) no-repeat center center fixed;
         -webkit-background-size: cover;
@@ -15,7 +15,12 @@ html {
         right: 0;
         bottom: 0;
         z-index: -1;
-    }
+    } */
+        /* background-color: rgb(244, 244, 244); */
+        background: #eee url(https://cdn.wallpapersafari.com/38/49/6LS0zc.jpg);
+        background: #f7f7f7;
+        z-index: -1;
+        background-repeat: no-repeat;
 }
 
 body {
@@ -24,7 +29,6 @@ body {
 }
 
 .app {
-    padding: 8px 24px;
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import { logOut } from '../actions/users';
 import styles from '../css/components/navigation';
+import iphone from '../images/iphoneX.svg';
 
 const cx = classNames.bind(styles);
 
@@ -14,7 +15,17 @@ const Navigation = ({ user, logOut }) => {
         <Link
           to="/"
           className={cx('item', 'logo')}
-          activeClassName={cx('active')}>Device Manager</Link>
+          activeClassName={cx('active')}>
+
+          <div className={cx('logo-container')}>
+            <img src={iphone} alt="logo" border="0" className={cx('logo-img')}/>
+            <div className={cx('brand-name')}>
+              Device Hub
+            </div>
+            
+
+          </div>
+          </Link>
           
         <div className={cx('nav-menu')}>
           <Link className={cx('item')} to="/dashboard">Dashboard</Link>

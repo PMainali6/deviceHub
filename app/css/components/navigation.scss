@@ -1,6 +1,8 @@
 .navigation {
-	padding: 0 28px 35px 28px;
+	padding: 0;
 	z-index: 1;
+	background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #36C797), color-stop(100, #4F8AFF));
+	box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
 
 	.item {
 		display: inline-block;
@@ -8,16 +10,26 @@
 		margin: 16px 32px;
 		color: #000;
 		font-weight: bold;
+		
 	}
 
-	.logo {
-	  	font-size: 28px;
-	  	border: 3px solid;
-	  	padding: 16px 32px;
-		margin: 0;
+	.logo-container {
+		.logo-img {
+			width: 12%;
+			height: auto;
+		}
+	
+		.brand-name {
+			display: inline-block;
+			margin: 0 0 0 10px;
+			font-size: 26px;
+			width: 50%;
+			font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+		}
 	}
 
 	.nav-menu {
 		float: right;
+		margin-top: 20px;
 	}
 }

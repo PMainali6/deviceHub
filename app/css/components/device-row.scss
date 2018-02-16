@@ -5,13 +5,36 @@
     	text-decoration: none;
     }
 
-    .head {
-    	margin: 0;
+    .img-container {
+        width: 15%;
+        float: left;
+
+        .os-logo {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .os-devices {
+        width: 80%;
+        float: right;
     }
 
     .button {
     	margin: 10px;
-    	padding: 5px 20px;
-    	border-radius: 5px;
+    	padding: 15px;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 16px;
+
+        &:hover {
+            color: #fff;
+            background-color: #36C797;
+            text-decoration: none;
+            border: 1px solid #36C797;
+            transition: background-color .25s ease-in;
+        }
     }
+
+    clear: both;
 }
