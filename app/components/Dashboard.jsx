@@ -1,5 +1,8 @@
 import React from 'react';
+
 import DeviceType from './DeviceType';
+import style from '../css/components/device-type';
+import classNames from 'classnames/bind';
 /*
  * Note: This is kept as a container-level component,
  *  i.e. We should keep this as the container that does the data-fetching
@@ -308,9 +311,11 @@ import DeviceType from './DeviceType';
     ]
   };
 
+const cx = classNames.bind(style);
+
 const Dashboard = () => {
     return(
-        <div>
+        <div className={cx('dashboard')}>
            <DeviceType devices={stateValue.devices.filter(device => device.deviceType === "Mobile")} deviceType ="Mobile" />
                
            <DeviceType devices={stateValue.devices.filter(device => device.deviceType === "Tablet")} deviceType ="Tablet" />

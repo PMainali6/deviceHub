@@ -1,4 +1,10 @@
-.device-type-container {
-    margin: 20px;
-    display: block;
+.dashboard {
+	display: flex;
+
+	.device-type-container {
+	    margin: 20px;
+	    padding: 20px;
+	    width: 50%;
+	    display: inline-block;
+	}
 }

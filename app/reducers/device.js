@@ -23,7 +23,6 @@ const devices = (
 ) => {
 	switch(action.type) {
 		case types.ADD_DEVICE_REQUEST:
-		debugger;
 			return [...state, device];
 
 		default :

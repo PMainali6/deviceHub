@@ -9,9 +9,7 @@ const cx = classNames.bind(style);
 
 
 const DeviceType = ({devices, deviceType}) => {
-	console.log(devices);
 	return (
-	<div>
 	<Paper className={cx('device-type-container')}>
 		<h4>{deviceType}</h4>
 
@@ -19,7 +17,7 @@ const DeviceType = ({devices, deviceType}) => {
 	    <DeviceRow devices ={devices.filter(device => device.os === "IOS")} deviceOS = "iOS" />
 	  	<DeviceRow devices ={devices.filter(device => device.os === "Windows")} deviceOS = "Windows" />
 	</Paper>
-	</div>  	)
+	)
 }
 
 export default DeviceType;

@@ -1,0 +1,23 @@
+.navigation {
+	padding: 0 28px 35px 28px;
+	z-index: 1;
+
+	.item {
+		display: inline-block;
+		text-decoration: none;
+		margin: 16px 32px;
+		color: #000;
+		font-weight: bold;
+	}
+
+	.logo {
+	  	font-size: 28px;
+	  	border: 3px solid;
+	  	padding: 16px 32px;
+		margin: 0;
+	}
+
+	.nav-menu {
+		float: right;
+	}
+}

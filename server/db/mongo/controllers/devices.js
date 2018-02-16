@@ -64,7 +64,8 @@ export function update(req, res) {
  * Remove a Device
  */
 export function remove(req, res) {
-  const query = { id: req.params.id };
+  const query = { _id: req.params.id };
+
   Device.findOneAndRemove(query, (err) => {
     if (err) {
       console.log('Error on delete');

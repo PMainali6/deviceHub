@@ -1,47 +1,16 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
+import { Link } from 'react-router';
+
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
-
 import Icon from 'material-ui/Icon';
 import Save from 'material-ui-icons/Save';
-import FileUpload from 'material-ui-icons/FileUpload';
 
-const styles = theme => ({
-	paper: {
-		margin: '20px auto',
-  		display: 'block',
-  		padding: 20,
-  		width: 700,
-	},
-	container: {
-		display: 'flex',
-		flexWrap: 'wrap',
-	},
-	textField: {
-		marginLeft: 20,
-		marginRight: 20,
-		width: 250,
+import style from '../css/components/device-form';
+import classNames from 'classnames/bind';
 
-	},
-	menu: {
-		width: 200,
-	},
-	button: {
-		margin: theme.spacing.unit,
-	},
-	rightIcon: {
-		marginLeft: theme.spacing.unit,
-	},
-	formAction: {
-		width: '100%',
-		marginTop: 30,
-	},
-	uploadAction: {
-
-	},
-});
+const cx = classNames.bind(style);
 
 const deviceType = ["Mobile", "Tablet"];
 
@@ -73,17 +42,17 @@ class DeviceForm extends Component {
 	}
 
 	render () {
-		const { classes, addDevice } = this.props;
+		const { addDevice } = this.props;
 
 		return (
-			<Paper className={classes.paper}>
+			<Paper className={cx('paper')}>
 				<h4>Device Form </h4>
-				<form className={classes.container} noValidate autoComplete="off">
+				<form className={cx('container')} noValidate autoComplete="off">
 					<TextField
 			        	required
 			        	id="device-name"
 			        	label="Device Name"
-			        	className={classes.textField}
+			        	className={cx('text-field')}
 			        	margin="normal"
 			        	inputProps={{ref: input => {this.deviceName = input}}}
 	        		/>
@@ -92,11 +61,11 @@ class DeviceForm extends Component {
 						id="device-type"
 						select
 						label="Device Type"
-						className={classes.textField}
+						className={cx('text-field')}
 						SelectProps={{
 							native: true,
 				            MenuProps: {
-				            	className: classes.menu,
+				            	className: cx('menu'),
 				            },
 						}}
 						margin="normal"
@@ -113,11 +82,11 @@ class DeviceForm extends Component {
 						id="device-os"
 						select
 						label="Device OS"
-						className={classes.textField}
+						className={cx('text-field')}
 						SelectProps={{
 							native: true,
 				            MenuProps: {
-				            	className: classes.menu,
+				            	className: cx('menu'),
 				            },
 						}}
 						margin="normal"
@@ -134,7 +103,7 @@ class DeviceForm extends Component {
 			        	required
 			        	id="os-version"
 			        	label="OS Version"
-			        	className={classes.textField}
+			        	className={cx('text-field')}
 			        	margin="normal"
 			        	inputProps={{ref: input => {this.deviceVersion = input}}}
 	        		/>
@@ -143,20 +112,23 @@ class DeviceForm extends Component {
 			        	required
 			        	id="img-url"
 			        	label="Image Url"
-			        	className={classes.textField}
+			        	className={cx('text-field')}
 			        	margin="normal"
 			        	inputProps={{ref: input => {this.deviceImg = input}}}
 	        		/>
 
-	        		<div className={classes.formAction}>
-		        		<Button className={classes.button} variant="raised" color="primary" onClick={this.onSave}>
-		        			Save
-		        			<Save className={classes.rightIcon} />
-		        		</Button>
-
-		        		<Button className={classes.button} variant="raised" color="default">
-		        			Cancel
-		        		</Button>
+	        		<div className={cx('form-action')}>
+	        			<Link to="/dashboard">
+			        		<Button className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
+			        			Save
+			        			<Save className={cx('right-icon')} />
+			        		</Button>
+			        	</Link>
+		        		<Link to="/dashboard">
+			        		<Button className={cx('button')} variant="raised" color="default">
+			        			Cancel
+			        		</Button>
+			        	</Link>
 		        	</div>
 				</form>
 			</Paper>
@@ -164,4 +136,4 @@ class DeviceForm extends Component {
 	}
 }
 
-export default withStyles(styles)(DeviceForm);
+export default DeviceForm;

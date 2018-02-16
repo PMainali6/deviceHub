@@ -15,6 +15,12 @@ const Navigation = ({ user, logOut }) => {
           to="/"
           className={cx('item', 'logo')}
           activeClassName={cx('active')}>Device Manager</Link>
+          
+        <div className={cx('nav-menu')}>
+          <Link className={cx('item')} to="/dashboard">Dashboard</Link>
+          <Link to="/about" className={cx('item')} activeClassName={cx('active')}>About</Link>
+          <Link className={cx('item')} to="/add-device">Add Device</Link>
+
           { user.authenticated ? (
             <Link
               onClick={logOut}
@@ -22,9 +28,7 @@ const Navigation = ({ user, logOut }) => {
           ) : (
             <Link className={cx('item')} to="/login">Log in</Link>
           )}
-        <Link className={cx('item')} to="/dashboard">Dashboard</Link>
-        <Link to="/about" className={cx('item')} activeClassName={cx('active')}>About</Link>
-        <Link className={cx('item')} to="/add-device">Add Device</Link>
+        </div>
       </nav>
     );
 };

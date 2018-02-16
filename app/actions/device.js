@@ -12,7 +12,7 @@ function addDeviceRequest (id, data) {
 export function addDevice (device) {
 	console.dir(device);
 	return (dispatch, getState) => {
-		const id = 10;
+		const id = '10';
 
 		dispatch(addDeviceRequest(id, device));
 
