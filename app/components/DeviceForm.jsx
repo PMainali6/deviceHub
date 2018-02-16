@@ -12,9 +12,9 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(style);
 
-const deviceType = ["Mobile", "Tablet"];
+const deviceType = ["","Mobile", "Tablet"];
 
-const deviceOS = ["iOS", "Android", "Windows"];
+const deviceOS = ["","iOS", "Android", "Windows"];
 
 const uploadFile = {
 	'type': 'file',
@@ -25,7 +25,26 @@ class DeviceForm extends Component {
 
 	constructor() {
 		super();
+		this.findAncestor = this.findAncestor.bind(this);
+		this.validateInput = this.validateInput.bind(this);
 		this.onSave = this.onSave.bind(this);
+	}
+
+	findAncestor (element, selector) {
+	    while ((element = element.parentElement) && !element.classList.contains(selector));
+	    return element;
+	}
+	validateInput(event) {
+		let input = event.target,
+			parent = this.findAncestor(input, cx('text-field'));
+
+		if(!input.value.length) {
+			parent.classList.add(cx('error'));
+
+		}
+		else  {
+			parent.classList.remove(cx('error'));
+		}
 	}
 
 	onSave() {
@@ -55,10 +74,15 @@ class DeviceForm extends Component {
 			        	label="Device Name"
 			        	className={cx('text-field')}
 			        	margin="normal"
-			        	inputProps={{ref: input => {this.deviceName = input}}}
+			        	onChange={this.validateInput}
+			        	inputProps={{
+			        		ref: input => {this.deviceName = input},
+			        		onBlur: this.validateInput
+			        	}}
 	        		/>
 
 	        		<TextField
+	        			required
 						id="device-type"
 						select
 						label="Device Type"
@@ -70,7 +94,11 @@ class DeviceForm extends Component {
 				            },
 						}}
 						margin="normal"
-						inputProps={{ref: input => {this.deviceType = input}}}
+						onChange={this.validateInput}
+						inputProps={{
+							ref: input => {this.deviceType = input},
+							onBlur: this.validateInput
+						}}
 					>
 						{deviceType.map(option => (
 							<option key={option} value={option}>
@@ -80,6 +108,7 @@ class DeviceForm extends Component {
 					</TextField>
 
 					<TextField
+						required
 						id="device-os"
 						select
 						label="Device OS"
@@ -91,7 +120,11 @@ class DeviceForm extends Component {
 				            },
 						}}
 						margin="normal"
-						inputProps={{ref: input => {this.deviceOS = input}}}
+						onChange={this.validateInput}
+						inputProps={{
+							ref: input => {this.deviceOS = input},
+							onBlur: this.validateInput
+						}}
 					>
 						{deviceOS.map(option => (
 							<option key={option} value={option}>
@@ -106,16 +139,11 @@ class DeviceForm extends Component {
 			        	label="OS Version"
 			        	className={cx('text-field')}
 			        	margin="normal"
-			        	inputProps={{ref: input => {this.deviceVersion = input}}}
-	        		/>
-
-	        		<TextField
-			        	required
-			        	id="img-url"
-			        	label="Image Url"
-			        	className={cx('text-field')}
-			        	margin="normal"
-			        	inputProps={{ref: input => {this.deviceImg = input}}}
+			        	onChange={this.validateInput}
+			        	inputProps={{
+			        		ref: input => {this.deviceVersion = input},
+			        		onBlur: this.validateInput
+			        	}}
 	        		/>
 
 	        		<div className={cx('form-action')}>

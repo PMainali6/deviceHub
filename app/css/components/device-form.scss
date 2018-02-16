@@ -42,6 +42,10 @@
 
 			a {
 				text-decoration: none;
+
+				&.disabled {
+					pointer-event: none;
+				}
 			}
 		}
 	}
