@@ -7,6 +7,7 @@ const topic = (
 ) => {
   switch (action.type) {
     case types.CREATE_TOPIC_REQUEST:
+      console.log(action)
       return {
         id: action.id,
         count: action.count,

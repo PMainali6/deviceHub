@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 const DeviceSchema = new mongoose.Schema({
   id: String,
   name: String,
-  type: String,
+  deviceType: String,
   os: String,
   version: String,
   bookedBy: String,

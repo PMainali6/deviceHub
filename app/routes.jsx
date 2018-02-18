@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import { fetchVoteData } from './fetch-data';
+import { fetchVoteData, fetchDevicesData } from './fetch-data';
 import { App, Vote, Dashboard, About, AddDevice, LoginOrRegister } from './pages';
 
-console.log(AddDevice);
+
 
 /*
  * @param {Redux Store}

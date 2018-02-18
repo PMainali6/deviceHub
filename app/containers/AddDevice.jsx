@@ -1,13 +1,14 @@
 import React from 'react';
+import classNames from 'classnames/bind';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import AddDeviceForm from '../components/AddDeviceForm';
-const AddDevice = () => {
+import { addDevice } from '../actions/device';
 
-    return(
-        <div>
-            <AddDeviceForm />
-        </div>
-    );
-
+const mapStateToProps = (state) => {
+    return {
+    	devices: state.user
+    };
 }
 
-export default AddDevice;
+export default connect(mapStateToProps, { addDevice })(AddDeviceForm);

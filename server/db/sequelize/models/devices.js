@@ -5,7 +5,7 @@ export default (sequelize, DataTypes) =>
       primaryKey: true
     },
     name: DataTypes.STRING,
-    type: DataTypes.STRING,
+    deviceType: DataTypes.STRING,
     os: DataTypes.STRING,
     version: DataTypes.STRING,
     bookedBy:DataTypes.STRING,

@@ -60,6 +60,19 @@ export function update(req, res) {
   }
 }
 
+export function get(req, res) {
+  const query = { id: req.params.id };
+  Topic.findOne(query).exec((err, topic) => {
+    if (err) {
+      console.log('Error in first query');
+      return res.status(500).send('Something went wrong getting the data');
+    }
+ 
+    return res.json(topic);
+  });
+ }
+ 
+
 /**
  * Remove a topic
  */
@@ -79,5 +92,6 @@ export default {
   all,
   add,
   update,
+  get,
   remove
 };

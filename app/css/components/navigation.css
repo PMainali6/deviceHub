@@ -9,7 +9,7 @@
   display: inline-block;
   text-decoration: none;
   padding: 16px 32px;
-  color: var(--colorBlack);
+  color: var(--colorWhite);
 }
 
 .logo {
@@ -17,5 +17,5 @@
 }
 
 .active {
-  color: var(--colorDodgerBlue);
+  color: var(--colorWhite);
 }
