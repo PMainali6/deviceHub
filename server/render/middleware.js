@@ -18,52 +18,7 @@ export default function render(req, res) {
       authenticated,
       isWaiting: false,
       message: '',
-      isLogin: true,
-      devices: [
-        {
-          name: "Samsung Galaxy S8",
-          deviceType: "Mobile",
-          os: "Android",
-          version: "7.1"
-        },
-        {
-          name: "HTC U11",
-          deviceType: "Mobile",
-          os: "Android",
-          version: "7.1"
-        },
-        {
-          name: "Apple Iphone X",
-          deviceType: "Mobile",
-          os: "IOS",
-          version: "11.3"
-        },
-        {
-          name: "Nokia 1020",
-          deviceType: "Mobile",
-          os: "Windows",
-          version: "10"
-        },
-        {
-          name: "Samsung Galaxy Tab",
-          deviceType: "Tablet",
-          os: "Android",
-          version: "8.1"
-        },
-        {
-          name: "Apple Ipad Pro",
-          deviceType: "Tablet",
-          os: "IOS",
-          version: "11.3"
-        },
-        {
-          name: "Acer Tablet",
-          deviceType: "Tablet",
-          os: "Windows",
-          version: "10"
-        }
-      ]
-
+      isLogin: true
     }
   }, history);
   const routes = createRoutes(store);
@@ -100,7 +55,7 @@ export default function render(req, res) {
       store.dispatch({ type: types.CREATE_REQUEST });
       fetchDataForRoute(props)
         .then((data) => {
-          store.dispatch({ type: types.REQUEST_SUCCESS, data });
+          store.dispatch({ type: types.DEVICE_REQUEST_SUCCESS, data });
           const html = pageRenderer(store, props);
           res.status(200).send(html);
         })

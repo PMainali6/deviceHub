@@ -14,7 +14,7 @@ const DeviceType = ({devices, deviceType}) => {
 		<h4>{deviceType}</h4>
 
 		<DeviceRow devices ={devices.filter(device => device.os === "Android")} deviceOS = "Android" />
-	    <DeviceRow devices ={devices.filter(device => device.os === "IOS")} deviceOS = "iOS" />
+	    <DeviceRow devices ={devices.filter(device => device.os === "iOS")} deviceOS = "iOS" />
 	  	<DeviceRow devices ={devices.filter(device => device.os === "Windows")} deviceOS = "Windows" />
 	</Paper>
 	)
