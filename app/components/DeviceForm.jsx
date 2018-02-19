@@ -12,9 +12,9 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(style);
 
-const deviceType = ["","Mobile", "Tablet"];
+const deviceType = ["Mobile", "Tablet"];
 
-const deviceOS = ["","iOS", "Android", "Windows"];
+const deviceOS = ["iOS", "Android", "Windows"];
 
 const uploadFile = {
 	'type': 'file',
@@ -50,15 +50,20 @@ class DeviceForm extends Component {
 	onSave() {
 		const { addDevice } = this.props;
 
-		let formInput = {
-			name: this.deviceName.value,
-			type: this.deviceType.value,
-			os: this.deviceOS.value,
-			version: this.deviceVersion.value,
-			bookedBy: "",
-			available: true
+		if(this.deviceName.value && this.deviceType.value && this.deviceOS.value && this.deviceVersion.value) {
+			let formInput = {
+				name: this.deviceName.value,
+				type: this.deviceType.value,
+				os: this.deviceOS.value,
+				version: this.deviceVersion.value,
+				bookedBy: "",
+				available: true
+			}
+			addDevice(formInput);
 		}
-		addDevice(formInput);
+		else {
+			alert('Please enter some data!!!');
+		}
 	}
 
 	render () {
@@ -147,7 +152,7 @@ class DeviceForm extends Component {
 	        		/>
 
 	        		<div className={cx('form-action')}>
-	        			<Link to="/dashboard">
+	        			<Link>
 			        		<Button className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
 			        			Save
 			        			<Save className={cx('right-icon')} />

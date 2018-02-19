@@ -12,7 +12,6 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(style);
 
 const Dashboard = ({deviceData}) => {
-	console.log(deviceData)
     return(
         <div className={cx('dashboard')}>
            <DeviceType devices={deviceData.filter(device => device.type === "Mobile")} deviceType ="Mobile" />
