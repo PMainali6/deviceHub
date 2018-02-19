@@ -1,0 +1,21 @@
+.message {
+    display: none;
+    padding: 12px 0;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+}
+
+.success {
+    background-color: rgb(49, 49, 49);
+    color: #fff;
+}
+
+.show {
+    display: block;
+}
+
+.close-icon {
+    float: right;
+    margin-right: 10px;
+}

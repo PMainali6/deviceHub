@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import { dismissMessage } from '../actions/messages';
 import styles from '../css/components/message';
+import Close from 'material-ui-icons/Close';
 
 const cx = classNames.bind(styles);
 
@@ -13,8 +14,12 @@ const Message = ({message, type, dismissMessage}) => (
       show: message && message.length > 0,
       success: type === 'SUCCESS'
     })}
-    onClick={dismissMessage}>{message}</div>
+    onClick={dismissMessage}>{message}
+    
+    <Close className={cx('close-icon')} />
+    </div>
 );
+
 
 Message.propTypes = {
   message: PropTypes.string,

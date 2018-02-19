@@ -1,9 +1,9 @@
 .login {
   width: 420px;
-  margin: 0 auto;
-  background-color: #f5f5f6;
-  border: 2px solid #e3e3e3;
+  margin: 40px auto;
+  background-color: #fff;
   border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
 }
 
 .waiting .loading {
@@ -55,7 +55,7 @@
   padding: 0.75rem 1rem;
   border: 2px solid #c3c8ce;
   border-radius: 4px;
-  width: 100%;
+  width: 91%;
 
   background-color: #ffffff;
   color: #333f48;
@@ -68,26 +68,32 @@
 }
 
 .button {
-
   display: block;
-    width: 100%;
-    padding: 0.75rem 1.25rem;
-    
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 24px;
+  padding: 0.75rem 1.25rem;
+  
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 24px;
 
-    text-decoration: none;
-    text-align: center;
-    border-radius: 4px;
-    border-style: solid;
-    border-width: 2px;
-    cursor: pointer;
-    transition: 0.1s background-color ease;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 2px;
+  cursor: pointer;
+  transition: 0.1s background-color ease;
 
   color: #ffffff;
-    background: #0f9d58;
-    border-color: #0f9d58;
+  background: #0f9d58;
+  border-color: #0f9d58;
+}
+
+.custom-login {
+  width: 100%;
+}
+
+.google-login {
+  width: 91%;
 }
 
 .hint {

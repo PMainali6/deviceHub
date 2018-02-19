@@ -18,7 +18,7 @@ const Navigation = ({ user, logOut }) => {
           activeClassName={cx('active')}>
 
           <div className={cx('logo-container')}>
-            <img src={iphone} alt="logo" border="0" className={cx('logo-img')}/>
+            <img src={iphone} alt="logo" className={cx('logo-img')}/>
             <div className={cx('brand-name')}>
               Device Hub
             </div>

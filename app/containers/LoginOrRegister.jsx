@@ -95,7 +95,7 @@ class LoginOrRegister extends Component {
                 'message-show': message && message.length > 0
               })}>{message}</p>
               <input
-                className={cx('button')}
+                className={cx('button', 'custom-login')}
                 type="submit"
                 value={isLogin ? 'Login' : 'Register'} />
             </form>
@@ -103,7 +103,7 @@ class LoginOrRegister extends Component {
           <div className={cx('google-container')}>
             <h1 className={cx('heading')}>Google Login Demo</h1>
             <a
-              className={cx('button')}
+              className={cx('goggle-login', 'button')}
               href="/auth/google">Login with Google</a>
           </div>
         </div>
