@@ -23,10 +23,30 @@ function addDeviceFailure (data) {
 	}
 }
 
+function bookDeviceRequest (data) {
+	return {
+		type: types.BOOK_DEVICE_REQUEST,
+		payload: data
+	}
+}
+
+function bookDeviceSuccess () {
+	return {
+		type: types.BOOK_DEVICE_SUCCESS
+	}
+}
+
+function bookDeviceFailure (data) {
+	return {
+		type: types.BOOK_DEVICE_FAILURE,
+		id: data.id,
+		error: data.error
+	}
+}
+
 export function addDevice (deviceData) {
 	return (dispatch, getState) => {
 		const id = md5.hash(deviceData.name);
-		console.log(`id: ${id}`);
 		const data = {id, ...deviceData};
 
 		dispatch(addDeviceRequest(data));
@@ -41,4 +61,22 @@ export function addDevice (deviceData) {
 				return dispatch(addDeviceFailure({ id, error:'Oops! Something went wrong and we couldn\'t add your device'}));
 			});
 	}
+}
+
+export function bookDevice (bookingData) {
+	return (dispatch, getState) => {
+		const id = bookingData.id;
+
+		dispatch(bookDeviceRequest(bookingData));
+
+		return deviceService().updateDeviceData({id, data: bookingData})
+			.then((res) => {
+				if(res.status === 200) {
+					return dispatch(bookDeviceSuccess());
+				}
+			})
+			.catch(() => {
+				return dispatch(bookDeviceFailure({id, error:'Oops! Something went wrong and we couldn\'t update your device'}))
+			})
+	} 
 }

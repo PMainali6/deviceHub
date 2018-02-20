@@ -29,6 +29,15 @@ const devices = (
 		case types.ADD_DEVICE_FAILURE:
 			return state.filter(t => t.id !== action.id);
 
+		case types.BOOK_DEVICE_REQUEST:
+			let index = state.findIndex(device => device.id === action.payload.id),
+				bookedDevice = state[index];
+
+			bookedDevice.bookedBy = action.payload.bookedBy;
+			bookedDevice.available = action.payload.available;
+			
+			return [...state.filter(device => device.id !== action.payload.id), bookedDevice];
+
 		default :
 			return state;
 	}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
@@ -29,47 +29,81 @@ const styles = theme => ({
 	}
 });
 
-const BookSlotForm = ({classes}) => {
-	return (
-		<form className={classes.container} noValidate autoComplete="off">
 
-			<Button className={classes.button} variant="raised" color="primary">
-				Release
-				<AssignmentReturn className={classes.rightIcon} />
-			</Button>
+class BookSlotForm extends Component {
+	constructor () {
+		super();
+		this.onSave = this.onSave.bind(this);
+	}
 
-			<div>
-				<TextField
-		        	required
-		        	id="user-name"
-		        	label="Borrower's Name"
-		        	className={classes.textField}
-		        	margin="normal"
-				/>
+	onSave() {
+		const { deviceId, bookDevice } = this.props;
 
-				<TextField
-		        	required
-		        	id="mobile-number"
-		        	label="Mobile Number"
-		        	className={classes.textField}
-		        	margin="normal"
-		        	inputProps = {{'type': 'tel'}}
-				/>
-			</div>
+		if(this.userName.value && this.mobile.value) {
+			let bookingData = {
+				id: deviceId,
+				bookedBy: {
+					name: this.userName.value,
+					mobile: this.mobile.value
+				},
+				available: false
+			}
+			bookDevice(bookingData);
+		}
+		else {
+			alert('Please enter some data!!!');
+		}
+	}
 
-			<div className={cx('formAction')}>
-	        		<Button className={classes.button} variant="raised" color="primary">
-	        			Save
-	        			<Save className={classes.rightIcon} />
-	        		</Button>
+	render() {
+		const { classes } = this.props;
+		return (
+			<form className={classes.container} noValidate autoComplete="off">
 
-	        		<Button className={classes.button} variant="raised" color="default">
-	        			Cancel
-	        		</Button>
-	        	</div>
+				<Button className={classes.button} variant="raised" color="primary">
+					Release
+					<AssignmentReturn className={classes.rightIcon} />
+				</Button>
 
-		</form>
-	)
+				<div>
+					<TextField
+			        	required
+			        	id="user-name"
+			        	label="Borrower's Name"
+			        	className={classes.textField}
+			        	margin="normal"
+			        	inputProps={{
+			        		ref: input => {this.userName = input}
+			        	}}
+					/>
+
+					<TextField
+			        	required
+			        	id="mobile-number"
+			        	label="Mobile Number"
+			        	className={classes.textField}
+			        	margin="normal"
+			        	inputProps = {{
+			        		ref: input => {this.mobile = input}
+			        	}}
+					/>
+				</div>
+
+				<div className={cx('formAction')}>
+		        		<Button className={classes.button} variant="raised" color="primary" onClick={this.onSave}>
+		        			Save
+		        			<Save className={classes.rightIcon} />
+		        		</Button>
+
+		        		<Button className={classes.button} variant="raised" color="default">
+		        			Cancel
+		        		</Button>
+		        	</div>
+
+			</form>
+		)
+	}
+
 }
 
 export default withStyles(styles)(BookSlotForm);

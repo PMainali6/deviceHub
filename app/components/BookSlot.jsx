@@ -33,7 +33,9 @@ const styles = theme => ({
 	}
 });
 
-const BookSlot = ({classes, deviceData}) => {
+const BookSlot = ({classes, deviceData, bookDevice}) => {
+	const deviceId = deviceData.id;
+
 	return (
 		<div>
 			<Paper className={cx('slot-container')}>
@@ -65,7 +67,7 @@ const BookSlot = ({classes, deviceData}) => {
 				</nav>
 				
 				<div className={cx('book-slot-form')}>
-					<BookSlotForm id="form1" key="1" />
+					<BookSlotForm deviceId={deviceId} bookDevice={bookDevice} />
 				</div>
 			</Paper>
 

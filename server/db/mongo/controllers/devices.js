@@ -50,7 +50,6 @@ export function add(req, res) {
  */
 export function update(req, res) {
   const query = { id: req.params.id };
-  const bookedBy = req.body.bookedBy;
 
   const omitKey = 'id';
   const data = _.omit(req.body, omitKey);
