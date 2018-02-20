@@ -14,9 +14,9 @@ const cx = classNames.bind(style);
 const Dashboard = ({deviceData}) => {
     return(
         <div className={cx('dashboard')}>
-           <DeviceType devices={deviceData.filter(device => device.deviceType === "Mobile")} deviceType ="Mobile" />
+           <DeviceType devices={deviceData.filter(device => device.type === "Mobile")} deviceType ="Mobile" />
                
-           <DeviceType devices={deviceData.filter(device => device.deviceType === "Tablet")} deviceType ="Tablet" />
+           <DeviceType devices={deviceData.filter(device => device.type === "Tablet")} deviceType ="Tablet" />
         </div>
     );
 

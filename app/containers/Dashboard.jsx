@@ -5,7 +5,7 @@ import DashboardComponent from '../components/Dashboard';
 
 const mapStateToProps = (state) => {
 	return {
-		deviceData: state.user.devices
+		deviceData: state.devices.devices
 	}
 }
 

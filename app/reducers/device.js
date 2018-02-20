@@ -25,6 +25,10 @@ const devices = (
 		case types.ADD_DEVICE_REQUEST:
 			return [...state, device];
 
+		case types.DEVICE_REQUEST_SUCCESS:
+			if(action.data) return action.data;
+			return state;
+
 		default :
 			return state;
 	}
