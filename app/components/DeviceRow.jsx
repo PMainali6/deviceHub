@@ -22,7 +22,7 @@ const DeviceRow = ({devices, deviceOS}) => {
 			</div>
 			<div className = {cx('os-devices')}>
 				{devices.map((device, index) => {
-					var slotLink = "/book-slot?key=" + device.name;
+					var slotLink = "/book-slot?key=" + device.id;
 					var editLink = "/edit-device?key=" + device.name;
 
 					return (

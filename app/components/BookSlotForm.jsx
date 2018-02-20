@@ -49,23 +49,6 @@ const BookSlotForm = ({classes}) => {
 
 				<TextField
 		        	required
-		        	id="oracle-id"
-		        	label="Oracle ID"
-		        	className={classes.textField}
-		        	margin="normal"
-				/>
-
-				<TextField
-		        	required
-		        	id="email"
-		        	label="Email Id"
-		        	className={classes.textField}
-		        	margin="normal"
-		        	inputProps = {{'type': 'email'}}
-				/>
-
-				<TextField
-		        	required
 		        	id="mobile-number"
 		        	label="Mobile Number"
 		        	className={classes.textField}
