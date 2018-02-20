@@ -92,10 +92,24 @@ export function remove(req, res) {
   });
 }
 
+
+// Only for Development. Delete!!
+export function removeAll (req, res) {
+  Device.remove({}, (err) => {
+    if (err) {
+      console.log('Error on delete');
+      return res.status(500).send('We failed to delete for some reason');
+    }
+
+    return res.status(200).send('Removed all Successfully');
+  });
+}
+
 export default {
   all,
   get,
   add,
   update,
-  remove
+  remove,
+  removeAll
 };

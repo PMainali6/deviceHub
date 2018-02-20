@@ -152,7 +152,7 @@ class DeviceForm extends Component {
 	        		/>
 
 	        		<div className={cx('form-action')}>
-	        			<Link>
+	        			<Link to='/'>
 			        		<Button className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
 			        			Save
 			        			<Save className={cx('right-icon')} />

@@ -60,5 +60,6 @@ export default (app) => {
     app.post('/device/:id', devicesController.add);
     app.put('/device/:id', devicesController.update);
     app.delete('/device/:id', devicesController.remove);
+    app.delete('/removeAllDevices', devicesController.removeAll);
   }
 };
