@@ -7,10 +7,7 @@ const device = (
 ) => {
 	switch(action.type) {
 		case types.ADD_DEVICE_REQUEST:
-			return {
-				id: action.id,
-				device: action.device
-			};
+			return action.device
 
 		default :
 			return state;
@@ -22,12 +19,15 @@ const devices = (
 	action
 ) => {
 	switch(action.type) {
-		case types.ADD_DEVICE_REQUEST:
-			return [...state, device];
-
 		case types.DEVICE_REQUEST_SUCCESS:
 			if(action.data) return action.data;
 			return state;
+
+		case types.ADD_DEVICE_REQUEST:
+			return [...state, device(undefined, action)];
+
+		case types.ADD_DEVICE_FAILURE:
+			return state.filter(t => t.id !== action.id);
 
 		default :
 			return state;

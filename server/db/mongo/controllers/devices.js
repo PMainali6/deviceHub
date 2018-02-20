@@ -16,6 +16,22 @@ export function all(req, res) {
 }
 
 /**
+ * Get a Device
+ */
+ export function get(req, res) {
+    const query = { id: req.params.id };
+    Device.findOne(query).exec((err, device) => {
+      if (err) {
+        console.log('Error in first query');
+        return res.status(500).send('Something went wrong getting the data');
+      }
+   
+      return res.json(device);
+    });
+ 
+ }
+
+/**
  * Add a Device
  */
 export function add(req, res) {
@@ -64,7 +80,7 @@ export function update(req, res) {
  * Remove a Device
  */
 export function remove(req, res) {
-  const query = { _id: req.params.id };
+  const query = { id: req.params.id };
 
   Device.findOneAndRemove(query, (err) => {
     if (err) {
@@ -78,6 +94,7 @@ export function remove(req, res) {
 
 export default {
   all,
+  get,
   add,
   update,
   remove

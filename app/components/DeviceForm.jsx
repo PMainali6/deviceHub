@@ -158,7 +158,7 @@ class DeviceForm extends Component {
 			        			<Save className={cx('right-icon')} />
 			        		</Button>
 			        	</Link>
-		        		<Link to="/dashboard">
+		        		<Link to="/">
 			        		<Button className={cx('button')} variant="raised" color="default">
 			        			Cancel
 			        		</Button>

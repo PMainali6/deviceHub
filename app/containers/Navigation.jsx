@@ -28,7 +28,7 @@ const Navigation = ({ user, logOut }) => {
           </Link>
           
         <div className={cx('nav-menu')}>
-          <Link className={cx('item')} to="/dashboard">Dashboard</Link>
+          <Link className={cx('item')} to="/">Dashboard</Link>
           <Link to="/about" className={cx('item')} activeClassName={cx('active')}>About</Link>
           <Link className={cx('item')} to="/add-device">Add Device</Link>
 

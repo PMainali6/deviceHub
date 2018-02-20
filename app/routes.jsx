@@ -33,7 +33,6 @@ export default (store) => {
     <Route path="/" component={App}>
       <IndexRoute component={Dashboard} fetchData={fetchDashboardData} />
       <Route path="login" component={LoginOrRegister} onEnter={redirectAuth} />
-      <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
       <Route path="book-slot" component={BookSlot} onEnter={requireAuth} />
       <Route path="edit-device" component={DeviceForm} onEnter={requireAuth} />
       <Route path="add-device" component={DeviceForm} onEnter={requireAuth} />
