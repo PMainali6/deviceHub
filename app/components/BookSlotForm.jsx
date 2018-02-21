@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-
+import {Link} from 'react-router';
 import Save from 'material-ui-icons/Save';
 import AssignmentReturn from 'material-ui-icons/AssignmentReturn';
 import style from '../css/components/book-slot-form';
@@ -10,70 +10,64 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(style);
 
-const styles = theme => ({
-	container: {
-		display: 'flex',
-		flexWrap: 'wrap',
-	},
-	textField: {
-		marginLeft: 20,
-		marginRight: 20,
-		width: 250,
-
-	},
-	button: {
-		margin: theme.spacing.unit,
-	},
-	rightIcon: {
-		marginLeft: theme.spacing.unit,
-	}
-});
-
-
 class BookSlotForm extends Component {
 	constructor () {
 		super();
 		this.onSave = this.onSave.bind(this);
+		this.findAncestor = this.findAncestor.bind(this);
+		this.formValidation = this.formValidation.bind(this);
+	}
+
+	findAncestor (element, selector) {
+	    while ((element = element.parentElement) && !element.classList.contains(selector));
+	    return element;
+	}
+
+	formValidation() {
+		if(this.userName.value && this.mobile.value) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	onSave() {
 		const { deviceId, bookDevice } = this.props;
+		let userName = this.userName,
+			mobile = this.mobile,
+			userNameParent = this.findAncestor(userName, cx('text-field')),
+			mobileParent = this.findAncestor(mobile, cx('text-field'))
 
-		if(this.userName.value && this.mobile.value) {
+		if(this.formValidation()) {
 			let bookingData = {
 				id: deviceId,
 				bookedBy: {
-					name: this.userName.value,
-					mobile: this.mobile.value
+					name: userName.value,
+					mobile: mobile.value
 				},
 				available: false
 			}
+
 			bookDevice(bookingData);
 		}
 		else {
-			alert('Please enter some data!!!');
+			userNameParent.classList.add(cx('error'));
+			mobileParent.classList.add(cx('error'));
 		}
 	}
 
 	render() {
-		const { classes } = this.props;
 		return (
-			<form className={classes.container} noValidate autoComplete="off">
-
-				<Button className={classes.button} variant="raised" color="primary">
-					Release
-					<AssignmentReturn className={classes.rightIcon} />
-				</Button>
-
-				<div>
-					<TextField
+			<form className={cx('container')} >
+				<TextField
 			        	required
 			        	id="user-name"
 			        	label="Borrower's Name"
-			        	className={classes.textField}
+			        	className={cx('text-field')}
 			        	margin="normal"
 			        	inputProps={{
-			        		ref: input => {this.userName = input}
+							ref: input => {this.userName = input}
 			        	}}
 					/>
 
@@ -81,29 +75,34 @@ class BookSlotForm extends Component {
 			        	required
 			        	id="mobile-number"
 			        	label="Mobile Number"
-			        	className={classes.textField}
+			        	className={cx('text-field')}
 			        	margin="normal"
 			        	inputProps = {{
 			        		ref: input => {this.mobile = input}
 			        	}}
 					/>
+
+				<Button className={cx('button', 'release')} variant="raised" color="primary">
+					Release
+					<AssignmentReturn className={cx('right-icon')} />
+				</Button>
+
+				<div className={cx('form-action')}>
+					<Button type="submit" variant="raised" color="primary" className={cx('button')} onClick={this.onSave}>
+						Save
+						<Save className={cx('right-icon')} />
+					</Button>
+						
+					<Link to="/">
+						<Button className={cx('button')} variant="raised" color="default">
+							Cancel
+						</Button>
+					</Link>
 				</div>
-
-				<div className={cx('formAction')}>
-		        		<Button className={classes.button} variant="raised" color="primary" onClick={this.onSave}>
-		        			Save
-		        			<Save className={classes.rightIcon} />
-		        		</Button>
-
-		        		<Button className={classes.button} variant="raised" color="default">
-		        			Cancel
-		        		</Button>
-		        	</div>
-
 			</form>
 		)
 	}
 
 }
 
-export default withStyles(styles)(BookSlotForm);
+export default BookSlotForm;

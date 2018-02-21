@@ -61,9 +61,6 @@ class DeviceForm extends Component {
 			}
 			addDevice(formInput);
 		}
-		else {
-			alert('Please enter some data!!!');
-		}
 	}
 
 	render () {
@@ -72,7 +69,7 @@ class DeviceForm extends Component {
 		return (
 			<Paper className={cx('paper')}>
 				<h4>Device Form </h4>
-				<form className={cx('container')} noValidate autoComplete="off">
+				<form className={cx('container')} >
 					<TextField
 			        	required
 			        	id="device-name"
@@ -152,12 +149,10 @@ class DeviceForm extends Component {
 	        		/>
 
 	        		<div className={cx('form-action')}>
-	        			<Link to='/'>
-			        		<Button className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
-			        			Save
-			        			<Save className={cx('right-icon')} />
-			        		</Button>
-			        	</Link>
+						<Button type="submit" className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
+							Save
+							<Save className={cx('right-icon')} />
+						</Button>
 		        		<Link to="/">
 			        		<Button className={cx('button')} variant="raised" color="default">
 			        			Cancel

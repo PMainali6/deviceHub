@@ -22,11 +22,12 @@ const DeviceRow = ({devices, deviceOS}) => {
 			</div>
 			<div className = {cx('os-devices')}>
 				{devices.map((device, index) => {
-					var slotLink = "/book-slot?key=" + device.id;
-					var editLink = "/edit-device?key=" + device.name;
+					let isAvailable = device.available;
+					let slotLink = "/book-slot?key=" + device.id;
+					let editLink = "/edit-device?key=" + device.name;
 
 					return (
-						<Link to= {slotLink} key={index}>
+						<Link to={slotLink} key={index} className = {isAvailable ?cx(''):cx('disabled')}>
 							<button className={cx('button')}>
 								{device.name}
 							</button>
