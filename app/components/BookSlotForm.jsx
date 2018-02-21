@@ -69,18 +69,18 @@ class BookSlotForm extends Component {
 			        	inputProps={{
 							ref: input => {this.userName = input}
 			        	}}
-					/>
+				/>
 
-					<TextField
-			        	required
-			        	id="mobile-number"
-			        	label="Mobile Number"
-			        	className={cx('text-field')}
-			        	margin="normal"
-			        	inputProps = {{
-			        		ref: input => {this.mobile = input}
-			        	}}
-					/>
+				<TextField
+					required
+					id="mobile-number"
+					label="Mobile Number"
+					className={cx('text-field')}
+					margin="normal"
+					inputProps = {{
+						ref: input => {this.mobile = input}
+					}}
+				/>
 
 				<Button className={cx('button', 'release')} variant="raised" color="primary">
 					Release
