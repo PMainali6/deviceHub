@@ -8,6 +8,7 @@ import { controllers, passport as passportConfig } from '../db';
 const usersController = controllers && controllers.users;
 const topicsController = controllers && controllers.topics;
 const devicesController = controllers && controllers.devices;
+const historyController = controllers && controllers.history;
 
 export default (app) => {
   // user routes
@@ -61,5 +62,12 @@ export default (app) => {
     app.put('/device/:id', devicesController.update);
     app.delete('/device/:id', devicesController.remove);
     app.delete('/removeAllDevices', devicesController.removeAll);
+  }
+
+  if(historyController) {
+    app.get('/history', historyController.all);
+    app.post('/history', historyController.add);
+    app.delete('/clearhistory', historyController.removeAll);
+
   }
 };

@@ -88,7 +88,7 @@ class BookSlotForm extends Component {
 
 	render() {		
 		return (
-			<form className={cx('container')} >
+			<form className={cx('container')} action="/" >
 				<FormControl>
 					<FormLabel component="legend">Select Slot/s</FormLabel>
 					<FormGroup>
@@ -155,7 +155,7 @@ class BookSlotForm extends Component {
 				</Button>
 
 				<div className={cx('form-action')}>
-					<Button variant="raised" color="primary" className={cx('button')} 
+					<Button type="submit" variant="raised" color="primary" className={cx('button')} 
 							onClick={this.onSave}>
 						Save
 						<Save className={cx('right-icon')} />

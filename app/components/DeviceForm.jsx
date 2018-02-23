@@ -73,7 +73,7 @@ class DeviceForm extends Component {
 		return (
 			<Paper className={cx('paper')}>
 				<h4>Device Form </h4>
-				<form className={cx('container')} >
+				<form className={cx('container')} action="/" >
 					<TextField
 			        	required
 			        	id="device-name"
@@ -153,7 +153,7 @@ class DeviceForm extends Component {
 	        		/>
 
 	        		<div className={cx('form-action')}>
-						<Button className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
+						<Button type="submit" className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
 							Save
 							<Save className={cx('right-icon')} />
 						</Button>
