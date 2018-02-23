@@ -6,7 +6,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import createRoutes from './routes';
 import * as types from './types';
 import configureStore from './store/configureStore';
-import fetchDataForRoute from './utils/fetchDataForRoute';
+import {fetchDashboardDataForRoute} from './utils/fetchDataForRoute';
 
 // Grab the state from a global injected into
 // server-generated HTML
@@ -32,7 +32,7 @@ function onUpdate() {
   }
 
   store.dispatch({ type: types.CREATE_REQUEST });
-  fetchDataForRoute(this.state)
+  fetchDashboardDataForRoute(this.state)
     .then((data) => {
       return store.dispatch({ type: types.REQUEST_SUCCESS, data });
     });

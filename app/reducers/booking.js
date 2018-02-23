@@ -5,6 +5,10 @@ const bookings = (
 	action
 ) => {
 	switch(action.type) {
+		case types.HISTORY_REQUEST_SUCCESS:
+			if(action.data) return action.data;
+			return state;
+			
 		case types.BOOKING_HISTORY_REQUEST:
 			return [...action.payload, ...state];
 

@@ -3,7 +3,7 @@ import createRoutes from '../../app/routes';
 import configureStore from '../../app/store/configureStore';
 import * as types from '../../app/types';
 import pageRenderer from './pageRenderer';
-import fetchDataForRoute from '../../app/utils/fetchDataForRoute';
+import {fetchDashboardDataForRoute, fetchHistoryDataForRoute} from '../../app/utils/fetchDataForRoute';
 
 /*
  * Export render function to be used in server/config/routes.js
@@ -53,16 +53,28 @@ export default function render(req, res) {
       // This method waits for all render component
       // promises to resolve before returning to browser
       store.dispatch({ type: types.CREATE_REQUEST });
-      fetchDataForRoute(props)
+      fetchDashboardDataForRoute(props)
         .then((data) => {
           store.dispatch({ type: types.DEVICE_REQUEST_SUCCESS, data });
-          const html = pageRenderer(store, props);
-          res.status(200).send(html);
+
+          fetchHistoryDataForRoute(props)
+            .then((data) => {
+              store.dispatch({ type: types.HISTORY_REQUEST_SUCCESS, data });
+
+              const html = pageRenderer(store, props);
+              res.status(200).send(html);
+            })
+            .catch((err) => {
+            console.error(err);
+            res.status(500).json(err);
+          });
+          
         })
         .catch((err) => {
           console.error(err);
           res.status(500).json(err);
         });
+
     } else {
       res.sendStatus(404);
     }
