@@ -65,11 +65,19 @@ export function addDevice (deviceData) {
 
 export function bookDevice (bookingData) {
 	return (dispatch, getState) => {
-		const id = bookingData.id;
+		const id = bookingData.id,
+			{ devices } = getState(),
+			bookedDevice = devices.find(device => device.id === id);
+		let slots = bookingData.slots;
 
-		dispatch(bookDeviceRequest(bookingData));
+		slots.forEach(slot => {
+			bookedDevice.bookedBy[slot].available = bookingData.available;
+			bookedDevice.bookedBy[slot].userInfo = bookingData.userInfo;
+		});
 
-		return deviceService().updateDeviceData({id, data: bookingData})
+		dispatch(bookDeviceRequest(bookedDevice));
+
+		return deviceService().updateDeviceData({id, data: bookedDevice})
 			.then((res) => {
 				if(res.status === 200) {
 					return dispatch(bookDeviceSuccess());

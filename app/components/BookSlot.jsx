@@ -40,31 +40,6 @@ const BookSlot = ({classes, deviceData, bookDevice}) => {
 		<div>
 			<Paper className={cx('slot-container')}>
 				<h4 className={cx('slot-title')}>Book A Slot</h4>
-
-				<nav className={cx('slot-tab')}>
-					<ul>
-						<li>
-							<Button disabled className={classes.button}  variant="raised" color="default">
-								09:00 - 11:00
-							</Button>
-						</li>
-						<li>
-							<Button className={classes.button}  variant="raised" color="secondary">
-								11:00 - 13:00
-							</Button>
-						</li>
-						<li>
-							<Button className={classes.button}  variant="raised" color="primary">
-								14:00 - 16:00
-							</Button>
-						</li>
-						<li>
-							<Button className={classes.button}  variant="raised" color="primary">
-								16:00 - 18:00
-							</Button>
-						</li>
-					</ul>
-				</nav>
 				
 				<div className={cx('book-slot-form')}>
 					<BookSlotForm deviceId={deviceId} bookDevice={bookDevice} />

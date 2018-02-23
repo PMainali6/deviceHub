@@ -56,8 +56,12 @@ class DeviceForm extends Component {
 				type: this.deviceType.value,
 				os: this.deviceOS.value,
 				version: this.deviceVersion.value,
-				bookedBy: "",
-				available: true
+				bookedBy: {
+					slot1: {available: true, userInfo: { name:'', mobile:'' } },
+					slot2: {available: true, userInfo: { name:'', mobile:'' } },
+					slot3: {available: true, userInfo: { name:'', mobile:'' } },
+					slot4: {available: true, userInfo: { name:'', mobile:'' } }
+				}
 			}
 			addDevice(formInput);
 		}
@@ -149,7 +153,7 @@ class DeviceForm extends Component {
 	        		/>
 
 	        		<div className={cx('form-action')}>
-						<Button type="submit" className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
+						<Button className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
 							Save
 							<Save className={cx('right-icon')} />
 						</Button>

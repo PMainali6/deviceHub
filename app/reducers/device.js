@@ -30,19 +30,11 @@ const devices = (
 			return state.filter(t => t.id !== action.id);
 
 		case types.BOOK_DEVICE_REQUEST:
-			let index = state.findIndex(device => device.id === action.payload.id),
-				bookedDevice = state[index];
-
-			bookedDevice.bookedBy = action.payload.bookedBy;
-			bookedDevice.available = action.payload.available;
-			
-			return [...state.filter(device => device.id !== action.payload.id), bookedDevice];
+			return [...state.filter(device => device.id !== action.payload.id), action.payload];
 
 		default :
 			return state;
 	}
 }
 
-const deviceReducers = combineReducers({ devices });
-
-export default deviceReducers;
+export default devices;

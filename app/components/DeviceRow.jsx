@@ -27,7 +27,7 @@ const DeviceRow = ({devices, deviceOS}) => {
 					let editLink = "/edit-device?key=" + device.name;
 
 					return (
-						<Link to={slotLink} key={index} className = {isAvailable ?cx(''):cx('disabled')}>
+						<Link to={slotLink} key={index} >
 							<button className={cx('button')}>
 								{device.name}
 							</button>

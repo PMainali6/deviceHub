@@ -9,7 +9,7 @@ const mapStateToProps = (state, props) => {
     let key = props.location.query.key;
 
 	return {
-		deviceData: state.devices.devices.find(device => device.id === key)
+		deviceData: state.devices.find(device => device.id === key)
 	}
 }
 
