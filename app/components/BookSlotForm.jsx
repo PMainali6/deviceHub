@@ -12,7 +12,6 @@ import {
   } from 'material-ui/Form';
 import {Link} from 'react-router';
 import Save from 'material-ui-icons/Save';
-import AssignmentReturn from 'material-ui-icons/AssignmentReturn';
 import style from '../css/components/book-slot-form';
 import classNames from 'classnames/bind';
 
@@ -26,6 +25,7 @@ class BookSlotForm extends Component {
 		this.formValidation = this.formValidation.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
+
 	slots = [];
 	
 	state = {
@@ -77,83 +77,91 @@ class BookSlotForm extends Component {
 	}
 
 	handleChange = name => (event,checked)=> {
+		let checkbox = event.target;
 		this.setState({[name]: checked});
+
+		let checkboxParent = this.findAncestor(checkbox, cx('checkbox-label'));
+
 		if(checked) {
 			this.slots.push(event.target.value);
+			checkboxParent.classList.add(cx('selected'));
 		}
 		else {
 			this.slots = this.slots.filter(slot => slot != name)
+			checkboxParent.classList.remove(cx('selected'));
 		}
+		console.log(this.slots);
 	}
 
-	render() {		
+	render() {	
+		let date = new Date(),
+			currentTime = date.getHours();	
 		return (
-			<form className={cx('container')} action="/" >
-				<FormControl>
-					<FormLabel component="legend">Select Slot/s</FormLabel>
-					<FormGroup>
-						<FormControlLabel 
-							control = {
-								<Checkbox checked={this.state.slot1} value="slot1" 
-								onChange={this.handleChange('slot1')}/>
-							}
-							label = "9:00 - 11:00"
+
+			<form action="/" className={cx('container')} >
+				<div className={cx('slot-input-container')}>
+					<FormControl>
+						<FormLabel className={cx('form-label')} component="legend">Select Slot(s)</FormLabel>
+						<FormGroup>
+							<FormControlLabel className={currentTime >= 11 ? cx('checkbox-label','full'): cx('checkbox-label','available')}
+								control = {
+									<Checkbox checked={this.state.slot1} value="slot1" className={cx('checkbox')}
+									onChange={this.handleChange('slot1')}/>
+								}
+								label = "09:00 - 11:00"
+							/>
+
+							<FormControlLabel className={currentTime >= 13 ? cx('checkbox-label','full'): cx('checkbox-label','available')}
+								control = {
+									<Checkbox checked={this.state.slot2} value="slot2" className={cx('checkbox')}
+									onChange={this.handleChange('slot2')}/>
+								}
+								label = "11:00 - 13:00"
+							/>
+
+							<FormControlLabel className={currentTime >= 16 ? cx('checkbox-label','full'): cx('checkbox-label','available')}
+								control = {
+									<Checkbox checked={this.state.slot3} value="slot3" className={cx('checkbox')}
+									onChange={this.handleChange('slot3')}/>
+								}
+								label = "14:00 - 16:00"
+							/>
+
+							<FormControlLabel className={currentTime >= 18 ? cx('checkbox-label','full'): cx('checkbox-label','available')}
+								control = {
+									<Checkbox checked={this.state.slot4} value="slot4" className={cx('checkbox')}
+									onChange={this.handleChange('slot4')}/>
+								}
+								label = "16:00 - 18:00"
+							/>
+
+						</FormGroup>
+					</FormControl>
+					
+					<div className={cx('textfield-container')}>
+						<TextField
+								required
+								id="user-name"
+								label="Borrower's Name"
+								className={cx('text-field')}
+								margin="normal"
+								inputProps={{
+									ref: input => {this.userName = input}
+								}}
 						/>
-
-						<FormControlLabel 
-							control = {
-								<Checkbox checked={this.state.slot2} value="slot2" 
-								onChange={this.handleChange('slot2')}/>
-							}
-							label = "11:00 - 1:00"
+						
+						<TextField
+							required
+							id="mobile-number"
+							label="Mobile Number"
+							className={cx('text-field')}
+							margin="normal"
+							inputProps = {{
+								ref: input => {this.mobile = input}
+							}}
 						/>
-
-						<FormControlLabel 
-							control = {
-								<Checkbox checked={this.state.slot3} value="slot3" 
-								onChange={this.handleChange('slot3')}/>
-							}
-							label = "2:00 - 4:00"
-						/>
-
-						<FormControlLabel 
-							control = {
-								<Checkbox checked={this.state.slot4} value="slot4" 
-								onChange={this.handleChange('slot4')}/>
-							}
-							label = "4:00 - 6:00"
-						/>
-
-					</FormGroup>
-				</FormControl>
-
-				<TextField
-			        	required
-			        	id="user-name"
-			        	label="Borrower's Name"
-			        	className={cx('text-field')}
-			        	margin="normal"
-			        	inputProps={{
-							ref: input => {this.userName = input}
-			        	}}
-				/>
-
-				<TextField
-					required
-					id="mobile-number"
-					label="Mobile Number"
-					className={cx('text-field')}
-					margin="normal"
-					inputProps = {{
-						ref: input => {this.mobile = input}
-					}}
-				/>
-
-				<Button className={cx('button', 'release')} variant="raised" color="primary">
-					Release
-					<AssignmentReturn className={cx('right-icon')} />
-				</Button>
-
+					</div>
+				</div>
 				<div className={cx('form-action')}>
 					<Button type="submit" variant="raised" color="primary" className={cx('button')} 
 							onClick={this.onSave}>
