@@ -12,30 +12,14 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(style);
 
-let id = 0;
-
-function createData(name, bookedBy, phone) {
-  id += 1;
-  return { id, name, bookedBy, phone};
-}
-
-const data = [
-    createData('Google Pixel 2', 'Rishab Vimal', 1234567890),
-    createData('Google Pixel 2', 'Rishab Vimal', 1234567890),
-    createData('Google Pixel 2', 'Rishab Vimal', 1234567890),
-    createData('Google Pixel 2', 'Rishab Vimal', 1234567890),
-
-  ];
-
-const Dashboard = ({deviceData}) => {
-    
+const Dashboard = ({deviceData, bookingHistory}) => {
     return(
         <div className={cx('dashboard')}>
            <DeviceType devices={deviceData.filter(device => device.type === "Mobile")} deviceType ="Mobile" />
                
            <DeviceType devices={deviceData.filter(device => device.type === "Tablet")} deviceType ="Tablet" />
 
-           <BookingHistory booked={data}/>
+           <BookingHistory booked={bookingHistory}/>
         </div>
     );
 

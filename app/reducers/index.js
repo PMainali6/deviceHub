@@ -4,6 +4,7 @@ import user from '../reducers/user';
 import topic from '../reducers/topic';
 import message from '../reducers/message';
 import devices from '../reducers/device';
+import bookings from '../reducers/booking';
 import * as types from '../types';
 
 const isFetching = (state = false, action) => {
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   user,
   message,
   devices,
+  bookings,
   routing
 });
 

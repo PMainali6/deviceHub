@@ -45,7 +45,7 @@ function bookDeviceFailure (data) {
 }
 
 export function addDevice (deviceData) {
-	return (dispatch, getState) => {
+	return (dispatch) => {
 		const id = md5.hash(deviceData.name);
 		const data = {id, ...deviceData};
 

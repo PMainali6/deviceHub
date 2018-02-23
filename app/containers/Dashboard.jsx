@@ -5,7 +5,8 @@ import DashboardComponent from '../components/Dashboard';
 
 const mapStateToProps = (state) => {
 	return {
-		deviceData: state.devices
+		deviceData: state.devices,
+		bookingHistory: state.bookings
 	}
 }
 

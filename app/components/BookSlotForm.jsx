@@ -50,7 +50,7 @@ class BookSlotForm extends Component {
 	}
 
 	onSave() {
-		const { deviceId, bookDevice } = this.props;
+		const { deviceId, bookDevice, bookingHistory } = this.props;
 		let userName = this.userName,
 			mobile = this.mobile,
 			slotId = this.slotId,
@@ -68,6 +68,7 @@ class BookSlotForm extends Component {
 				}
 			}
 			bookDevice(bookingData);
+			bookingHistory(bookingData);
 
 		}
 		else {
@@ -98,7 +99,7 @@ class BookSlotForm extends Component {
 			currentTime = date.getHours();	
 		return (
 
-			<form action="/" className={cx('container')} >
+			<form className={cx('container')} >
 				<div className={cx('slot-input-container')}>
 					<FormControl>
 						<FormLabel className={cx('form-label')} component="legend">Select Slot(s)</FormLabel>
@@ -163,7 +164,7 @@ class BookSlotForm extends Component {
 					</div>
 				</div>
 				<div className={cx('form-action')}>
-					<Button type="submit" variant="raised" color="primary" className={cx('button')} 
+					<Button variant="raised" color="primary" className={cx('button')} 
 							onClick={this.onSave}>
 						Save
 						<Save className={cx('right-icon')} />

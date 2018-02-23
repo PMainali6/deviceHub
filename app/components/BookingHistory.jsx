@@ -7,7 +7,15 @@ import style from '../css/components/booking-history';
 
 const cx = classNames.bind(style);
 
+const timeSlots = {
+    slot1: "09:00 - 11:00",
+    slot2: "11:00 - 13:00",
+    slot3: "14:00 - 16:00",
+    slot4: "16:00 - 18:00"    
+}
+
 const BookingHistory = ({booked}) => {
+    let key = 0;
     return(
         <Paper className={cx('container')}>
             <h4>Booking History</h4>
@@ -15,6 +23,7 @@ const BookingHistory = ({booked}) => {
                 <TableHead>
                     <TableRow>
                         <TableCell>Date</TableCell>
+                        <TableCell>Time Slot</TableCell>
                         <TableCell>Device Name</TableCell>
                         <TableCell>Booked By</TableCell>
                         <TableCell>Phone</TableCell>
@@ -22,13 +31,14 @@ const BookingHistory = ({booked}) => {
                 </TableHead>
 
             <TableBody>
-            {booked.map(el => {
+            {booked.map(({date, slotId, deviceName, userInfo}) => {
                 return(
-                    <TableRow key={el.id}>
-                        <TableCell>06-12-2018</TableCell>
-                        <TableCell>{el.name}</TableCell>
-                        <TableCell>{el.bookedBy}</TableCell>
-                        <TableCell>{el.phone}</TableCell>
+                    <TableRow key={key++}>
+                        <TableCell>{date}</TableCell>
+                        <TableCell>{timeSlots[slotId]}</TableCell>
+                        <TableCell>{deviceName}</TableCell>
+                        <TableCell>{userInfo.name}</TableCell>
+                        <TableCell>{userInfo.mobile}</TableCell>
                     </TableRow>
                 )
                 })}

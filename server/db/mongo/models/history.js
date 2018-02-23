@@ -8,8 +8,8 @@ const HistorySchema = new mongoose.Schema({
   id: String,
   deviceName: String,
   userInfo: Object,
-  slotInfo: String,
-  date: { type: Date, default: Date.now }
+  slotId: String,
+  date: String
 });
 
 // Compiles the schema into a model, opening (or creating, if

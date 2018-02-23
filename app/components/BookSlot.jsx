@@ -33,7 +33,7 @@ const styles = theme => ({
 	}
 });
 
-const BookSlot = ({classes, deviceData, bookDevice}) => {
+const BookSlot = ({classes, deviceData, bookDevice, bookingHistory}) => {
 	const deviceId = deviceData.id;
 
 	return (
@@ -42,7 +42,7 @@ const BookSlot = ({classes, deviceData, bookDevice}) => {
 				<h4 className={cx('slot-title')}>Book A Slot</h4>
 				
 				<div className={cx('book-slot-form')}>
-					<BookSlotForm deviceId={deviceId} bookDevice={bookDevice} />
+					<BookSlotForm deviceId={deviceId} bookDevice={bookDevice} bookingHistory={bookingHistory} />
 				</div>
 			</Paper>
 
