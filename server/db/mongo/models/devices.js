@@ -11,7 +11,7 @@ const DeviceSchema = new mongoose.Schema({
   os: String,
   version: String,
   bookedBy: Object,
-  available: Boolean,
+  masterFlag: Boolean,
   date: { type: Date, default: Date.now }
 });
 

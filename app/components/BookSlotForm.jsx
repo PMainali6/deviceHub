@@ -50,7 +50,7 @@ class BookSlotForm extends Component {
 	}
 
 	onSave() {
-		const { deviceId, bookDevice, bookingHistory } = this.props;
+		const { deviceId, bookDevice, bookingHistory, deviceData } = this.props;
 		let userName = this.userName,
 			mobile = this.mobile,
 			slotId = this.slotId,
@@ -58,9 +58,35 @@ class BookSlotForm extends Component {
 			mobileParent = this.findAncestor(mobile, cx('text-field'))
 
 		if(this.formValidation()) {
+			let flag = [];
+
+			Object.keys(deviceData.bookedBy).forEach(slot => {
+				flag.push(deviceData.bookedBy[slot].available);
+			});
+
+			this.slots.forEach(slot => {
+				switch(slot) {
+					case 'slot1':
+						flag[0] = false;
+						break;
+					case 'slot2':
+						flag[1] = false;
+						break;
+					case 'slot3':
+						flag[2] = false;
+						break;
+					case 'slot4':
+						flag[3] = false;
+						break;
+					default:
+						break;
+				}
+			});
+
 			let bookingData = {
 				id: deviceId,
 				slots: this.slots,
+				masterFlag: flag,
 				available: false,
 				userInfo: {
 					name: userName.value,
@@ -95,7 +121,7 @@ class BookSlotForm extends Component {
 	}
 
 	render() {	
-		let date = new Date(),
+		let date = new Date('March 13, 08 04:20'),
 			currentTime = date.getHours();
 		let currentDeviceData = this.props.deviceData.bookedBy;
 		return (

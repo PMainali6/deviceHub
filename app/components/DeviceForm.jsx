@@ -56,6 +56,7 @@ class DeviceForm extends Component {
 				type: this.deviceType.value,
 				os: this.deviceOS.value,
 				version: this.deviceVersion.value,
+				masterFlag: true,
 				bookedBy: {
 					slot1: {available: true, userInfo: { name:'', mobile:'' } },
 					slot2: {available: true, userInfo: { name:'', mobile:'' } },

@@ -29,20 +29,37 @@
     }
 
     .button {
+        font-size: 16px;
+        font-weight: 500;
     	margin: 10px;
     	padding: 15px;
         border-radius: 15px;
         cursor: pointer;
         font-size: 16px;
 
-        &:hover {
+        &.available:hover {
             color: #fff;
             background-color: #36C797;
-            text-decoration: none;
             border: 1px solid #36C797;
             transition: background-color .25s ease-in;
         }
+
+        &.empty {
+            color: #fff;
+            background-color: rgb(206, 34, 34);
+            border: 1px solid rgb(206, 34, 34);
+            opacity: 0.75;
+
+            &:hover {
+                opacity: 1;
+                transition: opacity .15s ease-in;
+
+            }
+
+        }
     }
+
+    
 
     clear: both;
 }
