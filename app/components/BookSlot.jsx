@@ -42,7 +42,7 @@ const BookSlot = ({classes, deviceData, bookDevice, bookingHistory}) => {
 				<h4 className={cx('slot-title')}>Book A Slot</h4>
 				
 				<div className={cx('book-slot-form')}>
-					<BookSlotForm deviceId={deviceId} bookDevice={bookDevice} bookingHistory={bookingHistory} />
+					<BookSlotForm deviceId={deviceId} deviceData={deviceData} bookDevice={bookDevice} bookingHistory={bookingHistory} />
 				</div>
 			</Paper>
 
