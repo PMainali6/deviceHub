@@ -58,10 +58,10 @@ class DeviceForm extends Component {
 				version: this.deviceVersion.value,
 				deviceAvailability: true,
 				bookedBy: {
-					slot1: {available: true, userInfo: { name:'', mobile:'' } },
-					slot2: {available: true, userInfo: { name:'', mobile:'' } },
-					slot3: {available: true, userInfo: { name:'', mobile:'' } },
-					slot4: {available: true, userInfo: { name:'', mobile:'' } }
+					slot1: {available: true, limitTime: 11, userInfo: { name:'', mobile:'' } },
+					slot2: {available: true, limitTime: 13, userInfo: { name:'', mobile:'' } },
+					slot3: {available: true, limitTime: 16, userInfo: { name:'', mobile:'' } },
+					slot4: {available: true, limitTime: 18, userInfo: { name:'', mobile:'' } }
 				}
 			}
 			addDevice(formInput);
@@ -74,7 +74,7 @@ class DeviceForm extends Component {
 		return (
 			<Paper className={cx('paper')}>
 				<h4>Device Form </h4>
-				<form className={cx('container')} action="/" >
+				<form className={cx('container')} >
 					<TextField
 			        	required
 			        	id="device-name"
@@ -154,10 +154,12 @@ class DeviceForm extends Component {
 	        		/>
 
 	        		<div className={cx('form-action')}>
-						<Button type="submit" className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
-							Save
-							<Save className={cx('right-icon')} />
-						</Button>
+						<Link to="/">
+							<Button className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
+								Save
+								<Save className={cx('right-icon')} />
+							</Button>
+						</Link>
 		        		<Link to="/">
 			        		<Button className={cx('button')} variant="raised" color="default">
 			        			Cancel
