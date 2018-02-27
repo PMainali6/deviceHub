@@ -75,6 +75,8 @@ export function bookDevice (bookingData) {
 			bookedDevice.bookedBy[slot].userInfo = bookingData.userInfo;
 		});
 
+		bookedDevice.deviceAvailability = bookingData.deviceAvailability;
+
 		dispatch(bookDeviceRequest(bookedDevice));
 
 		return deviceService().updateDeviceData({id, data: bookedDevice})

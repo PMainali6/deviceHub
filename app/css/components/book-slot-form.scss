@@ -27,6 +27,7 @@
 
             &.booked {
                 background-color: rgb(202, 84, 84);
+                pointer-events: none;
                 &:hover {
                     opacity: 1;
                 }

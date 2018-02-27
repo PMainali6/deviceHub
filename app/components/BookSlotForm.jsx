@@ -82,11 +82,12 @@ class BookSlotForm extends Component {
 						break;
 				}
 			});
+			console.log(!flag.every(ele => !ele));
 
 			let bookingData = {
 				id: deviceId,
 				slots: this.slots,
-				masterFlag: flag,
+				deviceAvailability: !flag.every(ele => !ele),
 				available: false,
 				userInfo: {
 					name: userName.value,
@@ -95,7 +96,6 @@ class BookSlotForm extends Component {
 			}
 			bookDevice(bookingData);
 			bookingHistory(bookingData);
-
 		}
 		else {
 			userNameParent.classList.add(cx('error'));
@@ -121,7 +121,7 @@ class BookSlotForm extends Component {
 	}
 
 	render() {	
-		let date = new Date('March 13, 08 04:20'),
+		let date = new Date(),
 			currentTime = date.getHours();
 		let currentDeviceData = this.props.deviceData.bookedBy;
 		return (
@@ -141,7 +141,7 @@ class BookSlotForm extends Component {
 							/>
 
 							<FormControlLabel 
-								className={(currentTime >= 13 ? cx('checkbox-label','full'): (!currentDeviceData.slot1.available ? cx('checkbox-label','booked') : cx('checkbox-label','available')))} 
+								className={(currentTime >= 13 ? cx('checkbox-label','full'): (!currentDeviceData.slot2.available ? cx('checkbox-label','booked') : cx('checkbox-label','available')))} 
 								control = {
 									<Checkbox checked={this.state.slot2} value="slot2" className={cx('checkbox')}
 									onChange={this.handleChange('slot2')}/>
@@ -150,7 +150,7 @@ class BookSlotForm extends Component {
 							/>
 
 							<FormControlLabel 
-								className={(currentTime >= 16 ? cx('checkbox-label','full'): (!currentDeviceData.slot1.available ? cx('checkbox-label','booked') : cx('checkbox-label','available')))} 
+								className={(currentTime >= 16 ? cx('checkbox-label','full'): (!currentDeviceData.slot3.available ? cx('checkbox-label','booked') : cx('checkbox-label','available')))} 
 								control = {
 									<Checkbox checked={this.state.slot3} value="slot3" className={cx('checkbox')}
 									onChange={this.handleChange('slot3')}/>
@@ -159,7 +159,7 @@ class BookSlotForm extends Component {
 							/>
 
 							<FormControlLabel 
-								className={(currentTime >= 18 ? cx('checkbox-label','full'): (!currentDeviceData.slot1.available ? cx('checkbox-label','booked') : cx('checkbox-label','available')))} 
+								className={(currentTime >= 18 ? cx('checkbox-label','full'): (!currentDeviceData.slot4.available ? cx('checkbox-label','booked') : cx('checkbox-label','available')))} 
 								control = {
 									<Checkbox checked={this.state.slot4} value="slot4" className={cx('checkbox')}
 									onChange={this.handleChange('slot4')}/>
