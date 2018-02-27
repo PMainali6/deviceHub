@@ -49,25 +49,27 @@ const BookSlot = ({classes, deviceData, bookDevice, bookingHistory}) => {
 			<Paper className={cx('device-info')}>
 			<h4>Device Info</h4>
 			<table>
-				<tr>
-					<th>Name:</th>
-					<td>{deviceData.name}</td>
-				</tr>
-				
-				<tr>
-					<th>Type:</th>
-					<td>{deviceData.type}</td>
-				</tr>
+				<tbody>
+					<tr>
+						<th>Name:</th>
+						<td>{deviceData.name}</td>
+					</tr>
+					
+					<tr>
+						<th>Type:</th>
+						<td>{deviceData.type}</td>
+					</tr>
 
-				<tr>
-					<th>OS:</th>
-					<td>{deviceData.os}</td>
-				</tr>
+					<tr>
+						<th>OS:</th>
+						<td>{deviceData.os}</td>
+					</tr>
 
-				<tr>
-					<th>Version:</th>
-					<td>{deviceData.version}</td>
-				</tr>
+					<tr>
+						<th>Version:</th>
+						<td>{deviceData.version}</td>
+					</tr>
+				</tbody>
 			</table>
 			</Paper>
 		</div>
