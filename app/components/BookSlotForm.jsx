@@ -117,7 +117,6 @@ class BookSlotForm extends Component {
 			this.slots = this.slots.filter(slot => slot != name)
 			checkboxParent.classList.remove(cx('selected'));
 		}
-		console.log(this.slots);
 	}
 
 	render() {	
