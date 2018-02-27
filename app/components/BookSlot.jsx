@@ -1,39 +1,12 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
 import style from '../css/components/book-slot';
 import BookSlotForm from './BookSlotForm';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(style);
 
-const styles = theme => ({
-	container: {
-		display: 'flex',
-		flexWrap: 'wrap',
-	},
-	textField: {
-		marginLeft: 20,
-		marginRight: 20,
-		width: 250,
-
-	},
-	button: {
-		margin: theme.spacing.unit,
-	},
-	rightIcon: {
-		marginLeft: theme.spacing.unit,
-	},
-	formAction: {
-		width: '100%',
-		marginTop: 30,
-	}
-});
-
-const BookSlot = ({classes, deviceData, bookDevice, bookingHistory}) => {
+const BookSlot = ({deviceData, bookDevice, bookingHistory}) => {
 	const deviceId = deviceData.id;
 
 	return (
@@ -76,4 +49,4 @@ const BookSlot = ({classes, deviceData, bookDevice, bookingHistory}) => {
 	)
 }
 
-export default withStyles(styles)(BookSlot);
+export default BookSlot;

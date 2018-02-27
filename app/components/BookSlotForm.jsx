@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Checkbox from 'material-ui/Checkbox';
