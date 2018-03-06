@@ -13,6 +13,9 @@ const cx = classNames.bind(style);
 
 
 const DeviceRow = ({devices, deviceOS}) => {
+	let currentDate = new Date(),
+		currentTime = currentDate.getHours();
+
 	return (
 		<div className={cx('root')}>
 			<div className={cx('img-container')}> 
@@ -27,7 +30,7 @@ const DeviceRow = ({devices, deviceOS}) => {
 
 					return (
 						<Link to={slotLink} key={index} >
-							<button className={isAvailable ? cx('button', 'available') : cx('button', 'empty')}>
+							<button className={!isAvailable ? cx('button', 'empty') : (currentTime >= 18 ? cx('button', 'empty') : cx('button', 'available'))}>
 								{device.name}
 							</button>
 						</Link>
