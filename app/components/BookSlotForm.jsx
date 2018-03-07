@@ -14,24 +14,63 @@ import Save from 'material-ui-icons/Save';
 import style from '../css/components/book-slot-form';
 import classNames from 'classnames/bind';
 
-const cx = classNames.bind(style);
+const cx = classNames.bind(style),
+	dateSlot = [
+		{
+			label: "Today",
+			value: 0
+		},
+		{
+			label: "Tomorrow",
+			value: 1
+		}
+	],
+	timeSlots = [
+		{
+			label: "09:00 - 11:00",
+			value: "slot1"
+		},
+		{
+			label: "11:00 - 13:00",
+			value: "slot2"
+		},
+		{
+			label: "14:00 - 16:00",
+			value: "slot3"
+		},
+		{
+			label: "16:00 - 18:00",
+			value: "slot4"
+		}
+	];
 
 class BookSlotForm extends Component {
-	constructor () {
+	constructor() {
 		super();
 		this.onSave = this.onSave.bind(this);
+		this.onDateChange = this.onDateChange.bind(this);
+		this.onTimeSelection = this.onTimeSelection.bind(this);
 		this.findAncestor = this.findAncestor.bind(this);
 		this.formValidation = this.formValidation.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-		this.slots = [];
+		this.slots = [new Array(), new Array()];
+		this.state = {
+			dateKey: "0",
+			slotState: [
+				{
+					slot1: false,
+					slot2: false,
+					slot3: false,
+					slot4: false
+				},
+				{
+					slot1: false,
+					slot2: false,
+					slot3: false,
+					slot4: false
+				}
+			]
+		};
 	}
-	
-	state = {
-		slot1: false,
-		slot2: false,
-		slot3: false,
-		slot4: false
-	  };
 
 	findAncestor (element, selector) {
 	    while ((element = element.parentElement) && !element.classList.contains(selector));
@@ -47,6 +86,39 @@ class BookSlotForm extends Component {
 		}
 	}
 
+	onDateChange(event) {
+		let selectedDate = event.target.value;
+		this.setState({'dateKey': selectedDate});
+	}
+
+	onTimeSelection(name) {
+		let { slotState, dateKey } = this.state;
+		return ((event, checked) => {
+			let checkbox = event.target,
+				newSlot = slotState,
+				checkboxParent = this.findAncestor(checkbox, cx('checkbox-label'));
+
+			for(var i=0; i<newSlot.length;i++) {
+					if(i === parseInt(dateKey)) {
+						newSlot[dateKey][name] = checked;
+					}
+			}
+
+			this.setState({
+				slotState : newSlot
+			});
+
+			if(checked) {
+				this.slots[dateKey].push(event.target.value);
+				checkboxParent.classList.add(cx('selected'));
+			}
+			else {
+				this.slots = this.slots[dateKey].filter(slot => slot != name)
+				checkboxParent.classList.remove(cx('selected'));
+			}
+		})
+	}
+
 	onSave() {
 		const { deviceId, bookDevice, bookingHistory, deviceData } = this.props;
 		let userName = this.userName,
@@ -56,127 +128,73 @@ class BookSlotForm extends Component {
 			mobileParent = this.findAncestor(mobile, cx('text-field'))
 
 		if(this.formValidation()) {
-			let flag = [];
-
-			Object.keys(deviceData.bookedBy).forEach(slot => {
-				if(this.state.currentTime >= deviceData.bookedBy[slot].limitTime)
-					flag.push(false);
-				else
-					flag.push(deviceData.bookedBy[slot].available);
-			});
-
-			this.slots.forEach(slot => {
-				switch(slot) {
-					case 'slot1':
-						flag[0] = false;
-						break;
-					case 'slot2':
-						flag[1] = false;
-						break;
-					case 'slot3':
-						flag[2] = false;
-						break;
-					case 'slot4':
-						flag[3] = false;
-						break;
-					default:
-						break;
-				}
-			});
-
 			let bookingData = {
 				id: deviceId,
 				slots: this.slots,
-				deviceAvailability: !flag.every(ele => !ele),
+				dateSlot: this.state.dateKey,
 				available: false,
 				userInfo: {
 					name: userName.value,
 					mobile: mobile.value
 				}
 			}
+
 			bookDevice(bookingData);
 			bookingHistory(bookingData);
 		}
+
 		else {
 			userNameParent.classList.add(cx('error'));
 			mobileParent.classList.add(cx('error'));
 		}
 	}
 
-	handleChange = name => (event,checked)=> {
-		let checkbox = event.target;
-		this.setState({[name]: checked});
+	render() {
+		const { dateKey, slotState } = this.state;
 
-		let checkboxParent = this.findAncestor(checkbox, cx('checkbox-label'));
-
-		if(checked) {
-			this.slots.push(event.target.value);
-			checkboxParent.classList.add(cx('selected'));
-		}
-		else {
-			this.slots = this.slots.filter(slot => slot != name)
-			checkboxParent.classList.remove(cx('selected'));
-		}
-	}
-
-	render() {	
-		let date = new Date(), 
+		let date = new Date(),
 			currentDeviceData = this.props.deviceData.bookedBy;
 			this.state.currentTime = date.getHours();
-		return (
 
+		return (
 			<form className={cx('container')} >
 				<div className={cx('slot-input-container')}>
+					<div className={cx('date-selector')}>
+						{
+							dateSlot.map( (date, index) => (
+								<button key={index} value={date.value} className={cx('date-button')} onClick = {this.onDateChange}>	
+									{date.label}
+								</button>
+							))
+						}
+					</div>
+
 					<FormControl>
-						<FormLabel className={cx('form-label')} component="legend">Select Slot(s)</FormLabel>
+						<FormLabel className={cx('form-label')} component="legend">
+							Select Slot(s)
+						</FormLabel>
+
 						<FormGroup>
-							<FormControlLabel 
-								className={(this.state.currentTime >= currentDeviceData.slot1.limitTime ? 
-											cx('checkbox-label','full'): (!currentDeviceData.slot1.available ? 
-											cx('checkbox-label','booked') : cx('checkbox-label','available')))} 
-								control = {
-									<Checkbox checked={this.state.slot1} value="slot1" className={cx('checkbox')}
-									onChange={this.handleChange('slot1')}/>
-								}
-								label = "09:00 - 11:00"
-							/>
-
-							<FormControlLabel 
-								className={(this.state.currentTime >= currentDeviceData.slot2.limitTime ? 
-											cx('checkbox-label','full'): (!currentDeviceData.slot2.available ? 
-											cx('checkbox-label','booked') : cx('checkbox-label','available')))} 
-								control = {
-									<Checkbox checked={this.state.slot2} value="slot2" className={cx('checkbox')}
-									onChange={this.handleChange('slot2')}/>
-								}
-								label = "11:00 - 13:00"
-							/>
-
-							<FormControlLabel 
-								className={(this.state.currentTime >= currentDeviceData.slot3.limitTime ? 
-											cx('checkbox-label','full'): (!currentDeviceData.slot3.available ? 
-											cx('checkbox-label','booked') : cx('checkbox-label','available')))} 
-								control = {
-									<Checkbox checked={this.state.slot3} value="slot3" className={cx('checkbox')}
-									onChange={this.handleChange('slot3')}/>
-								}
-								label = "14:00 - 16:00"
-							/>
-
-							<FormControlLabel 
-								className={(this.state.currentTime >= currentDeviceData.slot4.limitTime ? 
-											cx('checkbox-label','full'): (!currentDeviceData.slot4.available ? 
-											cx('checkbox-label','booked') : cx('checkbox-label','available')))} 
-								control = {
-									<Checkbox checked={this.state.slot4} value="slot4" className={cx('checkbox')}
-									onChange={this.handleChange('slot4')}/>
-								}
-								label = "16:00 - 18:00"
-							/>
-
+							{
+								timeSlots.map( (timeSlot, index) => (
+									<FormControlLabel 
+										key = {index}
+										className={(
+											(this.state.currentTime >= currentDeviceData[dateKey][timeSlot.value].limitTime && dateKey === "0")? 
+													cx('checkbox-label','full'): 
+													(!currentDeviceData[dateKey][timeSlot.value].available ? 
+													cx('checkbox-label','booked') : cx('checkbox-label','available')))} 
+										control = {
+											<Checkbox checked={slotState[dateKey][timeSlot.value]} value={timeSlot.value} className={cx('checkbox')}
+											onChange={this.onTimeSelection(timeSlot.value)}/>
+										}
+										label = {timeSlot.label}
+									/>
+								))
+							}
 						</FormGroup>
 					</FormControl>
-					
+
 					<div className={cx('textfield-container')}>
 						<TextField
 								required
@@ -200,7 +218,9 @@ class BookSlotForm extends Component {
 							}}
 						/>
 					</div>
+
 				</div>
+
 				<div className={cx('form-action')}>
 					<Link to="/">
 						<Button variant="raised" color="primary" className={cx('button')} 
@@ -219,7 +239,6 @@ class BookSlotForm extends Component {
 			</form>
 		)
 	}
-
 }
 
 export default BookSlotForm;
