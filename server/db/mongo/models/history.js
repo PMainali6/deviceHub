@@ -9,7 +9,8 @@ const HistorySchema = new mongoose.Schema({
   deviceName: String,
   userInfo: Object,
   slotId: String,
-  date: String
+  date: String,
+  bookingDate: { type: Date, default: Date.now }
 });
 
 // Compiles the schema into a model, opening (or creating, if

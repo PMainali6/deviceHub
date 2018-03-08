@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
 		currentDate = date.getDate();
 	return {
 		deviceData: state.devices,
-		bookingHistory: state.bookings.filter(booking => (booking.date.split('-')[0] == currentDate))
+		bookingHistory: state.bookings.filter(booking => (booking.date.split('-')[0] >= currentDate))
 	}
 }
 

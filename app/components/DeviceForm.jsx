@@ -56,7 +56,21 @@ class DeviceForm extends Component {
 				type: this.deviceType.value,
 				os: this.deviceOS.value,
 				version: this.deviceVersion.value,
-				deviceAvailability: true
+				deviceAvailability: true,
+				bookedBy: [
+					{
+				  		slot1: {available: true, limitTime: 11, userInfo: { name:'', mobile:'' } },
+						slot2: {available: true, limitTime: 13, userInfo: { name:'', mobile:'' } },
+						slot3: {available: true, limitTime: 16, userInfo: { name:'', mobile:'' } },
+						slot4: {available: true, limitTime: 18, userInfo: { name:'', mobile:'' } }
+				  	},
+				  	{
+				  		slot1: {available: true, limitTime: 11, userInfo: { name:'', mobile:'' } },
+						slot2: {available: true, limitTime: 13, userInfo: { name:'', mobile:'' } },
+						slot3: {available: true, limitTime: 16, userInfo: { name:'', mobile:'' } },
+						slot4: {available: true, limitTime: 18, userInfo: { name:'', mobile:'' } }
+				  	}
+				]
 			}
 			addDevice(formInput);
 		}
