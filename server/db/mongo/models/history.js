@@ -7,9 +7,11 @@ import mongoose from 'mongoose';
 const HistorySchema = new mongoose.Schema({
   id: String,
   deviceName: String,
+  version: String,
   userInfo: Object,
   slotId: String,
-  date: String
+  date: String,
+  owner: String
 });
 
 // Compiles the schema into a model, opening (or creating, if
