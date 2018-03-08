@@ -94,9 +94,7 @@ class BookSlotForm extends Component {
 	onTimeSelection(name) {
 		let { slotState, dateKey } = this.state;
 		return ((event, checked) => {
-			let checkbox = event.target,
-				newSlot = slotState,
-				checkboxParent = this.findAncestor(checkbox, cx('checkbox-label'));
+			let newSlot = slotState;
 
 			for(var i=0; i<newSlot.length;i++) {
 					if(i === parseInt(dateKey)) {
@@ -110,11 +108,9 @@ class BookSlotForm extends Component {
 
 			if(checked) {
 				this.slots[dateKey].push(event.target.value);
-				checkboxParent.classList.add(cx('selected'));
 			}
 			else {
 				this.slots = this.slots[dateKey].filter(slot => slot != name)
-				checkboxParent.classList.remove(cx('selected'));
 			}
 		})
 	}
@@ -179,11 +175,17 @@ class BookSlotForm extends Component {
 								timeSlots.map( (timeSlot, index) => (
 									<FormControlLabel 
 										key = {index}
-										className={(
-											(this.state.currentTime >= currentDeviceData[dateKey][timeSlot.value].limitTime && dateKey === "0")? 
-													cx('checkbox-label','full'): 
-													(!currentDeviceData[dateKey][timeSlot.value].available ? 
-													cx('checkbox-label','booked') : cx('checkbox-label','available')))} 
+										className={(() => {
+											if(this.state.currentTime >= currentDeviceData[dateKey][timeSlot.value].limitTime && dateKey === "0")
+												return cx('checkbox-label','full');
+											else if (!currentDeviceData[dateKey][timeSlot.value].available)
+												return cx('checkbox-label','booked');
+											else if(slotState[dateKey][timeSlot.value])
+												return cx('checkbox-label','selected');
+											else
+												return cx('checkbox-label','available');
+										})()}
+
 										control = {
 											<Checkbox checked={slotState[dateKey][timeSlot.value]} value={timeSlot.value} className={cx('checkbox')}
 											onChange={this.onTimeSelection(timeSlot.value)}/>
