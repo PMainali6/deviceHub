@@ -38,7 +38,9 @@ export function bookingHistory (bookingData) {
 				deviceName: bookedDevice,
 				userInfo: bookingData.userInfo,
 				slotId: slot,
-				date: currentDate
+				date: currentDate,
+				owner: bookingData.owner,
+				version: bookingData.version
 			}
 			data.push(historyData);
 		});

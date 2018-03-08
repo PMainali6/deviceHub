@@ -10,6 +10,7 @@ const DeviceSchema = new mongoose.Schema({
   type: String,
   os: String,
   version: String,
+  owner: String,
   bookedBy: Object,
   deviceAvailability: Boolean,
   date: { type: Date, default: Date.now }
