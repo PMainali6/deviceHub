@@ -31,7 +31,7 @@ const DeviceRow = ({devices, deviceOS}) => {
 					return (
 						<Link to={slotLink} key={index} >
 							<button className={!isAvailable ? cx('button', 'empty') : (currentTime >= 18 ? cx('button', 'empty') : cx('button', 'available'))}>
-								{device.name}
+								{device.name} v.{device.version}
 							</button>
 						</Link>
 					);
