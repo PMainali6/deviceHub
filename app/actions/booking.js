@@ -46,6 +46,8 @@ export function bookingHistory (bookingData) {
 					userInfo: bookingData.userInfo,
 					slotId: timeSlot,
 					date: index? nextDay : currentDay,
+					owner: bookingData.owner,
+					version: bookingData.version
 				}
 				data.push(historyData);
 			})

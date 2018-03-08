@@ -16,6 +16,8 @@ const deviceType = ["Mobile", "Tablet"];
 
 const deviceOS = ["iOS", "Android", "Windows"];
 
+const deviceOwner = ["Ashish Banka", "Bibhu"];
+
 const uploadFile = {
 	'type': 'file',
 	'accept':'.jpg, .jpeg, .png'
@@ -50,12 +52,13 @@ class DeviceForm extends Component {
 	onSave() {
 		const { addDevice } = this.props;
 
-		if(this.deviceName.value && this.deviceType.value && this.deviceOS.value && this.deviceVersion.value) {
+		if(this.deviceName.value && this.deviceType.value && this.deviceOS.value && this.deviceVersion.value && this.deviceOwner.value) {
 			let formInput = {
 				name: this.deviceName.value,
 				type: this.deviceType.value,
 				os: this.deviceOS.value,
 				version: this.deviceVersion.value,
+				owner: this.deviceOwner.value,
 				deviceAvailability: true,
 				bookedBy: [
 					{
@@ -160,6 +163,32 @@ class DeviceForm extends Component {
 			        		onBlur: this.validateInput
 			        	}}
 	        		/>
+
+					<TextField
+						required
+						id="device-owner"
+						select
+						label="Device Owner"
+						className={cx('text-field')}
+						SelectProps={{
+							native: true,
+				            MenuProps: {
+				            	className: cx('menu'),
+				            },
+						}}
+						margin="normal"
+						onChange={this.validateInput}
+						inputProps={{
+							ref: input => {this.deviceOwner = input},
+							onBlur: this.validateInput
+						}}
+					>
+						{deviceOwner.map(option => (
+							<option key={option} value={option}>
+								{option}
+							</option>
+						))}
+					</TextField>
 
 	        		<div className={cx('form-action')}>
 						<Link to="/">

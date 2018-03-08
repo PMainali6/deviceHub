@@ -132,7 +132,9 @@ class BookSlotForm extends Component {
 				userInfo: {
 					name: userName.value,
 					mobile: mobile.value
-				}
+				},
+				owner: deviceData.owner,
+				version: deviceData.version
 			}
 
 			bookDevice(bookingData);
