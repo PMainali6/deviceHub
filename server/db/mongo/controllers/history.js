@@ -5,7 +5,7 @@ import History from '../models/history';
  * List
  */
 export function all(req, res) {
-    History.find({}).exec((err, history) => {
+    History.find({}).sort({bookingDate: -1}).exec((err, history) => {
     if (err) {
       console.log('Error in first query');
       return res.status(500).send('Something went wrong getting the data');

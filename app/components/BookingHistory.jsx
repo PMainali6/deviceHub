@@ -30,21 +30,28 @@ const BookingHistory = ({booked}) => {
                         <TableCell>Owner</TableCell>
                     </TableRow>
                 </TableHead>
-
-            <TableBody>
-            {booked.map(({date, slotId, deviceName, userInfo, owner, version}) => {
-                return(
-                    <TableRow key={key++}>
-                        <TableCell>{date}</TableCell>
-                        <TableCell>{timeSlots[slotId]}</TableCell>
-                        <TableCell>{deviceName} v{version}</TableCell>
-                        <TableCell>{userInfo.name}</TableCell>
-                        <TableCell>{userInfo.mobile}</TableCell>
-                        <TableCell>{owner}</TableCell>
-                    </TableRow>
-                )
-                })}
-            </TableBody>                
+                {
+                    booked.length ?
+                    <TableBody>
+                    {booked.map(({date, slotId, deviceName, userInfo, owner, version}) => {
+                        return(
+                            <TableRow key={key++}>
+                                <TableCell>{date}</TableCell>
+                                <TableCell>{timeSlots[slotId]}</TableCell>
+                                <TableCell>{deviceName} v{version}</TableCell>
+                                <TableCell>{userInfo.name}</TableCell>
+                                <TableCell>{userInfo.mobile}</TableCell>
+                                <TableCell>{owner}</TableCell>
+                            </TableRow>
+                        )
+                        })}
+                    </TableBody> :
+                    <TableBody>
+                        <TableRow>
+                            <TableCell>No booking history to show</TableCell>
+                        </TableRow>
+                    </TableBody>
+                }
             </Table>
         </Paper>
 );

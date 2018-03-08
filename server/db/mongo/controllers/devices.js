@@ -64,6 +64,25 @@ export function update(req, res) {
   });
 }
 
+export function resetBooking (req, res) {
+  const data = {
+    bookedBy: {
+      slot1: {available: true, limitTime: 11, userInfo: { name:'', mobile:'' } },
+      slot2: {available: true, limitTime: 13, userInfo: { name:'', mobile:'' } },
+      slot3: {available: true, limitTime: 16, userInfo: { name:'', mobile:'' } },
+      slot4: {available: true, limitTime: 18, userInfo: { name:'', mobile:'' } }
+    }};
+
+  Device.updateMany({}, data, (err) => {
+    if (err) {
+      console.log('Error on save!');
+      return res.status(500).send('We failed to save for some reason');
+    }
+
+    return res.status(200).send('Reset successfully');
+  });
+}
+
 /**
  * Remove a Device
  */
@@ -99,5 +118,6 @@ export default {
   add,
   update,
   remove,
-  removeAll
+  removeAll,
+  resetBooking
 };

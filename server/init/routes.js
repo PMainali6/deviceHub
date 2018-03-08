@@ -62,6 +62,7 @@ export default (app) => {
     app.put('/device/:id', devicesController.update);
     app.delete('/device/:id', devicesController.remove);
     app.delete('/removeAllDevices', devicesController.removeAll);
+    app.put('/reset', devicesController.resetBooking);
   }
 
   if(historyController) {
