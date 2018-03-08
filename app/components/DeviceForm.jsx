@@ -16,7 +16,7 @@ const deviceType = ["Mobile", "Tablet"];
 
 const deviceOS = ["iOS", "Android", "Windows"];
 
-const deviceOwner = ["Ashish Banka", "Bibhu"];
+const deviceOwner = ["Select the device Owner", "Ashish Banka", "Bibhu"];
 
 const uploadFile = {
 	'type': 'file',

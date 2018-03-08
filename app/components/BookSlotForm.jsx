@@ -160,69 +160,71 @@ class BookSlotForm extends Component {
 					<div className={cx('date-selector')}>
 						{
 							dateSlot.map( (date, index) => (
-								<button key={index} value={date.value} className={cx('date-button')} onClick = {this.onDateChange}>	
+								<button key={index} value={date.value} onClick = {this.onDateChange} className={dateKey == date.value ? 
+									cx('date-button', 'selected-date') : cx('date-button')} >
 									{date.label}
 								</button>
 							))
 						}
 					</div>
 
-					<FormControl>
-						<FormLabel className={cx('form-label')} component="legend">
-							Select Slot(s)
-						</FormLabel>
+					<div className={cx('form-control-textfield-container')}>
+						<FormControl>
+							<FormLabel className={cx('form-label')} component="legend">
+								Click slot(s) to select
+							</FormLabel>
 
-						<FormGroup>
-							{
-								timeSlots.map( (timeSlot, index) => (
-									<FormControlLabel 
-										key = {index}
-										className={(() => {
-											if(this.state.currentTime >= currentDeviceData[dateKey][timeSlot.value].limitTime && dateKey === "0")
-												return cx('checkbox-label','full');
-											else if (!currentDeviceData[dateKey][timeSlot.value].available)
-												return cx('checkbox-label','booked');
-											else if(slotState[dateKey][timeSlot.value])
-												return cx('checkbox-label','selected');
-											else
-												return cx('checkbox-label','available');
-										})()}
+							<FormGroup>
+								{
+									timeSlots.map( (timeSlot, index) => (
+										<FormControlLabel 
+											key = {index}
+											className={(() => {
+												if(this.state.currentTime >= currentDeviceData[dateKey][timeSlot.value].limitTime && dateKey === "0")
+													return cx('checkbox-label','full');
+												else if (!currentDeviceData[dateKey][timeSlot.value].available)
+													return cx('checkbox-label','booked');
+												else if(slotState[dateKey][timeSlot.value])
+													return cx('checkbox-label','selected');
+												else
+													return cx('checkbox-label','available');
+											})()}
 
-										control = {
-											<Checkbox checked={slotState[dateKey][timeSlot.value]} value={timeSlot.value} className={cx('checkbox')}
-											onChange={this.onTimeSelection(timeSlot.value)}/>
-										}
-										label = {timeSlot.label}
-									/>
-								))
-							}
-						</FormGroup>
-					</FormControl>
+											control = {
+												<Checkbox checked={slotState[dateKey][timeSlot.value]} value={timeSlot.value} className={cx('checkbox')}
+												onChange={this.onTimeSelection(timeSlot.value)}/>
+											}
+											label = {timeSlot.label}
+										/>
+									))
+								}
+							</FormGroup>
+						</FormControl>
 
-					<div className={cx('textfield-container')}>
-						<TextField
+						<div className={cx('textfield-container')}>
+							<TextField
+									required
+									id="user-name"
+									label="Borrower's Name"
+									className={cx('text-field')}
+									margin="normal"
+									inputProps={{
+										ref: input => {this.userName = input}
+									}}
+							/>
+							
+							<TextField
 								required
-								id="user-name"
-								label="Borrower's Name"
+								id="mobile-number"
+								label="Mobile Number"
 								className={cx('text-field')}
 								margin="normal"
-								inputProps={{
-									ref: input => {this.userName = input}
+								inputProps = {{
+									ref: input => {this.mobile = input}
 								}}
-						/>
-						
-						<TextField
-							required
-							id="mobile-number"
-							label="Mobile Number"
-							className={cx('text-field')}
-							margin="normal"
-							inputProps = {{
-								ref: input => {this.mobile = input}
-							}}
-						/>
+							/>
+						</div>
 					</div>
-
 				</div>
 
 				<div className={cx('form-action')}>

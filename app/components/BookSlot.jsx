@@ -42,6 +42,11 @@ const BookSlot = ({deviceData, bookDevice, bookingHistory}) => {
 						<th>Version:</th>
 						<td>{deviceData.version}</td>
 					</tr>
+
+					<tr>
+						<th>Owner:</th>
+						<td>{deviceData.owner}</td>
+					</tr>
 				</tbody>
 			</table>
 			</Paper>

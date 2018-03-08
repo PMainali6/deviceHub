@@ -19,40 +19,36 @@ const BookingHistory = ({booked}) => {
     return(
         <Paper className={cx('container')}>
             <h4>Booking History</h4>
-            <Table className={cx('table')}>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Date</TableCell>
-                        <TableCell>Time Slot</TableCell>
-                        <TableCell>Device Name</TableCell>
-                        <TableCell>Booked By</TableCell>
-                        <TableCell>Phone</TableCell>
-                        <TableCell>Owner</TableCell>
-                    </TableRow>
-                </TableHead>
-                {
-                    booked.length ?
-                    <TableBody>
-                    {booked.map(({date, slotId, deviceName, userInfo, owner, version}) => {
-                        return(
-                            <TableRow key={key++}>
-                                <TableCell>{date}</TableCell>
-                                <TableCell>{timeSlots[slotId]}</TableCell>
-                                <TableCell>{deviceName} v{version}</TableCell>
-                                <TableCell>{userInfo.name}</TableCell>
-                                <TableCell>{userInfo.mobile}</TableCell>
-                                <TableCell>{owner}</TableCell>
+            {   booked.length ?
+                    <Table className={cx('table')}>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Date</TableCell>
+                                <TableCell>Time Slot</TableCell>
+                                <TableCell>Device Name</TableCell>
+                                <TableCell>Booked By</TableCell>
+                                <TableCell>Phone</TableCell>
+                                <TableCell>Owner</TableCell>
                             </TableRow>
-                        )
-                        })}
-                    </TableBody> :
-                    <TableBody>
-                        <TableRow>
-                            <TableCell>No booking history to show</TableCell>
-                        </TableRow>
-                    </TableBody>
-                }
-            </Table>
+                        </TableHead>
+                        
+                        <TableBody>
+                        {booked.map(({date, slotId, deviceName, userInfo, owner, version}) => {
+                            return(
+                                <TableRow key={key++}>
+                                    <TableCell>{date}</TableCell>
+                                    <TableCell>{timeSlots[slotId]}</TableCell>
+                                    <TableCell>{deviceName} v{version}</TableCell>
+                                    <TableCell>{userInfo.name}</TableCell>
+                                    <TableCell>{userInfo.mobile}</TableCell>
+                                    <TableCell>{owner}</TableCell>
+                                </TableRow>
+                            )
+                            })}
+                        </TableBody>
+                    </Table> :
+                <h4>======= No Current Booking History =======</h4>
+            }
         </Paper>
 );
 }

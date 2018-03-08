@@ -14,7 +14,7 @@ const cx = classNames.bind(style);
 
 const DeviceRow = ({devices, deviceOS}) => {
 	let currentDate = new Date(),
-		currentTime = currentDate.getHours();
+		currentTime = 8;
 
 	return (
 		<div className={cx('root')}>
@@ -24,7 +24,7 @@ const DeviceRow = ({devices, deviceOS}) => {
 			</div>
 			<div className = {cx('os-devices')}>
 				{devices.map((device, index) => {
-					let isAvailable = device.deviceAvailability;
+					let isAvailable = true;
 					let slotLink = "/book-slot?key=" + device.id;
 					let editLink = "/edit-device?key=" + device.name;
 
