@@ -6,7 +6,7 @@
     }
 
     .img-container {
-        width: 10%;
+        width: 60px;
         float: left;
 
         .os-logo {
@@ -16,8 +16,8 @@
     }
 
     .os-devices {
-        width: 90%;
         float: right;
+        width: calc(100% - 60px);
     }
 
     .disabled {
@@ -31,11 +31,11 @@
     .button {
         font-size: 16px;
         font-weight: 500;
-    	margin: 10px;
-    	padding: 15px;
+    	margin: 0 0 10px 10px;
+    	padding: 14px;
         border-radius: 15px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 13px;
 
         &.available:hover {
             color: #fff;
