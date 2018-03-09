@@ -3,9 +3,12 @@
 
     .slot-input-container {
         text-align: center;
+        
  
         .date-selector {
+            border-radius: 10px 10px 0 0;
             .date-button {
+                width: 50%;
                 font-size: 16px;
                 text-transform: uppercase;
                 padding: 15px 25px;
@@ -14,25 +17,29 @@
                 color: #000;
 
                 &:first-of-type {
-                    border-right: 0;
+                    border-bottom: 1px;
+                    border-right: 1px;
+                    border-radius: 10px 0 0 0;
                 }
 
                 &:last-of-type {
-                    border-left: 0;
+                    border-bottom: 1px;
+                    border-left: 1px;
+                    border-radius: 0 10px 0 0;
                 }
             }
 
             .selected-date {
-                background-color: #2196F3;
-                color: #fff;
-                border-color: #2196F3;
-                transition: background-color linear, color linear;
+                background-color: #f1f1f1;
+                border-color: #f1f1f1;
             }
-
         }
 
         .form-control-textfield-container {
-            margin-top: 25px;
+            background-color: #f1f1f1;
+            border-radius: 0 0 10px 10px;
+            padding: 20px 20px 10px;
+
             .form-label {
                 text-align: center;
                 font-weight: bold;
@@ -118,6 +125,7 @@
     }
 
     .form-action {
+        margin-top: 10px;
         float:right;
     }
 }
