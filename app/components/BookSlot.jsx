@@ -10,7 +10,7 @@ const BookSlot = ({deviceData, bookDevice, bookingHistory}) => {
 	const deviceId = deviceData.id;
 
 	return (
-		<div>
+		<div className={cx('wrapper')}>
 			<Paper className={cx('slot-container')}>
 				<h4 className={cx('slot-title')}>Book A Slot</h4>
 				
@@ -41,6 +41,11 @@ const BookSlot = ({deviceData, bookDevice, bookingHistory}) => {
 					<tr>
 						<th>Version:</th>
 						<td>{deviceData.version}</td>
+					</tr>
+
+					<tr>
+						<th>Owner:</th>
+						<td>{deviceData.owner}</td>
 					</tr>
 				</tbody>
 			</table>

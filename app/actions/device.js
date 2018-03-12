@@ -68,14 +68,14 @@ export function bookDevice (bookingData) {
 		const id = bookingData.id,
 			{ devices } = getState(),
 			bookedDevice = devices.find(device => device.id === id);
-		let slots = bookingData.slots;
+		let daySlots = bookingData.slots;
 
-		slots.forEach(slot => {
-			bookedDevice.bookedBy[slot].available = bookingData.available;
-			bookedDevice.bookedBy[slot].userInfo = bookingData.userInfo;
+		daySlots.forEach((daySlot, index) => {
+			daySlot.forEach((timeSlot) => {
+				bookedDevice.bookedBy[index][timeSlot].available = bookingData.available;
+				bookedDevice.bookedBy[index][timeSlot].userInfo = bookingData.userInfo;
+			})
 		});
-
-		bookedDevice.deviceAvailability = bookingData.deviceAvailability;
 
 		dispatch(bookDeviceRequest(bookedDevice));
 

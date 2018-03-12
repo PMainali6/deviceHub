@@ -26,23 +26,31 @@ export function bookingHistory (bookingData) {
 	return (dispatch, getState) => {
 		const { devices } = getState(),
 			bookedDevice = devices.find(device => device.id === bookingData.id).name,
-			slots = bookingData.slots,
+			daySlots = bookingData.slots,
 			date = new Date(),
-			currentDate = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`;
+			nextDate = new Date(date);
+
+		nextDate.setDate(date.getDate()+1);
+
+		const currentDay = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`,
+			nextDay = `${nextDate.getDate()}-${nextDate.getMonth()+1}-${nextDate.getFullYear()}`;
+
 		let data = [],
 			historyData;
 
-		slots.forEach( slot => {
-			historyData = {
-				id: bookingData.id,
-				deviceName: bookedDevice,
-				userInfo: bookingData.userInfo,
-				slotId: slot,
-				date: currentDate,
-				owner: bookingData.owner,
-				version: bookingData.version
-			}
-			data.push(historyData);
+		daySlots.forEach((daySlot, index) => {
+			daySlot.forEach((timeSlot) => {
+				historyData = {
+					id: bookingData.id,
+					deviceName: bookedDevice,
+					userInfo: bookingData.userInfo,
+					slotId: timeSlot,
+					date: index? nextDay : currentDay,
+					owner: bookingData.owner,
+					version: bookingData.version
+				}
+				data.push(historyData);
+			})
 		});
 
 		dispatch(bookingHistoryRequest(data));

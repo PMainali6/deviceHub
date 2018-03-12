@@ -1,12 +1,14 @@
 .dashboard {
 	display: flex;
 	flex-flow: row wrap;
+	justify-content: center;
 	margin-top: 20px;
 
 	.device-type-container {
 	    margin: 20px;
-	    padding: 20px;
-	    width: 44%;
+		padding: 20px;
+		min-width: 330px;
+		flex: 1 100px;
 		display: inline-block;
 		background-color: #fff;
     	box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);

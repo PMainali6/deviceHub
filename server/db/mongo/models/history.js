@@ -11,6 +11,7 @@ const HistorySchema = new mongoose.Schema({
   userInfo: Object,
   slotId: String,
   date: String,
+  bookingDate: { type: Date, default: Date.now },
   owner: String
 });
 

@@ -16,7 +16,7 @@ const deviceType = ["Mobile", "Tablet"];
 
 const deviceOS = ["iOS", "Android", "Windows"];
 
-const deviceOwner = ["Ashish Banka", "Bibhu"];
+const deviceOwner = ["Select the device Owner", "Ashish Banka", "Bibhu"];
 
 const uploadFile = {
 	'type': 'file',
@@ -60,12 +60,20 @@ class DeviceForm extends Component {
 				version: this.deviceVersion.value,
 				owner: this.deviceOwner.value,
 				deviceAvailability: true,
-				bookedBy: {
-					slot1: {available: true, limitTime: 11, userInfo: { name:'', mobile:'' } },
-					slot2: {available: true, limitTime: 13, userInfo: { name:'', mobile:'' } },
-					slot3: {available: true, limitTime: 16, userInfo: { name:'', mobile:'' } },
-					slot4: {available: true, limitTime: 18, userInfo: { name:'', mobile:'' } }
-				}
+				bookedBy: [
+					{
+				  		slot1: {available: true, limitTime: 11, userInfo: { name:'', mobile:'' } },
+						slot2: {available: true, limitTime: 13, userInfo: { name:'', mobile:'' } },
+						slot3: {available: true, limitTime: 16, userInfo: { name:'', mobile:'' } },
+						slot4: {available: true, limitTime: 18, userInfo: { name:'', mobile:'' } }
+				  	},
+				  	{
+				  		slot1: {available: true, limitTime: 11, userInfo: { name:'', mobile:'' } },
+						slot2: {available: true, limitTime: 13, userInfo: { name:'', mobile:'' } },
+						slot3: {available: true, limitTime: 16, userInfo: { name:'', mobile:'' } },
+						slot4: {available: true, limitTime: 18, userInfo: { name:'', mobile:'' } }
+				  	}
+				]
 			}
 			addDevice(formInput);
 		}

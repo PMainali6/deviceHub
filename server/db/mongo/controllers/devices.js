@@ -64,9 +64,31 @@ export function update(req, res) {
   });
 }
 
+export function resetBooking (req, res) {
+  const newBooking = {
+      slot1: {available: true, limitTime: 11, userInfo: { name:'', mobile:'' } },
+      slot2: {available: true, limitTime: 13, userInfo: { name:'', mobile:'' } },
+      slot3: {available: true, limitTime: 16, userInfo: { name:'', mobile:'' } },
+      slot4: {available: true, limitTime: 18, userInfo: { name:'', mobile:'' } }
+    };
+
+  Device.find({}).exec((err, devices) => {
+    devices.forEach( device => {
+      device.bookedBy.shift();
+      device.bookedBy.push(newBooking);
+
+      Device.findOneAndUpdate({id: device.id}, device, (err) => {
+        if (err) {
+          console.log('Error on save!');
+        }
+      });
+    });
+  });  
+}
+
 /**
  * Remove a Device
- */
+ */ 
 export function remove(req, res) {
   const query = { id: req.params.id };
 
@@ -99,5 +121,6 @@ export default {
   add,
   update,
   remove,
-  removeAll
+  removeAll,
+  resetBooking
 };
