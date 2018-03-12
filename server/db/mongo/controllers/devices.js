@@ -65,27 +65,30 @@ export function update(req, res) {
 }
 
 export function resetBooking (req, res) {
-  const data = {
-    bookedBy: {
+  const newBooking = {
       slot1: {available: true, limitTime: 11, userInfo: { name:'', mobile:'' } },
       slot2: {available: true, limitTime: 13, userInfo: { name:'', mobile:'' } },
       slot3: {available: true, limitTime: 16, userInfo: { name:'', mobile:'' } },
       slot4: {available: true, limitTime: 18, userInfo: { name:'', mobile:'' } }
-    }};
+    };
 
-  Device.updateMany({}, data, (err) => {
-    if (err) {
-      console.log('Error on save!');
-      return res.status(500).send('We failed to save for some reason');
-    }
+  Device.find({}).exec((err, devices) => {
+    devices.forEach( device => {
+      device.bookedBy.shift();
+      device.bookedBy.push(newBooking);
 
-    return res.status(200).send('Reset successfully');
-  });
+      Device.findOneAndUpdate({id: device.id}, device, (err) => {
+        if (err) {
+          console.log('Error on save!');
+        }
+      });
+    });
+  });  
 }
 
 /**
  * Remove a Device
- */
+ */ 
 export function remove(req, res) {
   const query = { id: req.params.id };
 
