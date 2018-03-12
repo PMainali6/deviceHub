@@ -64,7 +64,7 @@ export function update(req, res) {
   });
 }
 
-export function resetBooking (req, res) {
+export function resetBooking () {
   const newBooking = {
       slot1: {available: true, limitTime: 11, userInfo: { name:'', mobile:'' } },
       slot2: {available: true, limitTime: 13, userInfo: { name:'', mobile:'' } },
