@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { fetchDashboardData, fetchHistoryData } from './fetch-data';
-import { App, Vote, Dashboard, About, BookSlot, DeviceForm, LoginOrRegister } from './pages';
+import { App, Dashboard, About, BookSlot, DeviceForm, LoginOrRegister } from './pages';
 
 /*
  * @param {Redux Store}

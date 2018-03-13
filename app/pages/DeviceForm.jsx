@@ -12,12 +12,12 @@ class DeviceForm extends Component {
   }
 
   pageTitle = () => {
-    return 'DeviceForm | reactGo';
+    return 'DeviceForm | Device Hub';
   };
 
   pageMeta = () => {
     return [
-      { name: 'description', content: 'A reactGo example of a dashboard page' }
+      { name: 'description', content: 'A portal for booking devices.' }
     ];
   };
 

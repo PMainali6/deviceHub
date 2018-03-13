@@ -12,12 +12,12 @@ class BookSlot extends Component {
   }
 
   pageTitle = () => {
-    return 'BookSlot | reactGo';
+    return 'BookSlot | Device Hub';
   };
 
   pageMeta = () => {
     return [
-      { name: 'description', content: 'A reactGo example of a dashboard page' }
+      { name: 'description', content: 'A portal for booking devices.' }
     ];
   };
 
