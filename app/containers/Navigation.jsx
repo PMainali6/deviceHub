@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link, IndexLink } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import { logOut } from '../actions/users';
@@ -28,9 +28,10 @@ const Navigation = ({ user, logOut }) => {
           </Link>
           
         <div className={cx('nav-menu')}>
-          <Link className={cx('item')} to="/">Dashboard</Link>
-          <Link to="/about" className={cx('item')} activeClassName={cx('active')}>About</Link>
-          <Link className={cx('item')} to="/add-device">Add Device</Link>
+          <IndexLink className={cx('item')} activeClassName={cx('active')} to="/">Dashboard</IndexLink>
+          <Link className={cx('item')} activeClassName={cx('active')} to="/bookings">Booking Logs</Link>
+          <Link className={cx('item')} activeClassName={cx('active')} to="/add-device">Add Device</Link>
+          <Link className={cx('item')} activeClassName={cx('active')} to="/about">About</Link>
 
           { user.authenticated ? (
             <Link
