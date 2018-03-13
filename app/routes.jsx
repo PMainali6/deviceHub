@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { fetchDashboardData, fetchHistoryData } from './fetch-data';
-import { App, Dashboard, About, BookSlot, DeviceForm, LoginOrRegister } from './pages';
+import { App, Dashboard, About, BookSlot, DeviceForm, LoginOrRegister, BookingLogs } from './pages';
 
 /*
  * @param {Redux Store}
@@ -37,6 +37,7 @@ export default (store) => {
       <Route path="edit-device" component={DeviceForm} onEnter={requireAuth} />
       <Route path="add-device" component={DeviceForm} onEnter={requireAuth} />
       <Route path="about" component={About} />
+      <Route path="bookings" component={BookingLogs} fetchDashboardData={fetchDashboardData} fetchHistoryData = {fetchHistoryData} />
     </Route>
   );
 };
