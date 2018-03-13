@@ -12,12 +12,12 @@ class Dashboard extends Component {
   }
 
   pageTitle = () => {
-    return 'Dashboard | reactGo';
+    return 'Dashboard | Device Hub';
   };
 
   pageMeta = () => {
     return [
-      { name: 'description', content: 'A reactGo example of a dashboard page' }
+      { name: 'description', content: 'A portal for booking devices.' }
     ];
   };
 

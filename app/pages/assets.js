@@ -52,6 +52,6 @@ const linkAssets = () => {
   return links;
 };
 
-export const title = 'reactGo - just ship it';
+export const title = 'Device Hub';
 export const meta = metaAssets();
 export const link = linkAssets();

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Page from '../pages/Page';
-import VoteContainer from '../containers/Vote';
+import BookingLogsContainer from '../containers/BookingLogs';
 
-class Vote extends Component {
+class BookingLogs extends Component {
   getMetaData() {
     return {
       title: this.pageTitle(),
@@ -12,12 +12,12 @@ class Vote extends Component {
   }
 
   pageTitle = () => {
-    return 'Vote | reactGo';
+    return 'BookingLogs | Device Hub';
   };
 
   pageMeta = () => {
     return [
-      { name: 'description', content: 'A reactGo example of a voting page' }
+      { name: 'description', content: 'A portal for booking devices.' }
     ];
   };
 
@@ -28,11 +28,11 @@ class Vote extends Component {
   render() {
     return (
       <Page {...this.getMetaData()}>
-        <VoteContainer {...this.props} />
+        <BookingLogsContainer {...this.props} />
       </Page>
     );
   }
 }
 
-export default Vote;
+export default BookingLogs;
 
