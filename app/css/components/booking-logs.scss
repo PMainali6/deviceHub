@@ -1,5 +1,25 @@
+.filter-container {
+	margin: 20px 30px;
+
+	.filter-title {
+		display: inline-block;
+		margin: 0 20px;
+	}
+
+	.text-field {
+		display: inline-block;
+		margin: 0 20px;
+		width: 200px;
+	}
+
+	.menu {
+		width: 200px;
+	}
+}
 .container {
 	margin: 40px 30px;
+	width: 75%;
+	float: right;
 
 	.table-head {
 		font-weight: bold;
