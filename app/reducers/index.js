@@ -23,8 +23,8 @@ const isFetching = (state = false, action) => {
 const rootReducer = combineReducers({
   isFetching,
   user,
-  message,
   devices,
+  message,
   bookings,
   routing
 });

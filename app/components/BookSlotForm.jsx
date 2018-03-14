@@ -78,10 +78,22 @@ class BookSlotForm extends Component {
 	}
 
 	formValidation() {
-		if(this.userName.value && this.mobile.value) {
+		const { slotState } = this.state;
+		let selectionFlag = false;
+
+		slotState.forEach((slots) => {
+			Object.keys(slots).forEach((slot)=> {
+				if(slots[slot]) {
+					selectionFlag = true;
+				}
+			})
+		})
+		if(this.userName.value && this.mobile.value && selectionFlag) {
 			return true;
 		}
 		else {
+			if(!selectionFlag)
+				document.getElementsByClassName(cx('form-label'))[0].classList.add(cx('error'));
 			return false;
 		}
 	}
@@ -110,12 +122,12 @@ class BookSlotForm extends Component {
 				this.slots[dateKey].push(event.target.value);
 			}
 			else {
-				this.slots = this.slots[dateKey].filter(slot => slot != name)
+				this.slots[dateKey] = this.slots[dateKey].filter(slot => slot != name)
 			}
 		})
 	}
 
-	onSave() {
+	onSave(event) {
 		const { deviceId, bookDevice, bookingHistory, deviceData } = this.props;
 		let userName = this.userName,
 			mobile = this.mobile,
@@ -142,8 +154,11 @@ class BookSlotForm extends Component {
 		}
 
 		else {
-			userNameParent.classList.add(cx('error'));
-			mobileParent.classList.add(cx('error'));
+			event.preventDefault();
+			if(!userName.value)
+				userNameParent.classList.add(cx('error'));
+			if(!mobile.value)
+				mobileParent.classList.add(cx('error'));
 		}
 	}
 

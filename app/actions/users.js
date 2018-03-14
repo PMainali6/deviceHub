@@ -43,8 +43,11 @@ function beginLogout() {
   return { type: types.LOGOUT_USER};
 }
 
-function logoutSuccess() {
-  return { type: types.LOGOUT_SUCCESS_USER };
+function logoutSuccess(message) {
+  return { 
+    type: types.LOGOUT_SUCCESS_USER, 
+    message 
+  };
 }
 
 function logoutError() {
@@ -91,7 +94,7 @@ export function logOut() {
 
     return authService().logOut()
       .then((response) => {
-          dispatch(logoutSuccess());
+          dispatch(logoutSuccess('You have successfully logged out.'));
       })
       .catch((err) => {
         dispatch(logoutError());
