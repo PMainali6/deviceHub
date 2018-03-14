@@ -4,30 +4,10 @@
 	flex-flow: row nowrap;
     justify-content: space-evenly;
 
-	.filter-container {
-		margin: 20px 30px;
-
-		.filter-title {
-			display: inline-block;
-			margin: 0 20px;
-		}
-
-		.text-field {
-			display: inline-block;
-			margin: 0 20px;
-			width: 200px;
-		}
-
-		.menu {
-			width: 200px;
-		}
-	}
-
 	.drawer {
 		width: 200px;
 		background-color: #fff;
 		border-color: gray;
-		border: 1px solid rgba(0, 0, 0, 0.12);
 
 		.form {
 			width: 100%;
@@ -41,7 +21,12 @@
 			}
 
 			.form-group {
-				margin: 10px;
+				padding: 10px;
+				border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+				&:last-child {
+					border: none;
+				}
 
 				.title {
 					padding: 5px 0 0 5px;
@@ -54,6 +39,10 @@
 				}
 			}
 		}
+	}
+
+	.search-box {
+		margin: 0 20px;
 	}
 
 	.table-container {
