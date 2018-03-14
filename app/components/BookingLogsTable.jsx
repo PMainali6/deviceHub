@@ -42,7 +42,6 @@ class BookingLogsTable extends Component {
 	}
 
 	handleChangePage (event, page) {
-		console.log(page);
 		this.setState({ page });
 	}
 
