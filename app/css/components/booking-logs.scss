@@ -1,28 +1,68 @@
-.filter-container {
-	margin: 20px 30px;
-
-	.filter-title {
-		display: inline-block;
-		margin: 0 20px;
-	}
-
-	.text-field {
-		display: inline-block;
-		margin: 0 20px;
-		width: 200px;
-	}
-
-	.menu {
-		width: 200px;
-	}
-}
 .container {
 	margin: 40px 30px;
-	width: 75%;
-	float: right;
+	display: flex;
+	flex-flow: row nowrap;
+    justify-content: space-evenly;
 
-	.table-head {
-		font-weight: bold;
-		color: #000;
+	.filter-container {
+		margin: 20px 30px;
+
+		.filter-title {
+			display: inline-block;
+			margin: 0 20px;
+		}
+
+		.text-field {
+			display: inline-block;
+			margin: 0 20px;
+			width: 200px;
+		}
+
+		.menu {
+			width: 200px;
+		}
+	}
+
+	.drawer {
+		width: 200px;
+		background-color: #fff;
+		border-color: gray;
+		border: 1px solid rgba(0, 0, 0, 0.12);
+
+		.form {
+			width: 100%;
+
+			.form-label {
+				padding-top: 10px;
+				text-align: center;
+				color: #000;
+				font-weight: bold;
+				font-size: 12px;
+			}
+
+			.form-group {
+				margin: 10px;
+
+				.title {
+					padding: 5px 0 0 5px;
+					color: #000;
+					font-weight: bold;
+					font-size: 12px;
+				}
+				.form-control {
+					padding-left: 20px;
+				}
+			}
+		}
+	}
+
+	.table-container {
+		width: 75%;
+		float: right;
+
+		.table-head {
+			font-weight: bold;
+			color: #000;
+		}
 	}
 }

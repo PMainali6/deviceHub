@@ -56,7 +56,7 @@ class BookingLogsTable extends Component {
 		let key = 0;
 
 		return (
-			<Paper className={cx('container')}>
+			<Paper className={cx('table-container')}>
                 <Table className={cx('table')}>
                     <TableHead>
                         <TableRow>
