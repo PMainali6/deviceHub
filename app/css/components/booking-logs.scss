@@ -41,17 +41,21 @@
 		}
 	}
 
-	.search-box {
-		margin: 0 20px;
-	}
-
-	.table-container {
+	.search-table-container {
+		display: flex;
+		flex-direction: column;
 		width: 75%;
 		float: right;
 
-		.table-head {
-			font-weight: bold;
-			color: #000;
+		.search-box {
+			margin-bottom: 20px;
+		}
+
+		.table-container {
+			.table-head {
+				font-weight: bold;
+				color: #000;
+			}
 		}
 	}
 }

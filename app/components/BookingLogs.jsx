@@ -83,22 +83,26 @@ class BookingLogs extends Component {
 						</FormGroup>
 					</FormControl>
 				</Paper>
+				<div className={cx('search-table-container')}>		
+					<FormControl className = {cx('search-box')}>
+						<InputLabel 
+							htmlFor="search"
+							>Search by Device Name
+							</InputLabel>
+						<Input
+							id="search"
+							type="text"
+							onChange = {this.handleSearch}
+							endAdornment={
+								<InputAdornment position="end">
+									<Search/>
+								</InputAdornment>
+							}
+						/>
+					</FormControl>
 
-				<FormControl className = {cx('search-box')}>
-		          	<InputLabel htmlFor="search">Search...</InputLabel>
-		          	<Input
-			            id="search"
-			            type="text"
-			            onChange = {this.handleSearch}
-			            endAdornment={
-			            	<InputAdornment position="end">
-								<Search />
-		              		</InputAdornment>
-		              	}
-		          	/>
-		        </FormControl>
-
-				<BookingLogsTable bookingHistory={bookingHistory} />
+					<BookingLogsTable bookingHistory={bookingHistory} />
+				</div>
 			</div>
 		)
 	}
