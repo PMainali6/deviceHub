@@ -22,10 +22,11 @@ class BookingLogs extends Component {
 	constructor(props) {
 		super(props);
 		this.handleSearch = this.handleSearch.bind(this);
+		this.handleOwnersFilter = this.handleOwnersFilter.bind(this);
 
 		this.state = {
 			bookingHistory : props.bookingHistory,
-			owners: {Ashish: false, Bibhu: false},
+			owners: {'Ashish Banka': false, 'Bibhu': false},
 			days: {Monday:false, Tuesday:false, Tuesday:false, Wednesday:false, Thursday:false, Friday:false}
 		}
 	}
@@ -44,6 +45,41 @@ class BookingLogs extends Component {
 		this.setState({ bookingHistory: newBookingHistory});
 	}
 
+	handleOwnersFilter(event, checked) {
+		let { owners } = this.state,
+			{ bookingHistory } = this.props,
+			key = event.target.value,
+			newOwners = owners,
+			newBookingHistory = [],
+			ownerArray = [];
+
+		Object.keys(owners).forEach((owner) => {
+				if(owner == key) {
+					newOwners[owner] = checked;
+				}
+		});
+
+		this.setState({ owners: newOwners});
+		
+		Object.keys(owners).forEach((owner) => {
+			if(owners[owner])
+				ownerArray.push(owner);
+		});
+
+		if(ownerArray.length > 0) {
+			ownerArray.forEach(owner => {
+				bookingHistory.forEach(data => {
+					if(data.owner == owner)
+						newBookingHistory.push(data);
+				})
+			})
+		}
+		else 
+			newBookingHistory = bookingHistory;
+
+		 this.setState({ bookingHistory: newBookingHistory});
+	}
+
 	render () {
 		const { bookingHistory } = this.state;
 		return (
@@ -59,6 +95,7 @@ class BookingLogs extends Component {
 									<Checkbox
 										checked={this.state.owners[owner]}
 										value={owner}
+										onChange={this.handleOwnersFilter}
 										 />
 									}
 									key={index}
