@@ -9,9 +9,10 @@ function addDeviceRequest (data) {
 	} 
 }
 
-function addDeviceSuccess () {
+function addDeviceSuccess (message) {
 	return {
-		type: types.ADD_DEVICE_SUCCESS
+		type: types.ADD_DEVICE_SUCCESS,
+		message
 	}
 }
 
@@ -30,9 +31,10 @@ function bookDeviceRequest (data) {
 	}
 }
 
-function bookDeviceSuccess () {
+function bookDeviceSuccess (message) {
 	return {
-		type: types.BOOK_DEVICE_SUCCESS
+		type: types.BOOK_DEVICE_SUCCESS,
+		message
 	}
 }
 
@@ -54,7 +56,7 @@ export function addDevice (deviceData) {
 		return deviceService().addDeviceData({id, data})
 			.then((res) => {
 				if (res.status === 200) {
-					return dispatch(addDeviceSuccess());
+					return dispatch(addDeviceSuccess('Your device has been successfully added.'));
 				}
 			})
 			.catch(() => {
@@ -82,7 +84,7 @@ export function bookDevice (bookingData) {
 		return deviceService().updateDeviceData({id, data: bookedDevice})
 			.then((res) => {
 				if(res.status === 200) {
-					return dispatch(bookDeviceSuccess());
+					return dispatch(bookDeviceSuccess('Your selected slot has been booked'));
 				}
 			})
 			.catch(() => {

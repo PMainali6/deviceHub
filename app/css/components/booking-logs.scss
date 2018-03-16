@@ -1,8 +1,79 @@
 .container {
 	margin: 40px 30px;
+	display: flex;
+	flex-flow: row nowrap;
+    justify-content: space-evenly;
 
-	.table-head {
-		font-weight: bold;
-		color: #000;
+	.drawer {
+		width: 200px;
+		background-color: #fff;
+		border-color: gray;
+		margin-top: 70px;
+		height: fit-content;
+		padding: 20px 0;
+
+		.form {
+			width: 100%;
+
+			.form-label {
+				text-align: center;
+				color: #000;
+				font-weight: bold;
+				font-size: 12px;
+			}
+
+			.form-group {
+				padding: 10px;
+				border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+				&:last-child {
+					border: none;
+				}
+
+				.title {
+					padding: 5px 0 0 5px;
+					color: #000;
+					font-weight: bold;
+					font-size: 12px;
+				}
+				.form-control {
+					padding-left: 20px;
+				}
+			}
+		}
+
+		.reset-btn {
+			font-size: 12px;
+		    padding: 10px 15px;
+		    margin: 0 auto;
+		    display: block;
+		    background: #f15d22;
+		    color: white;
+		    font-weight: bold;
+		    border-radius: 5px;
+		    border: none;
+
+		    &:focus {
+		    	outline: none;
+		    }
+		}
+	}
+
+	.search-table-container {
+		display: flex;
+		flex-direction: column;
+		width: 75%;
+		float: right;
+
+		.search-box {
+			margin-bottom: 20px;
+		}
+
+		.table-container {
+			.table-head {
+				font-weight: bold;
+				color: #000;
+			}
+		}
 	}
 }

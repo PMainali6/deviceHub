@@ -1,105 +1,158 @@
 import React, { Component } from 'react';
-import Table, {
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TablePagination,
-  TableRow,
-  TableSortLabel,
-} from 'material-ui/Table';
+import Checkbox from 'material-ui/Checkbox';
+import {
+	FormLabel,
+	FormControl,
+	FormGroup,
+	FormControlLabel,
+	FormHelperText,
+  } from 'material-ui/Form';
 import Paper from 'material-ui/Paper';
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import Search from 'material-ui-icons/Search';
 
+import BookingLogsTable from './BookingLogsTable';
 
 import style from '../css/components/booking-logs';
 import classNames from 'classnames/bind';
-/*
- * Note: This is kept as a container-level component,
- *  i.e. We should keep this as the container that does the data-fetching
- *  and dispatching of actions if you decide to have any sub-components.
- */
 
 const cx = classNames.bind(style);
 
-const timeSlots = {
-        slot1: "09:00 - 11:00",
-        slot2: "11:00 - 13:00",
-        slot3: "14:00 - 16:00",
-        slot4: "16:00 - 18:00"    
-    },
-    tableHeader = ["Date", "Time Slot", "Device Name", "Booked By", "Mobile", "Owner"];
-
 class BookingLogs extends Component {
+	constructor(props) {
+		super(props);
+		this.handleFilter = this.handleFilter.bind(this);
+		this.handleSearch = this.handleSearch.bind(this);
+		this.handleOwnersFilter = this.handleOwnersFilter.bind(this);
+		this.handleResetFilter = this.handleResetFilter.bind(this);
 
-	constructor() {
-		super();
-		this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
-		this.handleChangePage = this.handleChangePage.bind(this);
 		this.state = {
-			page: 0,
-			rowsPerPage: 5
+			bookingHistory : props.bookingHistory,
+			owners: {'Ashish Banka': false, 'Bibhu': false}
 		}
 	}
 
-	handleChangePage (event, page) {
-		console.log(page);
-		this.setState({ page });
+	handleResetFilter() {
+		this.setState({
+			bookingHistory : this.props.bookingHistory,
+			owners: {'Ashish Banka': false, 'Bibhu': false}
+		});
+		this.searchInput.value = "";
 	}
 
-	handleChangeRowsPerPage(event) {
-		this.setState({ rowsPerPage: event.target.value });
-	}	
+	handleSearch(bookingHistory) {
+		const searchInput = this.searchInput.value.toLowerCase();
 
-	render() {
-		const { bookingHistory } = this.props,
-			{ page, rowsPerPage } = this.state;
-		let key = 0;
+		let newBookingHistory = bookingHistory.filter((data, index) => {
+			let currentDeviceName = `${data.deviceName} v${data.version}`;
 
+			if(currentDeviceName.toLowerCase().indexOf(searchInput) > -1) {
+				return data;
+			}
+		});
+		return newBookingHistory;
+	}
+
+	handleOwnersFilter(bookingHistory, checked, event) {
+		let { owners } =this.state,
+			newBookingHistory = [],
+			ownerArray = [];
+
+		if(event) {
+			let key = event.target.value,
+				newOwners = owners;
+
+			Object.keys(owners).forEach( owner => {
+				if(owner == key)
+					newOwners[owner] = checked;
+			});
+			this.setState({owners: newOwners});
+		}
+		
+		Object.keys(owners).forEach((owner) => {
+			if(owners[owner])
+				ownerArray.push(owner);
+		});
+
+		if(ownerArray.length > 0) {
+			ownerArray.forEach(owner => {
+				bookingHistory.forEach(data => {
+					if(data.owner == owner)
+						newBookingHistory.push(data);
+				})
+			})
+		}
+		else 
+			newBookingHistory = bookingHistory;
+
+		return newBookingHistory;
+	}
+
+	handleFilter(event, checked) {
+		const filterType = event.target.type;
+
+		let filteredBookingHistory = this.props.bookingHistory; 
+
+		filteredBookingHistory = this.handleSearch(filteredBookingHistory);
+
+		if(filterType === "checkbox")
+			filteredBookingHistory = this.handleOwnersFilter(filteredBookingHistory, checked, event);
+		else
+			filteredBookingHistory = this.handleOwnersFilter(filteredBookingHistory);
+
+		this.setState({ bookingHistory: filteredBookingHistory});
+	}
+
+	render () {
+		const { bookingHistory } = this.state;
 		return (
-			<Paper className={cx('container')}>
-                <Table className={cx('table')}>
-                    <TableHead>
-                        <TableRow>
-                            {tableHeader.map((ele, index) => 
-                                <TableCell className={cx('table-head')} key={index}>{ele}</TableCell>
-                            )}
-                        </TableRow>
-                    </TableHead>
-                    
-                    <TableBody>
-                    {bookingHistory.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(({date, slotId, deviceName, userInfo, owner, version}) => {
-                        return(
-                            <TableRow key={key++}>
-                                <TableCell>{date}</TableCell>
-                                <TableCell>{timeSlots[slotId]}</TableCell>
-                                <TableCell>{deviceName} v{version}</TableCell>
-                                <TableCell>{userInfo.name}</TableCell>
-                                <TableCell>{userInfo.mobile}</TableCell>
-                                <TableCell>{owner}</TableCell>
-                            </TableRow>
-                        )
-                        })}
-                    </TableBody>
-                    <TableFooter>
-                    	<TableRow>
-                    		<TablePagination
-                    			colSpan = {6}
-                    			count = {bookingHistory.length}
-                    			rowsPerPage = {rowsPerPage}
-                    			page = {page}
-                    			backIconButtonProps={{
-                    				'aria-label': 'Previous Page',
-                    			}}
-                    			nextIconButtonProps={{
-                    				'aria-label': 'Next Page',
-                    			}}
-                    			onChangePage={this.handleChangePage}
-                    			onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                    		/>
-                    	</TableRow>
-                    </TableFooter>
-                </Table>
-	        </Paper>
+			<div className={cx('container')}>
+				<Paper className={cx('drawer')}>
+					<FormControl className={cx('form')}>
+						<FormLabel component="legend" className={cx('form-label')}>Filter by</FormLabel>
+						<FormGroup className={cx('form-group')}>
+							<FormLabel component="legend" className={cx('title')}>Owner</FormLabel>
+							{Object.keys(this.state.owners).map((owner, index) => (
+								<FormControlLabel className={cx('form-control')}
+									control={
+									<Checkbox
+										checked={this.state.owners[owner]}
+										value={owner}
+										onChange={this.handleFilter}
+										 />
+									}
+									key={index}
+									label={owner}
+								/>
+							))}
+						</FormGroup >
+					</FormControl>
+					<button className={cx('reset-btn')} onClick={this.handleResetFilter}>Clear Filter</button>
+				</Paper>
+				<div className={cx('search-table-container')}>		
+					<FormControl className = {cx('search-box')}>
+						<InputLabel 
+							htmlFor="search"
+							>Search by Device Name
+							</InputLabel>
+						<Input
+							id="search"
+							type="text"
+							onChange = {this.handleFilter}
+							inputProps = {{
+								ref: input => {this.searchInput = input}
+							}}
+							endAdornment={
+								<InputAdornment position="end">
+									<Search/>
+								</InputAdornment>
+							}
+						/>
+					</FormControl>
+
+					<BookingLogsTable bookingHistory={bookingHistory} />
+				</div>
+			</div>
 		)
 	}
 }
