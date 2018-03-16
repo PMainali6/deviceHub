@@ -21,6 +21,7 @@ const cx = classNames.bind(style);
 class BookingLogs extends Component {
 	constructor(props) {
 		super(props);
+		this.handleFilter = this.handleFilter.bind(this);
 		this.handleSearch = this.handleSearch.bind(this);
 		this.handleOwnersFilter = this.handleOwnersFilter.bind(this);
 
@@ -31,9 +32,8 @@ class BookingLogs extends Component {
 		}
 	}
 
-	handleSearch(event) {
-		const searchInput = event.target.value.toLowerCase(),
-			{ bookingHistory } = this.props;
+	handleSearch(bookingHistory) {
+		const searchInput = this.searchInput.value.toLowerCase();
 
 		let newBookingHistory = bookingHistory.filter((data, index) => {
 			let currentDeviceName = `${data.deviceName} v${data.version}`;
@@ -42,24 +42,24 @@ class BookingLogs extends Component {
 				return data;
 			}
 		});
-		this.setState({ bookingHistory: newBookingHistory});
+		return newBookingHistory;
 	}
 
-	handleOwnersFilter(event, checked) {
-		let { owners } = this.state,
-			{ bookingHistory } = this.props,
-			key = event.target.value,
-			newOwners = owners,
+	handleOwnersFilter(bookingHistory, checked, event) {
+		let { owners } =this.state,
 			newBookingHistory = [],
 			ownerArray = [];
 
-		Object.keys(owners).forEach((owner) => {
-				if(owner == key) {
-					newOwners[owner] = checked;
-				}
-		});
+		if(event) {
+			let key = event.target.value,
+				newOwners = owners;
 
-		this.setState({ owners: newOwners});
+			Object.keys(owners).forEach( owner => {
+				if(owner == key)
+					newOwners[owner] = checked;
+			});
+			this.setState({owners: newOwners});
+		}
 		
 		Object.keys(owners).forEach((owner) => {
 			if(owners[owner])
@@ -77,7 +77,22 @@ class BookingLogs extends Component {
 		else 
 			newBookingHistory = bookingHistory;
 
-		 this.setState({ bookingHistory: newBookingHistory});
+		return newBookingHistory;
+	}
+
+	handleFilter(event, checked) {
+		const filterType = event.target.type;
+
+		let filteredBookingHistory = this.props.bookingHistory; 
+
+		filteredBookingHistory = this.handleSearch(filteredBookingHistory);
+
+		if(filterType === "checkbox")
+			filteredBookingHistory = this.handleOwnersFilter(filteredBookingHistory, checked, event);
+		else
+			filteredBookingHistory = this.handleOwnersFilter(filteredBookingHistory);
+
+		this.setState({ bookingHistory: filteredBookingHistory});
 	}
 
 	render () {
@@ -95,7 +110,7 @@ class BookingLogs extends Component {
 									<Checkbox
 										checked={this.state.owners[owner]}
 										value={owner}
-										onChange={this.handleOwnersFilter}
+										onChange={this.handleFilter}
 										 />
 									}
 									key={index}
@@ -129,7 +144,10 @@ class BookingLogs extends Component {
 						<Input
 							id="search"
 							type="text"
-							onChange = {this.handleSearch}
+							onChange = {this.handleFilter}
+							inputProps = {{
+								ref: input => {this.searchInput = input}
+							}}
 							endAdornment={
 								<InputAdornment position="end">
 									<Search/>
