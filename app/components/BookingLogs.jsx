@@ -24,12 +24,20 @@ class BookingLogs extends Component {
 		this.handleFilter = this.handleFilter.bind(this);
 		this.handleSearch = this.handleSearch.bind(this);
 		this.handleOwnersFilter = this.handleOwnersFilter.bind(this);
+		this.handleResetFilter = this.handleResetFilter.bind(this);
 
 		this.state = {
 			bookingHistory : props.bookingHistory,
-			owners: {'Ashish Banka': false, 'Bibhu': false},
-			days: {Monday:false, Tuesday:false, Tuesday:false, Wednesday:false, Thursday:false, Friday:false}
+			owners: {'Ashish Banka': false, 'Bibhu': false}
 		}
+	}
+
+	handleResetFilter() {
+		this.setState({
+			bookingHistory : this.props.bookingHistory,
+			owners: {'Ashish Banka': false, 'Bibhu': false}
+		});
+		this.searchInput.value = "";
 	}
 
 	handleSearch(bookingHistory) {
@@ -118,22 +126,8 @@ class BookingLogs extends Component {
 								/>
 							))}
 						</FormGroup >
-
-						<FormGroup className={cx('form-group')}>
-							<FormLabel component="legend" className={cx('title')}>Date</FormLabel>
-							{Object.keys(this.state.days).map((day, index) => (
-								<FormControlLabel className={cx('form-control')}
-									control={
-									<Checkbox
-										checked={this.state.days[day]}
-										value={day} />
-									}
-									key={index}
-									label={day}
-								/>
-							))}
-						</FormGroup>
 					</FormControl>
+					<button className={cx('reset-btn')} onClick={this.handleResetFilter}>Clear Filter</button>
 				</Paper>
 				<div className={cx('search-table-container')}>		
 					<FormControl className = {cx('search-box')}>
