@@ -56,7 +56,7 @@ export default (app) => {
   }
 
   if(devicesController) {
-    app.get('/device', devicesController.all);
+    app.get('/devices', devicesController.all);
     app.get('/device/:id', devicesController.get);
     app.post('/device/:id', devicesController.add);
     app.put('/device/:id', devicesController.update);

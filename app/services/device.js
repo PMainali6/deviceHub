@@ -4,9 +4,13 @@ import createRestApiClient from '../utils/createRestApiClient';
 export default () => {
   const client = createRestApiClient().withConfig({ baseURL: apiEndpoint });
   return {
-    getDeviceData: () => client.request({
+    getAllDeviceData: () => client.request({
       method: 'GET',
-      url: '/device'
+      url: '/devices'
+    }),
+    getDeviceData: ({userId}) => client.request({
+      method: 'GET',
+      url: `/device/${userId}`,
     }),
     deleteDeviceData: ({ id }) => client.request({
       method: 'DELETE',

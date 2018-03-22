@@ -1,34 +1,64 @@
 import _ from 'lodash';
 import Device from '../models/devices';
+import User from '../models/user';
 
 /**
  * List
  */
 export function all(req, res) {
-    Device.find({}).exec((err, devices) => {
-    if (err) {
-      console.log('Error in first query');
-      return res.status(500).send('Something went wrong getting the data');
+    if(_.isUndefined(req.user)) {
+      Device.find({}).exec((err, devices) => {
+        if (err) {
+          console.log('Error in first query');
+          return res.status(500).send('Something went wrong getting the data');
+        }
+        return res.json(devices);
+      });
     }
+    else {
+      const deviceList = req.user.deviceList;
+      let deviceQuery = new Array();
 
-    return res.json(devices);
-  });
+      deviceList.forEach((deviceId) => {
+        deviceQuery.push({id: deviceId})
+      });
+
+      if(deviceQuery.length) {
+        Device.find().or(deviceQuery).exec((err, devices) => {
+          if(err){
+            console.log('Error in first query');
+            return res.status(500).send('Something went wrong getting the data');
+          }
+          return res.json(devices);
+        });
+      }
+      return res.json([]);
+    }
 }
 
 /**
  * Get a Device
  */
  export function get(req, res) {
-    const query = { id: req.params.id };
-    Device.findOne(query).exec((err, device) => {
-      if (err) {
-        console.log('Error in first query');
-        return res.status(500).send('Something went wrong getting the data');
-      }
-   
-      return res.json(device);
-    });
- 
+   const userId = req.params.id;
+   let deviceQuery = new Array();
+
+   User.findOne({_id: userId}).exec((err, user) => {
+      if (err) {
+        console.log('Error in first query');
+        return res.status(500).send('Something went wrong getting the data');
+      }
+      user.deviceList.forEach((deviceId) => {
+        deviceQuery.push({id: deviceId})
+      });
+      Device.find().or(deviceQuery).exec((err, devices) => {
+        if(err){
+          console.log('Error in first query');
+          return res.status(500).send('Something went wrong getting the data');
+        }
+        return res.json(devices);
+      });
+   });  
  }
 
 /**

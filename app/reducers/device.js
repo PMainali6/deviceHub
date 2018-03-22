@@ -18,6 +18,7 @@ const devices = (
 	action
 ) => {
 	switch(action.type) {
+		case types.REQUEST_SUCCESS:
 		case types.DEVICE_REQUEST_SUCCESS:
 			if(action.data) return action.data;
 			return state;
