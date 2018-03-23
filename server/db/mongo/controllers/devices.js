@@ -32,7 +32,8 @@ export function all(req, res) {
           return res.json(devices);
         });
       }
-      return res.json([]);
+      else
+        return res.json([]);
     }
 }
 
@@ -65,14 +66,24 @@ export function all(req, res) {
  * Add a Device
  */
 export function add(req, res) {
-    Device.create(req.body, (err) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).send(err);
-    }
+    const query = { _id: req.user._id};
+    let deviceList = req.user.deviceList;
+    
+    deviceList.push(req.body.id);
 
-    return res.status(200).send('OK');
-  });
+    Device.create(req.body, (err) => {
+        if (err) {
+          console.log(err);
+          return res.status(400).send(err);
+        }
+
+        User.findOneAndUpdate(query, { deviceList }, (err) => {
+            if(err)
+                console.log('error on save');
+        });
+
+        return res.status(200).send('OK');
+    });
 }
 
 /**
