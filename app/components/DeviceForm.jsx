@@ -51,6 +51,7 @@ class DeviceForm extends Component {
 
 	onSave() {
 		const { addDevice } = this.props;
+		const form = document.getElementsByClassName(cx('container'))[0];
 
 		if(this.deviceName.value && this.deviceType.value && this.deviceOS.value && this.deviceVersion.value && this.deviceOwner.value) {
 			let formInput = {
@@ -77,6 +78,7 @@ class DeviceForm extends Component {
 			}
 			addDevice(formInput);
 		}
+		form.reset();
 	}
 
 	render () {
@@ -191,12 +193,10 @@ class DeviceForm extends Component {
 					</TextField>
 
 	        		<div className={cx('form-action')}>
-						<Link to="/">
-							<Button className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
-								Save
-								<Save className={cx('right-icon')} />
-							</Button>
-						</Link>
+						<Button className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
+							Save
+							<Save className={cx('right-icon')} />
+						</Button>
 		        		<Link to="/">
 			        		<Button className={cx('button')} variant="raised" color="default">
 			        			Cancel
