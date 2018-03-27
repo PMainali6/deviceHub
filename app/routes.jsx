@@ -34,7 +34,6 @@ export default (store) => {
       <IndexRoute component={Dashboard} fetchDashboardData={fetchDashboardData} fetchHistoryData = {fetchHistoryData} />
       <Route path="login" component={LoginOrRegister} onEnter={redirectAuth} />
       <Route path="book-slot" fetchDashboardData={fetchDashboardData} fetchHistoryData = {fetchHistoryData} component={BookSlot} onEnter={requireAuth} />
-      <Route path="edit-device" component={DeviceForm} onEnter={requireAuth} />
       <Route path="add-device" component={DeviceForm} onEnter={requireAuth} />
       <Route path="about" component={About} />
       <Route path="bookings" component={BookingLogs} fetchDashboardData={fetchDashboardData} fetchHistoryData = {fetchHistoryData} />

@@ -46,6 +46,25 @@ function bookDeviceFailure (data) {
 	}
 }
 
+function editDeviceRequest(payload) {
+	return {
+		type: types.EDIT_DEVICE_REQUEST,
+		payload
+	}
+}
+
+function editDeviceSuccess() {
+	return {
+		type: types.EDIT_DEVICE_SUCCESS
+	}
+}
+
+function editDeviceFailure() {
+	return {
+		type: types.EDIT_DEVICE_FAILURE
+	}
+}
+
 export function addDevice (deviceData) {
 	return (dispatch) => {
 		const date = new Date(),
@@ -63,6 +82,29 @@ export function addDevice (deviceData) {
 			.catch(() => {
 				return dispatch(addDeviceFailure({ id, error:'Oops! Something went wrong and we couldn\'t add your device'}));
 			});
+	}
+}
+
+export function editDevice ({name, type, os, version, owner}, deviceId) {
+	return (dispatch, getState) => {
+		const { devices } = getState();
+		let updatedDevice = devices.find( device => device.id === deviceId);
+
+		updatedDevice.name = name;
+		updatedDevice.type = type;
+		updatedDevice.os = os;
+		updatedDevice.version = version;
+		updatedDevice.owner = owner;
+
+		dispatch(editDeviceRequest(updatedDevice));
+
+		return deviceService().updateDeviceData({id: deviceId, data: updatedDevice})
+			.then(res => {
+				if(res.status === 200)
+					return dispatch(editDeviceSuccess());
+
+			})
+			.catch(() => dispatch(editDeviceFailure()));
 	}
 }
 

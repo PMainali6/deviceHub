@@ -26,7 +26,6 @@ const DeviceRow = ({devices, deviceOS}) => {
 				{devices.map((device, index) => {
 					let isAvailable = true;
 					let slotLink = "/book-slot?key=" + device.id;
-					let editLink = "/edit-device?key=" + device.name;
 
 					return (
 						<Link to={slotLink} key={index} >

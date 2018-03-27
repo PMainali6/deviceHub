@@ -30,6 +30,12 @@
         h4 {
             text-align: center;
             margin-top: 0;
+            display: inline;
+        }
+
+        .edit-device {
+            float: right;
+            cursor: pointer;
         }
 
         table {
@@ -49,6 +55,17 @@
             td, th {
                 border-bottom: 0;
             }
+        }
+    }
+
+    .modal {
+        position: absolute;
+        background: rgba(0,0,0,0.4);
+        width: 100%;
+        height: 100%;
+
+        &.close {
+            display: none;
         }
     }
 }
