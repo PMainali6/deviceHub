@@ -32,6 +32,9 @@ const devices = (
 		case types.BOOK_DEVICE_REQUEST:
 			return [...state.filter(device => device.id !== action.payload.id), action.payload];
 
+		case types.EDIT_DEVICE_REQUEST:
+			return [...state.filter(device => device.id !== action.payload.id), action.payload];
+
 		default :
 			return state;
 	}
