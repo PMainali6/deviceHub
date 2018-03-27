@@ -29,6 +29,7 @@ class EditDevice extends Component {
 					formType="edit"
 					deviceData={deviceData}
 					deviceAction={editDevice}
+					closeModal={this.props.closeModal}
 				/>
 			</div>
 		)

@@ -58,7 +58,7 @@ class DeviceForm extends Component {
 	}
 
 	onSave() {
-		const { deviceAction } = this.props;
+		const { deviceAction, closeModal, formType } = this.props;
 		const form = document.getElementsByClassName(cx('container'))[0];
 
 		if(this.deviceName.value && this.deviceType.value && this.deviceOS.value && this.deviceVersion.value && this.deviceOwner.value) {
@@ -87,6 +87,8 @@ class DeviceForm extends Component {
 			deviceAction(formInput, this.state.id);
 		}
 		form.reset();
+		if(formType === 'edit')
+			closeModal();
 	}
 
 	render () {
