@@ -25,6 +25,7 @@ class DeviceForm extends Component {
 		let editData = _.isUndefined(deviceData);
 
 		this.onSave = this.onSave.bind(this);
+		this.onCancel = this.onCancel.bind(this);
 		this.findAncestor = this.findAncestor.bind(this);
 		this.validateInput = this.validateInput.bind(this);
 		this.state = {
@@ -89,6 +90,15 @@ class DeviceForm extends Component {
 		form.reset();
 		if(formType === 'edit')
 			closeModal();
+	}
+
+	onCancel() {
+		const { closeModal, formType } = this.props;
+
+		if(formType === 'edit')
+			closeModal();
+		else
+			window.location.href = '/';
 	}
 
 	render () {
@@ -217,11 +227,9 @@ class DeviceForm extends Component {
 							Save
 							<Save className={cx('right-icon')} />
 						</Button>
-		        		<Link to="/">
-			        		<Button className={cx('button')} variant="raised" color="default">
-			        			Cancel
-			        		</Button>
-			        	</Link>
+		        		<Button className={cx('button')} variant="raised" color="default" onClick={this.onCancel}>
+		        			Cancel
+		        		</Button>
 		        	</div>
 				</form>
 			</Paper>
