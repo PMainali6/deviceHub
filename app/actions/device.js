@@ -20,7 +20,7 @@ function addDeviceFailure (data) {
 	return {
 		type: types.ADD_DEVICE_FAILURE,
 		id: data.id,
-		error: data.error
+		message: data.error
 	}
 }
 
@@ -42,7 +42,7 @@ function bookDeviceFailure (data) {
 	return {
 		type: types.BOOK_DEVICE_FAILURE,
 		id: data.id,
-		error: data.error
+		message: data.error
 	}
 }
 
@@ -53,15 +53,19 @@ function editDeviceRequest(payload) {
 	}
 }
 
-function editDeviceSuccess() {
+function editDeviceSuccess(message) {
 	return {
-		type: types.EDIT_DEVICE_SUCCESS
+		type: types.EDIT_DEVICE_SUCCESS,
+		message
 	}
 }
 
-function editDeviceFailure() {
+function editDeviceFailure({id, error, data}) {
 	return {
-		type: types.EDIT_DEVICE_FAILURE
+		type: types.EDIT_DEVICE_FAILURE,
+		id,
+		message: error,
+		data
 	}
 }
 
@@ -87,24 +91,25 @@ export function addDevice (deviceData) {
 
 export function editDevice ({name, type, os, version, owner}, deviceId) {
 	return (dispatch, getState) => {
-		const { devices } = getState();
-		let updatedDevice = devices.find( device => device.id === deviceId);
+		const { devices } = getState(),
+			updatedDevice = devices.find( device => device.id === deviceId);
+		let newUpdatedDevice = updatedDevice;
 
-		updatedDevice.name = name;
-		updatedDevice.type = type;
-		updatedDevice.os = os;
-		updatedDevice.version = version;
-		updatedDevice.owner = owner;
+		newUpdatedDevice.name = name;
+		newUpdatedDevice.type = type;
+		newUpdatedDevice.os = os;
+		newUpdatedDevice.version = version;
+		newUpdatedDevice.owner = owner;
 
-		dispatch(editDeviceRequest(updatedDevice));
+		dispatch(editDeviceRequest(newUpdatedDevice));
 
-		return deviceService().updateDeviceData({id: deviceId, data: updatedDevice})
+		return deviceService().updateDeviceData({id: deviceId, data: newUpdatedDevice})
 			.then(res => {
 				if(res.status === 200)
-					return dispatch(editDeviceSuccess());
+					return dispatch(editDeviceSuccess('The device has been updated successfully'));
 
 			})
-			.catch(() => dispatch(editDeviceFailure()));
+			.catch(() => dispatch(editDeviceFailure({id: deviceId, data: updatedDevice, error: 'Oops! Something went wrong while updating the device.'})));
 	}
 }
 
