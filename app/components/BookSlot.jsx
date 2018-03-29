@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Paper from 'material-ui/Paper';
 import Edit from 'material-ui-icons/Edit';
+import Delete from 'material-ui-icons/Delete';
 
 import style from '../css/components/book-slot';
+import Modal from './Modal';
 import BookSlotForm from './BookSlotForm';
-import EditDevice from './EditDevice';
+import DeviceForm from './DeviceForm';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(style);
@@ -13,21 +15,49 @@ const cx = classNames.bind(style);
 class BookSlot extends Component {
 	constructor() {
 		super();
-		this.editDevice = this.editDevice.bind(this);
+		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
-		this.state = { modalOpen: false };
+		this.modalContent = this.modalContent.bind(this);
+		this.state = { 
+			isModalOpen: false,
+			modalContent: '' 
+		};
 	}
 
-	editDevice() {
-		this.setState({modalOpen: true});
+	openModal(event) {
+		console.log(event.currentTarget.id)
+		this.setState({
+			isModalOpen: true,
+			modalContent: event.currentTarget.id
+		});
 	}
 
 	closeModal() {
-		this.setState({modalOpen: false});
+		this.setState({isModalOpen: false});
+	}
+
+	modalContent() {
+		const {modalContent} = this.state,
+			{deviceData, editDevice} = this.props;
+
+		switch(modalContent) {
+			case 'edit':
+				return <DeviceForm 
+							formType = {modalContent} 
+							deviceData = {deviceData}
+							deviceAction = {editDevice}
+							closeModal = {this.closeModal}
+						/>
+			case 'delete':
+				return <h1>Delete</h1>
+			default:
+				return <h1>Some error occured while loading content</h1>
+		}
 	}
 	
 	render() {
 		const {deviceData, bookDevice, bookingHistory, editDevice} = this.props,
+			{ isModalOpen, modalContent } = this.state,
 			deviceId = deviceData.id;
 
 		return (
@@ -42,7 +72,7 @@ class BookSlot extends Component {
 
 				<Paper className={cx('device-info')}>
 				<h4>Device Info</h4>
-				<Edit className={cx('edit-device')} onClick={this.editDevice} />
+				<Edit id="edit" className={cx('edit-device')} onClick={this.openModal} />
 				<table>
 					<tbody>
 						<tr>
@@ -71,8 +101,11 @@ class BookSlot extends Component {
 						</tr>
 					</tbody>
 				</table>
+				<Delete id="delete" onClick={this.openModal} />
 				</Paper>
-				<EditDevice open={this.state.modalOpen} closeModal={this.closeModal} deviceData={deviceData} editDevice={editDevice} />
+				<Modal open={isModalOpen} closeModal={this.closeModal}>
+					{this.modalContent()}
+				</Modal>
 			</div>
 		)
 	}

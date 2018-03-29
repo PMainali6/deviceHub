@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 
-import EditDeviceForm from './DeviceForm';
-
 import style from '../css/components/book-slot';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(style);
 
-class EditDevice extends Component {
+class Modal extends Component {
 	constructor() {
 		super();
 		this.closeModal = this.closeModal.bind(this);
@@ -21,19 +19,14 @@ class EditDevice extends Component {
 	}
 
 	render() {
-		const { open, deviceData, editDevice, closeModal } = this.props;
+		const { open, closeModal } = this.props;
 
 		return (
 			<div id="modal" className={open? cx('modal') : cx('modal','close')} onClick={this.closeModal} >
-				<EditDeviceForm
-					formType="edit"
-					deviceData={deviceData}
-					deviceAction={editDevice}
-					closeModal={this.props.closeModal}
-				/>
+				{this.props.children}
 			</div>
 		)
 	}
 }
 
-export default EditDevice;
+export default Modal;
