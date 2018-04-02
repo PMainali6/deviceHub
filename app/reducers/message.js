@@ -20,6 +20,8 @@ export default function message(state = {
     case types.ADD_DEVICE_FAILURE:
     case types.BOOK_DEVICE_FAILURE:
     case types.EDIT_DEVICE_FAILURE:
+    case types.DELETE_DEVICE_SUCCESS:
+    case types.DELETE_DEVICE_FAILURE:
       return {...state, message: action.message, type: 'SUCCESS'};
     case types.DISMISS_MESSAGE:
       return {...state, message: '', type: 'SUCCESS'};
