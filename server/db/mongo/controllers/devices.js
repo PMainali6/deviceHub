@@ -3,6 +3,18 @@ import Device from '../models/devices';
 import User from '../models/user';
 
 /**
+ * Generate username from email
+ */
+ function generateUserName(email) {
+  let username = email.split("@");
+  username = username[0].split(".");
+  const owner = username[0] + " " + username[1];
+
+  return owner;
+}
+
+
+/**
  * List
  */
 export function all(req, res) {
@@ -67,11 +79,13 @@ export function all(req, res) {
  */
 export function add(req, res) {
     const query = { _id: req.user._id};
-    let deviceList = req.user.deviceList;
+    let deviceList = req.user.deviceList, 
+    owner;
     
     deviceList.push(req.body.id);
 
-    Device.create(req.body, (err) => {
+    owner = generateUserName(req.user.email);
+    Device.create({...req.body, owner}, (err) => {
         if (err) {
           console.log(err);
           return res.status(400).send(err);

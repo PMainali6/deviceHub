@@ -16,8 +16,6 @@ const deviceType = ["Mobile", "Tablet"];
 
 const deviceOS = ["iOS", "Android", "Windows"];
 
-const deviceOwner = ["Select the device Owner", "Ashish Banka", "Bibhu"];
-
 class DeviceForm extends Component {
 	constructor(props) {
 		super(props);
@@ -34,7 +32,6 @@ class DeviceForm extends Component {
 			type: editData? '' : deviceData.type,
 			os: editData? '' : deviceData.os,
 			version: editData? '' : deviceData.version,
-			owner: editData? '' : deviceData.owner
 		};
 	}
 
@@ -62,13 +59,12 @@ class DeviceForm extends Component {
 		const { deviceAction, closeModal, formType } = this.props;
 		const form = document.getElementsByClassName(cx('container'))[0];
 
-		if(this.deviceName.value && this.deviceType.value && this.deviceOS.value && this.deviceVersion.value && this.deviceOwner.value) {
+		if(this.deviceName.value && this.deviceType.value && this.deviceOS.value && this.deviceVersion.value) {
 			let formInput = {
 				name: this.deviceName.value,
 				type: this.deviceType.value,
 				os: this.deviceOS.value,
 				version: this.deviceVersion.value,
-				owner: this.deviceOwner.value,
 				deviceAvailability: true,
 				bookedBy: [
 					{
@@ -102,7 +98,7 @@ class DeviceForm extends Component {
 	}
 
 	render () {
-		let { name, type, os, version, owner } = this.state;
+		let { name, type, os, version } = this.state;
 
 		return (
 			<Paper className={cx('paper')}>
@@ -193,34 +189,6 @@ class DeviceForm extends Component {
 			        	}}
 			        	InputLabelProps={{ shrink: true}}
 	        		/>
-
-					<TextField
-						required
-						id="owner"
-						select
-						label="Device Owner"
-						value={owner}
-						className={cx('text-field')}
-						SelectProps={{
-							native: true,
-				            MenuProps: {
-				            	className: cx('menu'),
-				            },
-						}}
-						margin="normal"
-						onChange={this.validateInput}
-						inputProps={{
-							ref: input => {this.deviceOwner = input},
-							onBlur: this.validateInput
-						}}
-			        	InputLabelProps={{ shrink: true}}
-					>
-						{deviceOwner.map(option => (
-							<option key={option} value={option}>
-								{option}
-							</option>
-						))}
-					</TextField>
 
 	        		<div className={cx('form-action')}>
 						<Button className={cx('button')} variant="raised" color="primary" onClick={this.onSave}>
