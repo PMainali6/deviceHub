@@ -69,6 +69,29 @@ function editDeviceFailure({id, error, data}) {
 	}
 }
 
+function deleteDeviceRequest(payload) {
+	return {
+		type: types.DELETE_DEVICE_REQUEST,
+		payload
+	}
+}
+
+function deleteDeviceSuccess(message) {
+	return {
+		type: types.DELETE_DEVICE_SUCCESS,
+		message
+	}
+}
+
+function deleteDeviceFailure(id, data, error) {
+	return {
+		type: types.DELETE_DEVICE_FAILURE,
+		id,
+		message: error,
+		data
+	}
+}
+
 export function addDevice (deviceData) {
 	return (dispatch) => {
 		const date = new Date(),
@@ -139,4 +162,22 @@ export function bookDevice (bookingData) {
 				return dispatch(bookDeviceFailure({id, error:'Oops! Something went wrong and we couldn\'t update your device'}))
 			})
 	} 
+}
+
+export function deleteDevice (deviceId) {
+	return (dispatch, getState) => {
+		const { devices } = getState(),
+			deletedDevice = devices.find(device => device.id === deviceId);
+		dispatch(deleteDeviceRequest(deviceId));
+
+	return deviceService().deleteDeviceData({id: deviceId})
+		.then((res) => {
+			if(res.status === 200) {
+				dispatch(deleteDeviceSuccess('Your selected device has been deleted'));
+			}
+		})
+		.catch(() => {
+			return dispatch(deleteDeviceFailure({id, data: deletedDevice, error:'Oops! Something went wrong and we couldn\'t delete your device'}))
+		})
+	}
 }

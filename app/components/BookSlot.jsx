@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Paper from 'material-ui/Paper';
 import Edit from 'material-ui-icons/Edit';
-import Delete from 'material-ui-icons/Delete';
+import Delete from 'material-ui-icons/DeleteForever';
 
 import style from '../css/components/book-slot';
 import Modal from './Modal';
 import BookSlotForm from './BookSlotForm';
 import DeviceForm from './DeviceForm';
+import DeleteDevice from './DeleteDevice';
 import classNames from 'classnames/bind';
+import Button from 'material-ui/Button';
 
 const cx = classNames.bind(style);
 
@@ -25,7 +27,6 @@ class BookSlot extends Component {
 	}
 
 	openModal(event) {
-		console.log(event.currentTarget.id)
 		this.setState({
 			isModalOpen: true,
 			modalContent: event.currentTarget.id
@@ -38,7 +39,7 @@ class BookSlot extends Component {
 
 	modalContent() {
 		const {modalContent} = this.state,
-			{deviceData, editDevice} = this.props;
+			{deviceData, editDevice, deleteDevice} = this.props;
 
 		switch(modalContent) {
 			case 'edit':
@@ -49,7 +50,12 @@ class BookSlot extends Component {
 							closeModal = {this.closeModal}
 						/>
 			case 'delete':
-				return <h1>Delete</h1>
+				return <DeleteDevice 
+						formType = {modalContent} 
+						closeModal = {this.closeModal}
+						deleteDevice = {deleteDevice}
+						deviceId = {deviceData.id}
+						/>
 			default:
 				return <h1>Some error occured while loading content</h1>
 		}
@@ -101,7 +107,9 @@ class BookSlot extends Component {
 						</tr>
 					</tbody>
 				</table>
-				<Delete id="delete" onClick={this.openModal} />
+				<Button variant="raised" color="secondary" className={cx('delete-btn')} id='delete' onClick={this.openModal}> 
+					Delete  <Delete className={cx('delete-icon')}/>
+				</Button>
 				</Paper>
 				<Modal open={isModalOpen} closeModal={this.closeModal}>
 					{this.modalContent()}

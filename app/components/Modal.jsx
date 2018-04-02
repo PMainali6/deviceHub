@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import style from '../css/components/book-slot';
+import style from '../css/components/modal';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(style);

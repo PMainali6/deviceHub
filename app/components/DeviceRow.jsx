@@ -10,8 +10,6 @@ import Windows from '../images/windows2.png';
 
 const cx = classNames.bind(style);
 
-
-
 const DeviceRow = ({devices, deviceOS}) => {
 	let currentDate = new Date(),
 		currentTime = 8;

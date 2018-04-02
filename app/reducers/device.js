@@ -38,6 +38,12 @@ const devices = (
 		case types.EDIT_DEVICE_FAILURE:
 			return [...state.filter(device => device.id !== action.id), action.data];
 
+		case types.DELETE_DEVICE_REQUEST:
+			return [...state.filter(device => device.id !== action.payload)];
+		
+		case types.DELETE_DEVICE_FAILURE:
+			return [...state.filter(device => device.id !== action.id), action.data];
+
 		default :
 			return state;
 	}
