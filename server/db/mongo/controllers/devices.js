@@ -6,9 +6,18 @@ import User from '../models/user';
  * Generate username from email
  */
  function generateUserName(email) {
-  let username = email.split("@");
+  let username, fname, lname, owner;
+
+  username = email.split("@");
   username = username[0].split(".");
-  const owner = username[0] + " " + username[1];
+
+  fname = username[0];
+  lname = username[1];
+
+  fname = fname.charAt(0).toUpperCase() + fname.slice(1);
+  lname = lname.charAt(0).toUpperCase() + lname.slice(1);
+
+  owner = fname + " " + lname;
 
   return owner;
 }
