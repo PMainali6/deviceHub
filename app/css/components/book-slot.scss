@@ -19,77 +19,102 @@
         }
     }
 
-    .device-info {
-        height: 270px;
-        width: 250px;
+    .sidebar {
+        display: flex;
+        flex-flow: column nowrap;
         margin: 40px 10px;
-        padding: 20px 30px;
-        box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+
+        .device-info {
+            height: 270px;
+            width: 250px;
+            padding: 20px 30px;
+            box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
 
 
-        h4 {
-            text-align: center;
-            margin-top: 0;
-            display: inline;
-        }
+            h4 {
+                text-align: center;
+                display: inline;
+            }
 
-        .edit-device {
-            float: right;
-            cursor: pointer;
-        }
+            .edit-device {
+                float: right;
+                cursor: pointer;
+            }
 
-        table {
-            font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
-            color: rgba(0, 0, 0, 0.87);
-            width: 100%;
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
+            table {
+                font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+                color: rgba(0, 0, 0, 0.87);
+                width: 100%;
+                font-size: 13px;
+                margin-bottom: 20px;
+            }
 
-        td, th {
-            border-bottom: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:last-child {
             td, th {
-                border-bottom: 0;
+                border-bottom: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:last-child {
+                td, th {
+                    border-bottom: 0;
+                }
+            }
+
+            .delete-device {
+                float: right;
+                cursor: pointer;
+            }
+
+            .delete-btn {
+                float: right;
+                .delete-icon {
+                    margin-left: 5px;
+                }
             }
         }
 
-        .delete-device {
-            float: right;
-            cursor: pointer;
-        }
+        .release-container {
+            width:250px;
+            height: 250px;
+            margin-top: 20px;
+            padding: 20px 30px;
+            box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
 
-        .delete-btn {
-            float: right;
-            .delete-icon {
-                margin-left: 5px;
+            .textfield {
+                margin-top: 20px;
+			    width: 250px;
+            }
+            .submit-btn {
+                margin-top: 20px;
+                width: 125px;
+
+                .submit-icon {
+                    margin-left: 10px;
+                }
             }
         }
     }
+}
 
-    .delete-modal {
-        width: 510px;
-        padding: 30px;
-        margin: 200px auto;
+.delete-modal {
+    width: 510px;
+    padding: 30px;
+    margin: 200px auto;
 
-        h4 {
-            margin-top: 0;
-            margin-bottom: 5px;
-        }
+    h4 {
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
 
-        p {
-            margin-top: 0;
-            font-size: 14px;
-        }
+    p {
+        margin-top: 0;
+        font-size: 14px;
+    }
 
-        .button {
-            margin-top: 10px;
-            margin-right: 10px;
-            border-radius: 5px;
-        }
+    .button {
+        margin-top: 10px;
+        margin-right: 10px;
+        border-radius: 5px;
     }
 }

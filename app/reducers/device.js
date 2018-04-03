@@ -44,6 +44,9 @@ const devices = (
 		case types.DELETE_DEVICE_FAILURE:
 			return [...state.filter(device => device.id !== action.id), action.data];
 
+		case types.RELEASE_DEVICE_REQUEST:
+			return [...state.filter(device => device.id != action.id), action.payload];
+
 		default :
 			return state;
 	}

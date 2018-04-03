@@ -9,6 +9,7 @@ import Modal from './Modal';
 import BookSlotForm from './BookSlotForm';
 import DeviceForm from './DeviceForm';
 import DeleteDevice from './DeleteDevice';
+import ReleaseDevice from './ReleaseDevice';
 import classNames from 'classnames/bind';
 import Button from 'material-ui/Button';
 
@@ -62,7 +63,7 @@ class BookSlot extends Component {
 	}
 	
 	render() {
-		const {deviceData, bookDevice, bookingHistory, editDevice} = this.props,
+		const {deviceData, bookDevice, bookingHistory, editDevice, releaseDevice} = this.props,
 			{ isModalOpen, modalContent } = this.state,
 			deviceId = deviceData.id;
 
@@ -76,41 +77,44 @@ class BookSlot extends Component {
 					</div>
 				</Paper>
 
-				<Paper className={cx('device-info')}>
-				<h4>Device Info</h4>
-				<Edit id="edit" className={cx('edit-device')} onClick={this.openModal} />
-				<table>
-					<tbody>
-						<tr>
-							<th>Name:</th>
-							<td>{deviceData.name}</td>
-						</tr>
-						
-						<tr>
-							<th>Type:</th>
-							<td>{deviceData.type}</td>
-						</tr>
+				<div className={cx('sidebar')}>
+					<Paper className={cx('device-info')}>
+					<h4>Device Info</h4>
+					<Edit id="edit" className={cx('edit-device')} onClick={this.openModal} />
+					<table>
+						<tbody>
+							<tr>
+								<th>Name:</th>
+								<td>{deviceData.name}</td>
+							</tr>
+							
+							<tr>
+								<th>Type:</th>
+								<td>{deviceData.type}</td>
+							</tr>
 
-						<tr>
-							<th>OS:</th>
-							<td>{deviceData.os}</td>
-						</tr>
+							<tr>
+								<th>OS:</th>
+								<td>{deviceData.os}</td>
+							</tr>
 
-						<tr>
-							<th>Version:</th>
-							<td>{deviceData.version}</td>
-						</tr>
+							<tr>
+								<th>Version:</th>
+								<td>{deviceData.version}</td>
+							</tr>
 
-						<tr>
-							<th>Owner:</th>
-							<td>{deviceData.owner}</td>
-						</tr>
-					</tbody>
-				</table>
-				<Button variant="raised" color="secondary" className={cx('delete-btn')} id='delete' onClick={this.openModal}> 
-					Delete  <Delete className={cx('delete-icon')}/>
-				</Button>
-				</Paper>
+							<tr>
+								<th>Owner:</th>
+								<td>{deviceData.owner}</td>
+							</tr>
+						</tbody>
+					</table>
+					<Button variant="raised" color="secondary" className={cx('delete-btn')} id='delete' onClick={this.openModal}> 
+						Delete  <Delete className={cx('delete-icon')}/>
+					</Button>
+					</Paper>
+					<ReleaseDevice deviceOwner={deviceData.owner} release={deviceData.release} releaseDevice={releaseDevice} deviceId={deviceId}/>
+				</div>
 				<Modal open={isModalOpen} closeModal={this.closeModal}>
 					{this.modalContent()}
 				</Modal>

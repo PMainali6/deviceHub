@@ -22,6 +22,8 @@ export default function message(state = {
     case types.EDIT_DEVICE_FAILURE:
     case types.DELETE_DEVICE_SUCCESS:
     case types.DELETE_DEVICE_FAILURE:
+    case types.RELEASE_DEVICE_SUCCESS:
+    case types.RELEASE_DEVICE_FAILURE:
       return {...state, message: action.message, type: 'SUCCESS'};
     case types.DISMISS_MESSAGE:
       return {...state, message: '', type: 'SUCCESS'};

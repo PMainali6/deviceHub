@@ -92,6 +92,29 @@ function deleteDeviceFailure(id, data, error) {
 	}
 }
 
+function releaseDeviceRequest(data) {
+	return {
+		type: types.RELEASE_DEVICE_REQUEST,
+		id: data.id,
+		payload: data.releaseDevice
+	}
+}
+
+function releaseDeviceSuccess(message) {
+	return {
+		type: types.RELEASE_DEVICE_SUCCESS,
+		message
+	}
+}
+
+function releaseDeviceFailure(data) {
+	return {
+		type: types.RELEASE_DEVICE_FAILURE,
+		id: data.id,
+		message: data.error
+	}
+}
+
 export function addDevice (deviceData) {
 	return (dispatch) => {
 		const date = new Date(),
@@ -179,5 +202,28 @@ export function deleteDevice (deviceId) {
 		.catch(() => {
 			return dispatch(deleteDeviceFailure({id, data: deletedDevice, error:'Oops! Something went wrong and we couldn\'t delete your device'}))
 		})
+	}
+}
+
+export function releaseDevice(releaseData) {
+	return (dispatch, getState) => {
+		const id = releaseData.deviceId,
+			{ devices } = getState(),
+			releaseDevice = devices.find(device => device.id === id);
+
+			releaseDevice.release = releaseData.release;
+			releaseDevice.deviceHolder = releaseData.deviceHolder;
+
+		dispatch(releaseDeviceRequest({id, releaseDevice}));
+
+		return deviceService().updateDeviceData({id, data: releaseDevice})
+			.then((res) => {
+				if(res.status === 200) {
+					return dispatch(releaseDeviceSuccess('The release data is updated'));
+				}
+			})
+			.catch(() => {
+				return dispatch(releaseDeviceFailure({id, error:'Oops! Something went wrong and we couldn\'t update release info'}))
+			})
 	}
 }
