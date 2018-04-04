@@ -24,7 +24,7 @@ class DeleteDevice extends Component {
 				<Paper className={cx('delete-modal')}>
                     <h4>Are you sure you want to delete the selected device permanently?</h4>
                     <p>Note: Booking data for this device will not be deleted </p>
-                    <Link to='/'>
+                    <Link to='/' className={cx('link')}>
                         <Button className={cx('button')} variant="raised" color="secondary" onClick={this.onDelete}>
                             Delete
                         </Button>
