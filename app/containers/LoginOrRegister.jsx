@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
-import { manualLogin, signUp, toggleLoginMode } from '../actions/users';
+import { manualLogin } from '../actions/users';
 import styles from '../css/components/login';
 import hourGlassSvg from '../images/hourglass.svg';
 
@@ -22,46 +22,19 @@ class LoginOrRegister extends Component {
     const email = ReactDOM.findDOMNode(this.refs.email).value;
     const password = ReactDOM.findDOMNode(this.refs.password).value;
 
-    if (isLogin) {
-      manualLogin({ email, password });
-    } else {
-      signUp({ email, password });
-    }
+    manualLogin({ email, password });
   }
 
   renderHeader() {
-    const { user: { isLogin }, toggleLoginMode } = this.props;
-    if (isLogin) {
       return (
         <div className={cx('header')}>
           <h1 className={cx('heading')}>Login with Email</h1>
-          <div className={cx('alternative')}>
-            Not what you want?
-            <a
-              className={cx('alternative-link')}
-              onClick={toggleLoginMode}
-            >Register an Account</a>
-          </div>
         </div>
       );
-    }
-
-    return (
-      <div className={cx('header')}>
-        <h1 className={cx('heading')}>Register with Email</h1>
-        <div className={cx('alternative')}>
-          Already have an account?
-          <a
-            className={cx('alternative-link')}
-            onClick={toggleLoginMode}
-          >Login</a>
-        </div>
-      </div>
-    );
   }
 
   render() {
-    const { isWaiting, message, isLogin } = this.props.user;
+    const { isWaiting, message } = this.props.user;
 
     return (
       <div
@@ -97,14 +70,8 @@ class LoginOrRegister extends Component {
               <input
                 className={cx('button', 'custom-login')}
                 type="submit"
-                value={isLogin ? 'Login' : 'Register'} />
+                value="Login" />
             </form>
-          </div>
-          <div className={cx('google-container')}>
-            <h1 className={cx('heading')}>Google Login Demo</h1>
-            <a
-              className={cx('goggle-login', 'button')}
-              href="/auth/google">Login with Google</a>
           </div>
         </div>
       </div>
@@ -130,5 +97,5 @@ function mapStateToProps({user}) {
 // Connects React component to the redux store
 // It does not modify the component class passed to it
 // Instead, it returns a new, connected component class, for you to use.
-export default connect(mapStateToProps, { manualLogin, signUp, toggleLoginMode })(LoginOrRegister);
+export default connect(mapStateToProps, { manualLogin })(LoginOrRegister);
 
