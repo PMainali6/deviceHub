@@ -95,6 +95,7 @@ export function logOut() {
     return authService().logOut()
       .then((response) => {
           dispatch(logoutSuccess('You have successfully logged out.'));
+          dispatch(push('/'));
       })
       .catch((err) => {
         dispatch(logoutError());

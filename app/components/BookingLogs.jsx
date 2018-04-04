@@ -28,7 +28,7 @@ class BookingLogs extends Component {
 
 		this.state = {
 			bookingHistory : props.bookingHistory,
-			owners: {'Ashish Banka': false, 'Bibhu': false}
+			owners: {'Ashish Banka': false, 'Bibhu Rout': false}
 		}
 	}
 

@@ -11,6 +11,14 @@ const DeviceSchema = new mongoose.Schema({
 	os: String,
 	version: String,
 	owner: String,
+	release: {
+		type: Boolean,
+		default: true
+	},
+	deviceHolder: {
+		type: String,
+		default: ''
+	},
 	bookedBy: {
 	  	type: Array,
 	  	default: [

@@ -18,6 +18,7 @@ const devices = (
 	action
 ) => {
 	switch(action.type) {
+		case types.REQUEST_SUCCESS:
 		case types.DEVICE_REQUEST_SUCCESS:
 			if(action.data) return action.data;
 			return state;
@@ -30,6 +31,21 @@ const devices = (
 
 		case types.BOOK_DEVICE_REQUEST:
 			return [...state.filter(device => device.id !== action.payload.id), action.payload];
+
+		case types.EDIT_DEVICE_REQUEST:
+			return [...state.filter(device => device.id !== action.payload.id), action.payload];
+		
+		case types.EDIT_DEVICE_FAILURE:
+			return [...state.filter(device => device.id !== action.id), action.data];
+
+		case types.DELETE_DEVICE_REQUEST:
+			return [...state.filter(device => device.id !== action.payload)];
+		
+		case types.DELETE_DEVICE_FAILURE:
+			return [...state.filter(device => device.id !== action.id), action.data];
+
+		case types.RELEASE_DEVICE_REQUEST:
+			return [...state.filter(device => device.id != action.id), action.payload];
 
 		default :
 			return state;

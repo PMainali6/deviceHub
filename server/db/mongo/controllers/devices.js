@@ -1,48 +1,112 @@
 import _ from 'lodash';
 import Device from '../models/devices';
+import User from '../models/user';
+
+/**
+ * Generate username from email
+ */
+ function generateUserName(email) {
+  let username, fname, lname, owner;
+
+  username = email.split("@");
+  username = username[0].split(".");
+
+  fname = username[0];
+  lname = username[1];
+
+  fname = fname.charAt(0).toUpperCase() + fname.slice(1);
+  lname = lname.charAt(0).toUpperCase() + lname.slice(1);
+
+  owner = fname + " " + lname;
+
+  return owner;
+}
+
 
 /**
  * List
  */
 export function all(req, res) {
-    Device.find({}).exec((err, devices) => {
-    if (err) {
-      console.log('Error in first query');
-      return res.status(500).send('Something went wrong getting the data');
+    if(_.isUndefined(req.user)) {
+      Device.find({}).exec((err, devices) => {
+        if (err) {
+          console.log('Error in first query');
+          return res.status(500).send('Something went wrong getting the data');
+        }
+        return res.json(devices);
+      });
     }
+    else {
+      const deviceList = req.user.deviceList;
+      let deviceQuery = new Array();
 
-    return res.json(devices);
-  });
+      deviceList.forEach((deviceId) => {
+        deviceQuery.push({id: deviceId})
+      });
+
+      if(deviceQuery.length) {
+        Device.find().or(deviceQuery).exec((err, devices) => {
+          if(err){
+            console.log('Error in first query');
+            return res.status(500).send('Something went wrong getting the data');
+          }
+          return res.json(devices);
+        });
+      }
+      else
+        return res.json([]);
+    }
 }
 
 /**
  * Get a Device
  */
  export function get(req, res) {
-    const query = { id: req.params.id };
-    Device.findOne(query).exec((err, device) => {
-      if (err) {
-        console.log('Error in first query');
-        return res.status(500).send('Something went wrong getting the data');
-      }
-   
-      return res.json(device);
-    });
- 
+   const userId = req.params.id;
+   let deviceQuery = new Array();
+
+   User.findOne({_id: userId}).exec((err, user) => {
+      if (err) {
+        console.log('Error in first query');
+        return res.status(500).send('Something went wrong getting the data');
+      }
+      user.deviceList.forEach((deviceId) => {
+        deviceQuery.push({id: deviceId})
+      });
+      Device.find().or(deviceQuery).exec((err, devices) => {
+        if(err){
+          console.log('Error in first query');
+          return res.status(500).send('Something went wrong getting the data');
+        }
+        return res.json(devices);
+      });
+   });  
  }
 
 /**
  * Add a Device
  */
 export function add(req, res) {
-    Device.create(req.body, (err) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).send(err);
-    }
+    const query = { _id: req.user._id};
+    let deviceList = req.user.deviceList, 
+    owner;
+    
+    deviceList.push(req.body.id);
 
-    return res.status(200).send('OK');
-  });
+    owner = generateUserName(req.user.email);
+    Device.create({...req.body, owner}, (err) => {
+        if (err) {
+          console.log(err);
+          return res.status(400).send(err);
+        }
+
+        User.findOneAndUpdate(query, { deviceList }, (err) => {
+            if(err)
+                console.log('error on save');
+        });
+
+        return res.status(200).send('OK');
+    });
 }
 
 /**

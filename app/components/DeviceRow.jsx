@@ -10,8 +10,6 @@ import Windows from '../images/windows2.png';
 
 const cx = classNames.bind(style);
 
-
-
 const DeviceRow = ({devices, deviceOS}) => {
 	let currentDate = new Date(),
 		currentTime = 8;
@@ -26,7 +24,6 @@ const DeviceRow = ({devices, deviceOS}) => {
 				{devices.map((device, index) => {
 					let isAvailable = true;
 					let slotLink = "/book-slot?key=" + device.id;
-					let editLink = "/edit-device?key=" + device.name;
 
 					return (
 						<Link to={slotLink} key={index} >

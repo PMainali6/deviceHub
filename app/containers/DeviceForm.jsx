@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import DeviceFormComponent from '../components/DeviceForm';
+import DeviceFormComponent from '../components/AddDeviceForm';
 import { addDevice } from '../actions/device';
 
 

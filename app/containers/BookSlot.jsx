@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { bookDevice } from '../actions/device';
+import { bookDevice, editDevice, deleteDevice, releaseDevice } from '../actions/device';
 import { bookingHistory } from '../actions/booking';
 
 
@@ -15,4 +15,4 @@ const mapStateToProps = (state, props) => {
 	}
 }
 
-export default connect(mapStateToProps, { bookDevice, bookingHistory })(BookSlotComponent);
+export default connect(mapStateToProps, { bookDevice, bookingHistory, editDevice, deleteDevice, releaseDevice })(BookSlotComponent);

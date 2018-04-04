@@ -38,7 +38,7 @@ const Navigation = ({ user, logOut }) => {
               onClick={logOut}
               className={cx('item')} to="/">Logout</Link>
           ) : (
-            <Link className={cx('item')} to="/login">Log in</Link>
+            <Link className={cx('item')} activeClassName={cx('active')} to="/login">Log in</Link>
           )}
         </div>
       </nav>
