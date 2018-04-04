@@ -113,7 +113,7 @@ class BookSlot extends Component {
 						Delete  <Delete className={cx('delete-icon')}/>
 					</Button>
 					</Paper>
-					<ReleaseDevice deviceOwner={deviceData.owner} release={deviceData.release} releaseDevice={releaseDevice} deviceId={deviceId}/>
+					<ReleaseDevice deviceOwner={deviceData.owner} deviceHolder={deviceData.deviceHolder} release={deviceData.release} releaseDevice={releaseDevice} deviceId={deviceId}/>
 				</div>
 				<Modal open={isModalOpen} closeModal={this.closeModal}>
 					{this.modalContent()}

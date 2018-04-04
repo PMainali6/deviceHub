@@ -25,7 +25,7 @@ class ReleaseDevice extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             release: this.props.release,
-            deviceHolder: ''
+            deviceHolder: this.props.deviceHolder
         }
     }
 
