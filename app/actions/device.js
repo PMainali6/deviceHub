@@ -145,7 +145,6 @@ export function editDevice ({name, type, os, version, owner}, deviceId) {
 		newUpdatedDevice.type = type;
 		newUpdatedDevice.os = os;
 		newUpdatedDevice.version = version;
-		newUpdatedDevice.owner = owner;
 
 		dispatch(editDeviceRequest(newUpdatedDevice));
 
