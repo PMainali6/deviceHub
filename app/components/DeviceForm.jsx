@@ -81,9 +81,15 @@ class DeviceForm extends Component {
 				  	}
 				]
 			}
-			deviceAction(formInput, this.state.id);
+			deviceAction(formInput, this.state.id);			
 		}
-		form.reset();
+		this.setState({
+			name: '',
+			type: '',
+			os: '',
+			version: '',
+		})
+
 		if(formType === 'edit')
 			closeModal();
 	}
