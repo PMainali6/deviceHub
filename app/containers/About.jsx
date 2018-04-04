@@ -16,7 +16,15 @@ const About = () => {
       <div className={cx('description')}>
         <p><strong>Device Hub </strong>is the result of collorabative effort of the Helios Team fuelled by the efficient need for the booking of various devices for the testing purposes. </p>
           <p>We hope our endeavour manages to streamline this process.</p>
+
+          <h4>Collaborators</h4>
+          <ul>
+            <li><a href="https://www.linkedin.com/in/nawaz-shaik-bb84a738/"> Nawaz Shaik </a> </li>
+            <li><a href="https://www.linkedin.com/in/megha-vijay-9b9411108/" > Megha Vijay</a> </li>
+            <li><a href="https://www.linkedin.com/in/pradhumna-mainali-892a4b5b/"> Pradhumna Mainali (Param)</a> </li>
+          </ul>
       </div>
+
       <br/><br/><br/>
       <div className={cx('contribute')}>
         <p>Want to contribute? Help us out!
