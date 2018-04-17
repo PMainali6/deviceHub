@@ -82,8 +82,6 @@ class LoginOrRegister extends Component {
 LoginOrRegister.propTypes = {
   user: PropTypes.object,
   manualLogin: PropTypes.func.isRequired,
-  signUp: PropTypes.func.isRequired,
-  toggleLoginMode: PropTypes.func.isRequired
 };
 
 // Function passed in to `connect` to subscribe to Redux store updates.

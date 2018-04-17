@@ -243,7 +243,7 @@ class BookSlotForm extends Component {
 				</div>
 
 				<div className={cx('form-action')}>
-					<Link to="/">
+					<Link to="/" className={cx('link')}>
 						<Button variant="raised" color="primary" className={cx('button')} 
 								onClick={this.onSave}>
 							Save
@@ -251,7 +251,7 @@ class BookSlotForm extends Component {
 						</Button>
 					</Link>
 						
-					<Link to="/">
+					<Link to="/" className={cx('link')}>
 						<Button className={cx('button')} variant="raised" color="default">
 							Cancel
 						</Button>
