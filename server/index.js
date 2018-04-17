@@ -6,7 +6,8 @@ import initPassport from './init/passport';
 import initExpress from './init/express';
 import initRoutes from './init/routes';
 import renderMiddleware from './render/middleware';
-import scheduler from './db/mongo/scheduler';
+import {resetScheduler} from './db/mongo/scheduler';
+import {hourScheduler} from './db/mongo/scheduler';
 
 const app = express();
 
@@ -16,7 +17,8 @@ const app = express();
  * - register mongoose Schema
  */
 connect();
-scheduler.start();
+resetScheduler.start();
+hourScheduler.start();
 
 /*
  * REMOVE if you do not need passport configuration

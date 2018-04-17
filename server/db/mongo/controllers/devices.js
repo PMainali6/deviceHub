@@ -128,6 +128,10 @@ export function update(req, res) {
   });
 }
 
+
+/**
+ * Reset DeviceList
+ */
 export function resetBooking () {
   const newBooking = {
       slot1: {available: true, limitTime: 11, userInfo: { name:'', mobile:'' } },
