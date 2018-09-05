@@ -14,9 +14,8 @@ const About = () => {
     <div className={cx('about')}>
       <h1 className={cx('header')}>About</h1>
       <div className={cx('description')}>
-        <p><strong>Device Hub </strong>is the result of collorabative effort of the Helios Team fuelled by the efficient need for the booking of various devices for the testing purposes. </p>
+          <p><strong>Device Hub </strong>is the result of collorabative effort of Pradhumna Mainali (Param), Megha Vijay and Nawaz Shaik fuelled by the efficient need for the booking of various devices for the testing purposes. </p>
           <p>We hope our endeavour manages to streamline this process.</p>
-
           <h4>Collaborators</h4>
           <ul>
             <li><a href="https://www.linkedin.com/in/nawaz-shaik-bb84a738/"> Nawaz Shaik </a> </li>
